@@ -1,0 +1,72 @@
+2025-12-08 09:26:59.437 error: 	moise--Se produjo un error interno del servidor 
+Invalid `this.prisma.usuario.update()` invocation in
+E:\Universidad 2025\Software Libre\Proyecto Completo p\EducationalSystem\server\source\controllers\usuarioController.ts:343:55
+
+  340   : [];
+  341 
+  342 //Actualizar
+→ 343 const updateTecnico = await this.prisma.usuario.update({
+        where: {
+          id_usuario: 1
+        },
+        data: {
+          nombre: "Administrador",
+          correo: "admin@centroedu.com",
+          activo: 0,
+                  ~
+          especialidades: {
+            disconnect: [],
+            connect: []
+          }
+        }
+      })
+
+Argument `activo`: Invalid value provided. Expected Boolean or BoolFieldUpdateOperationsInput, provided Int.
+2025-12-08 09:28:09.239 error: 	moise--Se produjo un error interno del servidor 
+Invalid `this.prisma.usuario.update()` invocation in
+E:\Universidad 2025\Software Libre\Proyecto Completo p\EducationalSystem\server\source\controllers\usuarioController.ts:343:55
+
+  340   : [];
+  341 
+  342 //Actualizar
+→ 343 const updateTecnico = await this.prisma.usuario.update({
+        where: {
+          id_usuario: 1
+        },
+        data: {
+          nombre: "Administrador",
+          correo: "admin@centroedu.com",
+          activo: 0,
+                  ~
+          especialidades: {
+            disconnect: [],
+            connect: []
+          }
+        }
+      })
+
+Argument `activo`: Invalid value provided. Expected Boolean or BoolFieldUpdateOperationsInput, provided Int.
+2025-12-08 09:30:11.871 error: 	moise--Se produjo un error interno del servidor 
+Invalid `this.prisma.usuario.update()` invocation in
+E:\Universidad 2025\Software Libre\Proyecto Completo p\EducationalSystem\server\source\controllers\usuarioController.ts:343:55
+
+  340   : [];
+  341 
+  342 //Actualizar
+→ 343 const updateTecnico = await this.prisma.usuario.update({
+        where: {
+          id_usuario: 1
+        },
+        data: {
+          nombre: "Administrador",
+          correo: "admin@centroedu.com",
+          activo: 1,
+                  ~
+          especialidades: {
+            disconnect: [],
+            connect: []
+          }
+        }
+      })
+
+Argument `activo`: Invalid value provided. Expected Boolean or BoolFieldUpdateOperationsInput, provided Int.

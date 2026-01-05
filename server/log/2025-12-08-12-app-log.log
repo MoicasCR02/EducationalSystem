@@ -1,0 +1,31 @@
+2025-12-08 12:21:21.531 error: 	moise--Se produjo un error interno del servidor 
+Invalid `prisma.usuario.findUnique()` invocation in
+E:\Universidad 2025\Software Libre\Proyecto Completo p\EducationalSystem\server\source\config\passport.ts:42:41
+
+  39 passport.use(
+  40   new JwtStrategy(jwtOptions, async (payload, done) => {
+  41     try {
+→ 42       const user = await prisma.usuario.findUnique({
+             where: {
+               id_usuario: undefined,
+           ?   correo?: String,
+           ?   AND?: UsuarioWhereInput | UsuarioWhereInput[],
+           ?   OR?: UsuarioWhereInput[],
+           ?   NOT?: UsuarioWhereInput | UsuarioWhereInput[],
+           ?   nombre?: StringFilter | String,
+           ?   contrasena?: StringFilter | String,
+           ?   id_rol?: EnumRoleFilter | Role,
+           ?   ultimo_inicio_sesion?: DateTimeNullableFilter | DateTime | Null,
+           ?   activo?: BoolFilter | Boolean,
+           ?   carga_actual?: IntFilter | Int,
+           ?   disponible?: BoolNullableFilter | Boolean | Null,
+           ?   especialidades?: EspecialidadListRelationFilter,
+           ?   tickets?: TicketListRelationFilter,
+           ?   asignaciones?: AsignacionListRelationFilter,
+           ?   Historial_Estados?: Historial_EstadoListRelationFilter,
+           ?   NotificacionesRemitente?: NotificacionListRelationFilter,
+           ?   NotificacionesDestinatario?: NotificacionListRelationFilter
+             }
+           })
+
+Argument `where` of type UsuarioWhereUniqueInput needs at least one of `id_usuario` or `correo` arguments. Available options are marked with ?.

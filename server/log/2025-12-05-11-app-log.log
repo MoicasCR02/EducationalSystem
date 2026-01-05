@@ -1,0 +1,31 @@
+2025-12-05 11:14:32.542 error: 	moise--Se produjo un error interno del servidor Cannot read properties of undefined (reading 'titulo')
+2025-12-05 11:14:41.811 error: 	moise--Se produjo un error interno del servidor Cannot read properties of undefined (reading 'titulo')
+2025-12-05 11:14:56.667 error: 	moise--Se produjo un error interno del servidor 
+Invalid `this.prisma.ticket.findFirst()` invocation in
+E:\Universidad 2025\Software Libre\Proyecto Completo p\EducationalSystem\server\source\controllers\ticketController.ts:77:50
+
+  74 if (isNaN(idTicket)) {
+  75   next(AppError.badRequest("El ID no es válido"));
+  76 }
+→ 77 const objTicket = await this.prisma.ticket.findFirst(
+Can't reach database server at `localhost:3306`
+
+Please make sure your database server is running at `localhost:3306`.
+2025-12-05 11:15:19.194 error: 	moise--Se produjo un error interno del servidor 
+Invalid `this.prisma.categoria.findFirst()` invocation in
+E:\Universidad 2025\Software Libre\Proyecto Completo p\EducationalSystem\server\source\controllers\categoriaController.ts:35:56
+
+  32 if (isNaN(idCategoria)) {
+  33   next(AppError.badRequest("El ID no es válido"));
+  34 }
+→ 35 const objCategoria = await this.prisma.categoria.findFirst(
+Can't reach database server at `localhost:3306`
+
+Please make sure your database server is running at `localhost:3306`.
+2025-12-05 11:16:16.815 error: 	moise--Se produjo un error interno del servidor Cannot read properties of undefined (reading 'id_ticket')
+2025-12-05 11:17:20.413 error: 	moise--Se produjo un error interno del servidor Cannot read properties of undefined (reading 'id_tecnico')
+2025-12-05 11:17:43.640 error: 	moise--Se produjo un error interno del servidor Cannot read properties of undefined (reading 'id_tecnico')
+2025-12-05 11:25:20.715 error: 	moise--Se produjo un error interno del servidor Cannot read properties of undefined (reading 'id_tecnico')
+2025-12-05 11:26:06.809 error: 	moise--Se produjo un error interno del servidor Cannot read properties of undefined (reading 'map')
+2025-12-05 11:30:30.840 error: 	moise--Se produjo un error interno del servidor Cannot read properties of undefined (reading 'map')
+2025-12-05 11:42:45.487 error: 	moise--No existe el Ticket No existe el Ticket

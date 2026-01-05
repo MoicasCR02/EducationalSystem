@@ -1,0 +1,205 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+
+//Base de datos - Modelos
+
+
+enum Role {
+  ADMIN
+  TECNICO
+  USER
+}
+
+model Prioridad {
+  id_prioridad Int  @id @default(autoincrement())
+  nombre String  @db.VarChar(100)
+}
+
+model Usuario {
+  id_usuario           Int       @id @default(autoincrement())
+  nombre               String    @db.VarChar(100)
+  correo               String    @unique @db.VarChar(100)
+  contrasena           String    @db.VarChar(255)
+  id_rol               Role @default(USER)
+  ultimo_inicio_sesion DateTime? @db.DateTime
+  activo               Boolean   @default(true)
+  carga_actual        Int  @default(0)  
+  disponible           Boolean?
+
+  //rol Rol @relation(fields: [id_rol], references: [id_rol])
+
+  especialidades Especialidad[]// Relación N:M con Especialidades
+
+  tickets Ticket[] // relacion a tickets N:1
+
+  asignaciones Asignacion[] // para relacion a asignaciones
+
+  Historial_Estados Historial_Estado[] // relacion del tecnico que registra el estado
+
+  NotificacionesRemitente Notificacion[] @relation("NotificacionesEnviadas")
+
+  NotificacionesDestinatario Notificacion[] @relation("NotificacionesRecibidas")
+}
+
+model Especialidad {
+  id_especialidad Int     @id @default(autoincrement())
+  nombre          String  @db.VarChar(100)
+  descripcion     String? @db.VarChar(255)
+
+  
+  usuarios Usuario[] // Relación N:M con Usuarios que son los tecnicos
+
+  categorias Categoria[] // relacion con categoria
+}
+
+
+model Categoria {
+  id_categoria    Int     @id @default(autoincrement())
+  nombre          String  @db.VarChar(100)
+  descripcion     String? @db.VarChar(255)
+
+  id_sla          Int
+
+  especialidades Especialidad[]
+  etiquetas Etiqueta[]
+
+  sla Sla @relation(fields: [id_sla], references: [id_sla])
+
+  tickets Ticket[] // relacion con tickets
+}
+
+
+model Etiqueta{
+  id_etiqueta Int @id @default(autoincrement())
+  nombre          String  @db.VarChar(100)
+  categorias Categoria[]
+
+}
+
+model Sla {
+  id_sla Int @id @default(autoincrement())
+  nombre String  @db.VarChar(100)
+  tiempo_max_respuesta Int
+  tiempo_max_resolucion Int
+  categorias Categoria[]
+}
+
+
+model Ticket {
+  id_ticket              Int       @id @default(autoincrement())
+  titulo                 String    @db.VarChar(200)
+  descripcion            String    @db.VarChar(100)
+  fecha_creacion         DateTime  @default(now())
+  fecha_cierre           DateTime? @db.DateTime
+  estado                 String    @default("Pendiente") @db.VarChar(20)
+  prioridad              String    @default("Baja") @db.VarChar(20)
+  cumplimiento_respuesta Boolean   @default(false) 
+  cumplimiento_resolucion Boolean  @default(false) 
+
+  id_categoria Int 
+  categoria Categoria @relation(fields: [id_categoria], references: [id_categoria])
+
+  id_usuario_cliente Int
+  cliente Usuario @relation(fields: [id_usuario_cliente], references: [id_usuario])
+
+  asignaciones Asignacion[] // N:1 a asiganciones
+
+  valoracion Valoracion? // N:1 a valoraciones
+
+  Historial_Estados Historial_Estado[]
+}
+
+model Asignacion {
+  id_asignacion     Int       @id @default(autoincrement())
+  fecha_asignacion  DateTime  @default(now())
+  metodo            String    @db.VarChar(20)
+  justificacion     String?   @db.VarChar(50)
+  // Relaciones
+  id_ticket          Int
+  id_tecnico         Int
+  id_reglaAutotriage Int?
+
+  ticket Ticket? @relation(fields: [id_ticket], references: [id_ticket])
+  tecnico Usuario? @relation(fields: [id_tecnico], references: [id_usuario]) // usuario rol tecnico
+  regla Reglas_Autotriage? @relation(fields: [id_reglaAutotriage], references: [id_regla]) // usuario rol tecnico
+}
+
+model Valoracion {
+  id_valoracion Int       @id @default(autoincrement())
+  puntuacion    Int?
+  comentario    String?    @db.VarChar(255)
+  fecha         DateTime   @default(now())
+
+  id_ticket Int @unique
+  ticket Ticket @relation(fields: [id_ticket], references: [id_ticket])
+}
+
+model Historial_Estado {
+  id_historial   Int       @id @default(autoincrement())
+  estado_anterior String?   @db.VarChar(20)
+  nuevo_estado    String?   @db.VarChar(20)
+  observaciones   String?   @db.VarChar(100)
+  fecha_cambio    DateTime  @default(now())
+
+  id_ticket  Int
+  id_usuario Int
+
+  ticket  Ticket  @relation(fields: [id_ticket], references: [id_ticket])
+  usuario Usuario @relation(fields: [id_usuario], references: [id_usuario]) // se refiere al tecnico que registra el estado
+
+  Imagenes_Ticket Imagen_Ticket[]
+}
+
+model Reglas_Autotriage {
+  id_regla        Int      @id @default(autoincrement())
+  nombre          String   @db.VarChar(100)
+  descripcion     String?  @db.VarChar(255)
+  prioridad_base  Int
+  peso_carga      Int
+  peso_sla        Int
+  activo          Boolean  @default(true)
+
+  // Relaciones
+  asignaciones Asignacion[] // relacion de N:1 
+  
+}
+
+model Imagen_Ticket {
+  id_imagen    Int      @id @default(autoincrement())
+  ruta_imagen  String   @default("image-not-found.jpg")
+
+  // Relaciones
+  id_historial Int
+  historial    Historial_Estado  @relation(fields: [id_historial], references: [id_historial])
+}
+
+  model Notificacion {
+    id_notificacion Int      @id @default(autoincrement())
+    tipo            String  @db.VarChar(100)
+    mensaje         String  @db.VarChar(255)
+    fecha           DateTime @default(now())
+    leido           Boolean  @default(false)
+
+    // Relaciones
+    id_remitente   Int
+    id_destinatario Int
+
+    remitente    Usuario @relation("NotificacionesEnviadas", fields: [id_remitente], references: [id_usuario])
+    destinatario Usuario @relation("NotificacionesRecibidas", fields: [id_destinatario], references: [id_usuario])
+  }
+
+

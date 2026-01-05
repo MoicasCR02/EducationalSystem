@@ -1,0 +1,89 @@
+@if (datos()) {
+<mat-card class="tecnico-card" appearance="outlined">
+  <button mat-icon-button class="close-button" [mat-dialog-close]="true" aria-label="{{ 'TICKET_DIALOG.CLOSE' | translate }}">
+    <mat-icon class="close-icon" color="warn">close</mat-icon>
+  </button>
+  <!-- 🧑 Sección 1: Información del ticket -->
+  <div class="tecnico-info">
+    <h2 class="section-title">
+      <mat-icon color="primary">engineering</mat-icon>
+      {{ 'TICKET_DIALOG.INFO' | translate }}
+    </h2>
+    <p><strong>{{ 'TICKET_DIALOG.TITLE' | translate }}:</strong> {{ datos()?.titulo }}</p>
+    <p><strong>{{ 'TICKET_DIALOG.DESCRIPTION' | translate }}:</strong> {{ datos()?.descripcion }}</p>
+    <p><strong>{{ 'TICKET_DIALOG.CREATED' | translate }}:</strong> {{ datos()?.fecha_creacion | date : 'dd/MM/yyyy HH:mm' }}</p>
+    <p><strong>{{ 'TICKET_DIALOG.CLOSED' | translate }}:</strong> {{ datos()?.fecha_cierre | date : 'dd/MM/yyyy HH:mm' }}</p>
+
+    <div class="tecnico-status">
+      <mat-icon color="accent">verified_user</mat-icon>
+      <span>
+        {{ 'TICKET_DIALOG.STATUS' | translate }}:
+        <mat-chip [color]="datos()?.estado ? 'primary' : 'warn'" selected>
+          {{ datos()?.estado ? ('TICKET_DIALOG.ACTIVE' | translate) : ('TICKET_DIALOG.INACTIVE' | translate) }}
+        </mat-chip>
+      </span>
+    </div>
+
+    <p><strong>{{ 'TICKET_DIALOG.PRIORITY' | translate }}:</strong> {{ datos()?.prioridad }}</p>
+    <p><strong>{{ 'TICKET_DIALOG.CATEGORY' | translate }}:</strong> {{ datos()?.categoria?.nombre }}</p>
+  </div>
+
+  <!-- 🕒 Sección 2: Cumplimientos -->
+  <div class="cumplimiento-section">
+    <div class="cumplimiento-card">
+      <h3 class="section-title">
+        <mat-icon color="primary">schedule</mat-icon>
+        {{ 'TICKET_DIALOG.RESPONSE_COMPLIANCE' | translate }}
+      </h3>
+      <p>
+        <strong>{{ 'TICKET_DIALOG.RESULT' | translate }}:</strong>
+        {{ datos()?.cumplimiento_respuesta ? ('TICKET_DIALOG.COMPLIED' | translate) : ('TICKET_DIALOG.NOT_COMPLIED' | translate) }}
+      </p>
+    </div>
+
+    <div class="cumplimiento-card">
+      <h3 class="section-title">
+        <mat-icon color="primary">hourglass_bottom</mat-icon>
+        {{ 'TICKET_DIALOG.RESOLUTION_COMPLIANCE' | translate }}
+      </h3>
+      <p>
+        <strong>{{ 'TICKET_DIALOG.RESULT' | translate }}:</strong>
+        {{ datos()?.cumplimiento_resolucion ? ('TICKET_DIALOG.COMPLIED' | translate) : ('TICKET_DIALOG.NOT_COMPLIED' | translate) }}
+      </p>
+    </div>
+  </div>
+
+  <!-- 📄 Sección 3: Historial de estados -->
+  <div class="historial-section">
+    <h3 class="section-title">
+      <mat-icon color="primary">history</mat-icon>
+      {{ 'TICKET_DIALOG.HISTORY' | translate }}
+    </h3>
+
+    @for (item of datos()?.Historial_Estados; track item.id ?? $index) {
+    <mat-card class="estado-card">
+      <mat-card-content>
+        <strong class="estado-nombre">
+          {{ 'TICKET_DIALOG.FROM' | translate }}: {{ item.estado_anterior }} → {{ 'TICKET_DIALOG.TO' | translate }}: {{ item.nuevo_estado }}
+        </strong>
+        <p class="estado-observaciones">{{ item.observaciones }}</p>
+      </mat-card-content>
+    </mat-card>
+    }
+  </div>
+
+  <!-- 🔙 Sección 4: Acción -->
+  <mat-card-actions class="tecnico-actions">
+    <button mat-raised-button color="primary" (click)="close()">
+      <mat-icon>arrow_back</mat-icon>
+      {{ 'TICKET_DIALOG.BACK' | translate }}
+    </button>
+  </mat-card-actions>
+</mat-card>
+} @else {
+<mat-card class="tecnico-card" appearance="outlined">
+  <mat-card-content class="tecnico-content text-center">
+    <p class="mat-body">{{ 'TICKET_DIALOG.NOT_FOUND' | translate }}</p>
+  </mat-card-content>
+</mat-card>
+}

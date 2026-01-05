@@ -1,0 +1,10 @@
+2025-12-04 09:08:14.065 error: 	moise--Se produjo un error interno del servidor 
+Invalid `this.prisma.asignacion.create()` invocation in
+E:\Universidad 2025\Software Libre\Proyecto Completo p\EducationalSystem\server\source\controllers\ticketController.ts:228:74
+
+  225 
+  226 if (ultimoTicket && ultimoTicket.prioridad == "Alta" && tecnico) {
+  227   if (tecnico) {
+→ 228     const newAsignacionAutomatica = await this.prisma.asignacion.create(
+Foreign key constraint violated on the fields: (`id_reglaAutotriage`)
+2025-12-04 09:14:46.114 error: 	moise--Se produjo un error interno del servidor Cannot set headers after they are sent to the client

@@ -1,0 +1,100 @@
+<div class="grid-container">
+  <!-- 🔍 Filtro de búsqueda -->
+  <mat-card appearance="outlined" class="filter">
+    <mat-card-header>
+      <h1 class="mat-h1">{{ 'ASSIGNMENTS.TITLE' | translate }}</h1>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-form-field class="full-width">
+        <mat-label>{{ 'ASSIGNMENTS.FILTER_LABEL' | translate }}</mat-label>
+        <input matInput />
+        <button mat-icon-button matSuffix color="primary">
+          <mat-icon>search</mat-icon>
+        </button>
+      </mat-form-field>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- 📅 Selector de rango de fechas -->
+  <mat-form-field appearance="fill">
+    <mat-label>{{ 'ASSIGNMENTS.DATE_RANGE' | translate }}</mat-label>
+    <mat-date-range-input [rangePicker]="picker">
+      <input
+        matStartDate
+        placeholder="{{ 'ASSIGNMENTS.START' | translate }}"
+        [(ngModel)]="fechaInicio"
+        (dateChange)="onDateChange()"
+      />
+      <input
+        matEndDate
+        placeholder="{{ 'ASSIGNMENTS.END' | translate }}"
+        [(ngModel)]="fechaFin"
+        (dateChange)="onDateChange()"
+      />
+    </mat-date-range-input>
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-date-range-picker #picker></mat-date-range-picker>
+  </mat-form-field>
+
+  <!-- 🟢 Calendario -->
+  @if (datos().length > 0) {
+  <div class="calendar-grid">
+    @for (dia of diasFiltrados; track dia) {
+    <div class="calendar-day">
+      <h3>
+        {{ dia.toLocaleDateString(locale, { weekday: 'long', day: '2-digit', month: 'long' }) }}
+      </h3>
+
+      <!-- Asignaciones del día -->
+      @for (asignacion of asignacionesPorDia()[dia.toLocaleDateString(locale, { weekday: 'long', day: '2-digit', month: 'long' })]; track asignacion.id_asignacion) {
+        <mat-card appearance="outlined" class="ticket-card">
+          <mat-card-header class="secondary-title title">
+            <mat-card-title>{{ 'ASSIGNMENTS.TICKET' | translate }} #{{ asignacion.ticket?.id_ticket }}</mat-card-title>
+            <mat-card-subtitle>{{ asignacion.ticket?.titulo }}</mat-card-subtitle>
+          </mat-card-header>
+
+          <mat-card-content class="content">
+            <div class="info-row">
+              <mat-icon color="primary">event</mat-icon>
+              <span>{{ asignacion.ticket?.fecha_creacion | date : 'short' }}</span>
+            </div>
+
+            <div class="info-row">
+              <mat-icon color="primary">category</mat-icon>
+              <span>{{ asignacion.ticket?.categoria?.nombre }}</span>
+            </div>
+
+            <mat-divider></mat-divider>
+
+            <div class="info-row" [ngClass]="getEstadoClass(asignacion.ticket?.estado)">
+              <mat-icon>verified_user</mat-icon>
+              <span>{{ 'ASSIGNMENTS.STATUS' | translate }}:</span>
+              <span>{{ asignacion.ticket?.estado }}</span>
+            </div>
+            
+          </mat-card-content>
+
+          <mat-card-footer class="footer">
+            <button mat-button color="accent" (click)="detalle(asignacion.id_ticket)">
+              {{ 'ASSIGNMENTS.DETAIL' | translate }}
+            </button>
+          </mat-card-footer>
+        </mat-card>
+      }
+
+      <!-- Mensaje si no hay asignaciones -->
+      @if (asignacionesPorDia()[dia.toLocaleDateString(locale, { weekday: 'long', day: '2-digit', month: 'long' })]?.length === 0) {
+        <div class="sin-asignaciones fade-in">
+          <mat-icon color="warn">event_busy</mat-icon>
+          <span>{{ 'ASSIGNMENTS.NO_ASSIGNMENTS' | translate }}</span>
+        </div>
+      }
+    </div>
+    }
+  </div>
+  } @else {
+  <div>
+    <p>{{ 'ASSIGNMENTS.NO_RESULTS' | translate }}</p>
+  </div>
+  }
+</div>

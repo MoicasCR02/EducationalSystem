@@ -1,0 +1,11 @@
+2025-12-05 08:33:19.569 error: 	moise--Se produjo un error interno del servidor 
+Invalid `this.prisma.usuario.findUnique()` invocation in
+E:\Universidad 2025\Software Libre\Proyecto Completo p\EducationalSystem\server\source\controllers\ticketController.ts:16:47
+
+  13 get = async (request: Request, response: Response, next: NextFunction) => {
+  14   const idUsuarioActual = 2; // cambiar por valor de usario que inicia la sesion
+  15 
+→ 16   const usuario = await this.prisma.usuario.findUnique(
+Can't reach database server at `localhost:3306`
+
+Please make sure your database server is running at `localhost:3306`.

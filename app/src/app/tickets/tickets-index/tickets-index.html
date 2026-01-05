@@ -1,0 +1,96 @@
+<div class="grid-container">
+  <!-- Filtro de búsqueda -->
+  <mat-card appearance="outlined" class="filter">
+    <mat-card-header>
+      <h1 class="mat-h1">{{ 'TICKETS.TITLE' | translate }}</h1>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-form-field class="full-width">
+        <mat-label>{{ 'TICKETS.FILTER_LABEL' | translate }}</mat-label>
+        <input matInput />
+        <button mat-icon-button matSuffix color="primary">
+          <mat-icon>search</mat-icon>
+        </button>
+      </mat-form-field>
+    </mat-card-content>
+    <mat-card-content>
+      <button mat-raised-button color="primary" (click)="toggleFiltroPendientes()">
+        {{
+          mostrarPendientes
+            ? ('TICKETS.SHOW_ALL' | translate)
+            : ('TICKETS.SHOW_PENDING' | translate)
+        }}
+      </button>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Botón crear ticket solo si es usuario -->
+  @if (isUser()) {
+  <mat-card-subtitle>
+    <mat-card-title class="title">Crear Ticket nuevo</mat-card-title>
+    <button
+      mat-mini-fab
+      matTooltip="{{ 'TICKETS.CREATE' | translate }}"
+      class="bg-primary"
+      aria-label="{{ 'TICKETS.CREATE' | translate }}"
+      (click)="crearTicket()"
+    >
+      <mat-icon>add</mat-icon>
+    </button>
+  </mat-card-subtitle>
+  }
+
+  <!-- Lista de tickets -->
+  @if (filteredTickets().length > 0) {
+  <div class="ticket-list">
+    @for (item of filteredTickets(); track item.id_ticket ?? $index) {
+    <div class="ticket-wrapper">
+      <div class="ticket-header">
+        <mat-icon class="ticket-icon">local_play</mat-icon>
+        <div>
+          <mat-card-title>{{ item.titulo }}</mat-card-title>
+          <mat-card-subtitle>
+            <strong>{{ 'TICKETS.CATEGORY' | translate }}:</strong>
+            {{ item?.categoria?.nombre }}
+          </mat-card-subtitle>
+        </div>
+      </div>
+
+      <div class="ticket-status">
+        <span>{{ 'TICKETS.STATUS' | translate }}:</span>
+        <mat-chip
+          [ngClass]="{
+            'chip-pendiente': item.estado === 'Pendiente',
+            'chip-asignado': item.estado === 'Asignado',
+            'chip-proceso': item.estado === 'En Proceso',
+            'chip-resuelto': item.estado === 'Resuelto',
+            'chip-cerrado': item.estado === 'Cerrado'
+          }"
+          selected
+        >
+          {{ item.estado }}
+        </mat-chip>
+      </div>
+
+      <!-- Acciones -->
+      <div class="ticket-actions">
+        <button
+          mat-raised-button
+          matTooltip="{{ 'TICKETS.DETAIL_TOOLTIP' | translate }}"
+          aria-label="{{ 'TICKETS.DETAIL_TOOLTIP' | translate }}"
+          class="btn-detalle"
+          (click)="detalle(item.id_ticket)"
+        >
+          <mat-icon>info</mat-icon>
+          <span>{{ 'TICKETS.DETAIL' | translate }}</span>
+        </button>
+      </div>
+    </div>
+    }
+  </div>
+  } @else {
+  <div>
+    <p>{{ 'TICKETS.NO_RESULTS' | translate }}</p>
+  </div>
+  }
+</div>

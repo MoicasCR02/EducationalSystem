@@ -1,0 +1,136 @@
+<mat-dialog-content class="dialog-scroll">
+  @if (datosTicket()) {
+  <mat-card class="tecnico-card" appearance="outlined">
+    <!-- Botón cerrar -->
+    <button
+      mat-icon-button
+      class="close-button"
+      [mat-dialog-close]="true"
+      aria-label="{{ 'TICKET_DIALOG.CLOSE' | translate }}"
+    >
+      <mat-icon class="close-icon" color="warn">close</mat-icon>
+    </button>
+
+    <!-- 🧾 Sección Ticket -->
+    <section class="ticket-section">
+      <h2 class="section-title">
+        <mat-icon color="primary">engineering</mat-icon>
+        {{ 'TICKET_DIALOG.INFO' | translate }}
+      </h2>
+
+      <div class="ticket-info-grid">
+        <p><strong>{{ 'TICKET_DIALOG.TITLE' | translate }}:</strong> {{ datosTicket()?.titulo }}</p>
+        <p><strong>{{ 'TICKET_DIALOG.DESCRIPTION' | translate }}:</strong> {{ datosTicket()?.descripcion }}</p>
+        <p><strong>{{ 'TICKET_DIALOG.CREATED' | translate }}:</strong> {{ datosTicket()?.fecha_creacion | date : 'dd/MM/yyyy HH:mm' }}</p>
+        <p><strong>{{ 'TICKET_DIALOG.PRIORITY' | translate }}:</strong> {{ datosTicket()?.prioridad }}</p>
+        <p><strong>{{ 'TICKET_DIALOG.CATEGORY' | translate }}:</strong> {{ datosTicket()?.categoria?.nombre }}</p>
+      </div>
+
+      <div class="tecnico-status">
+        <mat-chip [color]="datosTicket()?.estado ? 'primary' : 'warn'" selected>
+          <mat-icon color="accent">verified_user</mat-icon>
+          {{ datosTicket()?.estado }}
+        </mat-chip>
+      </div>
+
+      <h2 class="estado-nombre">Evidencia</h2>
+      <div class="estado-list">
+        @for (item of datosTicket()?.Historial_Estados; track item.id ?? $index) {
+        <mat-card class="estado-card">
+          <mat-card-content>
+            <p class="estado-observaciones">{{ item.observaciones }}</p>
+            <div class="imagenes-ticket">
+              @for (imagen of item.Imagenes_Ticket; track imagen.id_imagen) {
+              <img
+                class="imagen-ticket"
+                [src]="'http://localhost:3000/images/' + imagen.ruta_imagen"
+                [alt]="imagen.ruta_imagen"
+                *ngIf="imagen.ruta_imagen"
+              />
+              }
+            </div>
+          </mat-card-content>
+        </mat-card>
+        }
+      </div>
+    </section>
+
+    <!-- 🛠️ Sección Administrar Ticket -->
+    <section class="admin-section">
+      <h1 class="dialog-subtitle">{{ 'TECHNICIAN_DIALOG.INFO' | translate }}</h1>
+      <p class="dialog-description">
+        Estas cambiando de estado de <strong>En Proceso</strong> a <strong>Resuelto</strong>.  
+        Agrega una observación e imágenes que evidencien tla resolucion del problema.
+      </p>
+
+      <form [formGroup]="AsignacionForm" (ngSubmit)="TicketEnProceso()" novalidate>
+        <!-- Observaciones -->
+        <mat-form-field class="full-width" floatLabel="auto">
+          <mat-label>{{ 'TICKET_FORM.OBSERVATIONS' | translate }}</mat-label>
+          <textarea
+            matInput
+            formControlName="observaciones"
+            placeholder="{{ 'TICKET_FORM.OBSERVATIONS_PLACEHOLDER' | translate }}"
+          ></textarea>
+          @if(AsignacionForm.controls['observaciones'].invalid && AsignacionForm.controls['observaciones'].touched) {
+          <mat-error>
+            {{ 'TICKET_FORM.ERROR_OBSERVATIONS_REQUIRED' | translate }}
+          </mat-error>
+          }
+        </mat-form-field>
+
+        <!-- Subir imágenes -->
+        <div class="upload-section">
+          <h3 class="section-subtitle">{{ 'TICKET_FORM.UPLOAD_IMAGES' | translate }}</h3>
+          <div class="file-upload">
+            @if(selectedImages.length > 0) {
+            <div class="image-preview-grid">
+              @for (img of selectedImages; track img.preview) {
+              <div class="image-preview">
+                <img [src]="img.preview" alt="{{ 'TICKET_FORM.IMAGE_SELECTED' | translate }}" />
+                <button mat-icon-button color="warn" type="button" (click)="removeImage(img)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
+              }
+            </div>
+            } @else {
+            <p class="no-images">{{ 'TICKET_FORM.NO_IMAGES' | translate }}</p>
+            }
+            <button type="button" mat-raised-button color="accent" (click)="fileUpload.click()">
+              <mat-icon>attach_file</mat-icon> {{ 'TICKET_FORM.SELECT_FILES' | translate }}
+            </button>
+            <input type="file" accept="image/*" multiple (change)="selectFiles($event)" #fileUpload hidden />
+          </div>
+          @if(AsignacionForm.controls['imagenes'].invalid && AsignacionForm.controls['imagenes'].touched) {
+          <mat-error>
+            {{ 'TICKET_FORM.NO_IMAGES' | translate }}
+          </mat-error>
+          }
+        </div>
+
+        <!-- Botón guardar -->
+        <mat-card-actions class="button-row">
+          <button mat-flat-button color="accent" type="submit">
+            <mat-icon>save</mat-icon> {{ 'TICKET_FORM.SAVE' | translate }}
+          </button>
+        </mat-card-actions>
+      </form>
+    </section>
+
+    <!-- 🔙 Acción -->
+    <mat-card-actions class="tecnico-actions">
+      <button mat-raised-button color="primary" (click)="close()">
+        <mat-icon>arrow_back</mat-icon>
+        {{ 'TICKET_DIALOG.BACK' | translate }}
+      </button>
+    </mat-card-actions>
+  </mat-card>
+  } @else {
+  <mat-card class="tecnico-card" appearance="outlined">
+    <mat-card-content class="tecnico-content text-center">
+      <p class="mat-body">{{ 'TICKET_DIALOG.NOT_FOUND' | translate }}</p>
+    </mat-card-content>
+  </mat-card>
+  }
+</mat-dialog-content>

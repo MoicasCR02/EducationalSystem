@@ -1,0 +1,52 @@
+<!-- Botón de cierre -->
+<button mat-icon-button class="close-button" [mat-dialog-close]="true" aria-label="{{ 'TECHNICIAN_DIALOG.CLOSE' | translate }}">
+  <mat-icon class="close-icon" color="warn">close</mat-icon>
+</button>
+
+@if(datos()){
+<div class="categoria-dialog">
+  <!-- Encabezado -->
+  <h2 mat-dialog-title class="dialog-title">{{ datos()?.nombre }}</h2>
+  <h6 class="dialog-subtitle">{{ 'TECHNICIAN_DIALOG.SUBTITLE' | translate }}</h6>
+
+  <!-- Contenido principal -->
+  <mat-dialog-content class="content">
+    <div class="details">
+      <!-- Correo -->
+      <section class="section">
+        <h6 class="section-title">{{ 'TECHNICIAN_DIALOG.EMAIL' | translate }}</h6>
+        <p class="section-value">{{ datos()?.correo }}</p>
+      </section>
+
+      <!-- Estado -->
+      <section class="section">
+        <h6 class="section-title">{{ 'TECHNICIAN_DIALOG.STATUS' | translate }}</h6>
+        <p class="section-value">
+          {{ datos()?.activo ? ('TECHNICIAN_DIALOG.ACTIVE' | translate) : ('TECHNICIAN_DIALOG.INACTIVE' | translate) }}
+        </p>
+      </section>
+
+      <!-- Carga Actual -->
+      <section class="section">
+        <h6 class="section-title">{{ 'TECHNICIAN_DIALOG.CURRENT_LOAD' | translate }}</h6>
+        <mat-progress-bar mode="determinate" [value]="(datos()?.carga_actual || 0) * 20">
+        </mat-progress-bar>
+        <div class="carga-text">{{ datos()?.carga_actual || 0 }} / 5</div>
+      </section>
+
+      <!-- Especialidades -->
+      <section class="section">
+        <h6 class="section-title">{{ 'TECHNICIAN_DIALOG.SPECIALTIES' | translate }}</h6>
+        <div class="especialidades-grid">
+          @for (item of datos()?.especialidades; track $index) {
+          <div class="especialidad-card">
+            <div class="especialidad-title">{{ item.nombre }}</div>
+            <div class="especialidad-desc">{{ item.descripcion }}</div>
+          </div>
+          }
+        </div>
+      </section>
+    </div>
+  </mat-dialog-content>
+</div>
+}

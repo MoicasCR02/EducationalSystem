@@ -1,0 +1,102 @@
+<form [formGroup]="TecnicosForm" (ngSubmit)="submitTecnico()" novalidate>
+  <input type="hidden" formControlName="id_usuario" />
+
+  <mat-card class="form-card">
+    <mat-card-header class="primary-title title">
+      <mat-card-title>{{ 'TECHNICIAN_FORM.TECHNICIAN' | translate }}</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <!-- NOMBRE -->
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width" floatLabel="auto">
+            <mat-label>{{ 'TECHNICIAN_FORM.NAME' | translate }}</mat-label>
+            <input matInput formControlName="nombre" placeholder="{{ 'TECHNICIAN_FORM.NAME' | translate }}" />
+            @if(TecnicosForm.controls['nombre'].invalid && TecnicosForm.controls['nombre'].touched) {
+              <mat-error>
+                <ng-container *ngIf="TecnicosForm.controls['nombre'].errors?.['required']">
+                  {{ 'TECHNICIAN_FORM.ERROR_NAME_REQUIRED' | translate }}
+                </ng-container>
+                <ng-container *ngIf="TecnicosForm.controls['nombre'].errors?.['minlength']">
+                  {{ 'TECHNICIAN_FORM.ERROR_NAME_MINLENGTH' | translate }}
+                </ng-container>
+              </mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+
+      <!-- Correo -->
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width" floatLabel="auto">
+            <mat-label>{{ 'TECHNICIAN_FORM.EMAIL' | translate }}</mat-label>
+            <input matInput formControlName="correo" placeholder="{{ 'TECHNICIAN_FORM.EMAIL' | translate }}" />
+            @if(TecnicosForm.controls['correo'].invalid && TecnicosForm.controls['correo'].touched) {
+              <mat-error>
+                <ng-container *ngIf="TecnicosForm.controls['correo'].errors?.['required']">
+                  {{ 'TECHNICIAN_FORM.ERROR_EMAIL_REQUIRED' | translate }}
+                </ng-container>
+                <ng-container *ngIf="TecnicosForm.controls['correo'].errors?.['correoCentroEdu']">
+                  {{ 'TECHNICIAN_FORM.ERROR_EMAIL_DOMAIN' | translate }}
+                </ng-container>
+              </mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+
+      <!-- Activo -->
+      <div class="row">
+        <div class="col">
+          <mat-label>{{ 'TECHNICIAN_FORM.STATUS' | translate }}</mat-label>
+          <mat-radio-group formControlName="activo" class="radio-group">
+            <mat-radio-button [value]="1">{{ 'TECHNICIAN_FORM.ACTIVE' | translate }}</mat-radio-button>
+            <mat-radio-button [value]="0">{{ 'TECHNICIAN_FORM.INACTIVE' | translate }}</mat-radio-button>
+          </mat-radio-group>
+          @if(TecnicosForm.controls['activo'].invalid && TecnicosForm.controls['activo'].touched) {
+            <mat-error>{{ 'TECHNICIAN_FORM.ERROR_STATUS_REQUIRED' | translate }}</mat-error>
+          }
+        </div>
+      </div>
+
+      <!-- Carga Actual -->
+      <div class="row">
+        <div class="col">
+          <mat-label>{{ 'TECHNICIAN_FORM.CURRENT_LOAD' | translate }}</mat-label>
+          <mat-progress-bar
+            mode="determinate"
+            [value]="(TecnicosForm.get('carga_actual')?.value || 0) * 20"
+          >
+          </mat-progress-bar>
+          <div class="carga-text">{{ TecnicosForm.get('carga_actual')?.value || 0 }} / 5</div>
+        </div>
+      </div>
+
+      <!-- Especialidades -->
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width" floatLabel="auto">
+            <mat-label>{{ 'TECHNICIAN_FORM.SPECIALTIES' | translate }}</mat-label>
+            <mat-select formControlName="especialidades" multiple>
+              @for (item of especialidadList(); track item.id_especialidad) {
+                <mat-option [value]="item.id_especialidad">{{ item.nombre }}</mat-option>
+              }
+            </mat-select>
+            @if(TecnicosForm.controls['especialidades'].invalid && TecnicosForm.controls['especialidades'].touched) {
+              <mat-error>{{ 'TECHNICIAN_FORM.ERROR_SPECIALTIES_REQUIRED' | translate }}</mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-card-content>
+
+    <!-- Botones -->
+    <mat-card-actions class="button-row">
+      <button matButton class="btn-tertiary" type="button" (click)="onReset()">{{ 'TECHNICIAN_FORM.RESET' | translate }}</button>
+      <button matButton class="btn-secondary" type="button" (click)="onBack()">{{ 'TECHNICIAN_FORM.BACK' | translate }}</button>
+      <button matButton class="btn-primary" type="submit">{{ 'TECHNICIAN_FORM.SAVE' | translate }}</button>
+    </mat-card-actions>
+  </mat-card>
+</form>

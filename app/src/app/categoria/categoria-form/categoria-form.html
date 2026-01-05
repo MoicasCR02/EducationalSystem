@@ -1,0 +1,124 @@
+<form [formGroup]="categoriaForm" (ngSubmit)="submitCategoria()" novalidate>
+  <input type="hidden" formControlName="id_categoria" />
+
+  <mat-card class="form-card">
+    <mat-card-header class="primary-title title">
+      <mat-card-title>{{ 'CATEGORY_FORM.CATEGORY' | translate }}</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+
+      <!-- 🟦 Sección: Nombre -->
+      <h3 class="section-subtitle">{{ 'CATEGORY_FORM.NAME_SECTION' | translate }}</h3>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width" floatLabel="auto">
+            <mat-label>{{ 'CATEGORY_FORM.NAME' | translate }}</mat-label>
+            <input matInput formControlName="nombre" placeholder="{{ 'CATEGORY_FORM.NAME' | translate }}" />
+            @if(categoriaForm.controls['nombre'].invalid && categoriaForm.controls['nombre'].touched) {
+              <mat-error>
+                <ng-container *ngIf="categoriaForm.controls['nombre'].errors?.['required']">
+                  {{ 'CATEGORY_FORM.ERROR_NAME_REQUIRED' | translate }}
+                </ng-container>
+                <ng-container *ngIf="categoriaForm.controls['nombre'].errors?.['minlength']">
+                  {{ 'CATEGORY_FORM.ERROR_NAME_MINLENGTH' | translate }}
+                </ng-container>
+              </mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+
+      <!-- 🟩 Sección: Descripción -->
+      <h3 class="section-subtitle">{{ 'CATEGORY_FORM.DESCRIPTION_SECTION' | translate }}</h3>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width" floatLabel="auto">
+            <mat-label>{{ 'CATEGORY_FORM.DESCRIPTION' | translate }}</mat-label>
+            <textarea matInput formControlName="descripcion" placeholder="{{ 'CATEGORY_FORM.DESCRIPTION' | translate }}"></textarea>
+            @if(categoriaForm.controls['descripcion'].invalid && categoriaForm.controls['descripcion'].touched) {
+              <mat-error>
+                <ng-container *ngIf="categoriaForm.controls['descripcion'].errors?.['required']">
+                  {{ 'CATEGORY_FORM.ERROR_DESCRIPTION_REQUIRED' | translate }}
+                </ng-container>
+                <ng-container *ngIf="categoriaForm.controls['descripcion'].errors?.['minWords']">
+                  {{ 'CATEGORY_FORM.ERROR_DESCRIPTION_MINWORDS' | translate }}
+                </ng-container>
+              </mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+
+      <!-- 🟨 Sección: Etiquetas -->
+      <h3 class="section-subtitle">{{ 'CATEGORY_FORM.TAGS_SECTION' | translate }}</h3>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width" floatLabel="auto">
+            <mat-label>{{ 'CATEGORY_FORM.TAGS' | translate }}</mat-label>
+            <mat-select formControlName="etiquetas" multiple>
+              @for (item of etiquetasList(); track item.id_etiqueta) {
+                <mat-option [value]="item.id_etiqueta">{{ item.nombre }}</mat-option>
+              }
+            </mat-select>
+            @if(categoriaForm.controls['etiquetas'].invalid && categoriaForm.controls['etiquetas'].touched) {
+              <mat-error>
+                {{ 'CATEGORY_FORM.ERROR_TAGS_REQUIRED' | translate }}
+              </mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+
+      <!-- 🟥 Sección: SLA -->
+      <h3 class="section-subtitle">{{ 'CATEGORY_FORM.SLA_SECTION' | translate }}</h3>
+      <div class="row" formGroupName="sla">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <mat-label>{{ 'CATEGORY_FORM.SLA' | translate }}</mat-label>
+            <mat-select formControlName="id_sla" placeholder="{{ 'CATEGORY_FORM.SELECT_SLA' | translate }}">
+              @for (item of slaList(); track item.id_sla) {
+                <mat-option [value]="item.id_sla">
+                  {{ item.nombre }} ({{ 'CATEGORY_FORM.RESPONSE' | translate }}: {{ item.tiempo_max_respuesta }}h, {{ 'CATEGORY_FORM.RESOLUTION' | translate }}: {{ item.tiempo_max_resolucion }}h)
+                </mat-option>
+              }
+            </mat-select>
+            @if(categoriaForm.get('sla.id_sla')?.invalid && categoriaForm.get('sla.id_sla')?.touched) {
+              <mat-error>
+                {{ 'CATEGORY_FORM.ERROR_SLA_REQUIRED' | translate }}
+              </mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+
+      <!-- 🟪 Sección: Especialidades -->
+      <h3 class="section-subtitle">{{ 'CATEGORY_FORM.SPECIALTIES_SECTION' | translate }}</h3>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width" floatLabel="auto">
+            <mat-label>{{ 'CATEGORY_FORM.SPECIALTIES' | translate }}</mat-label>
+            <mat-select formControlName="especialidades" multiple>
+              @for (item of especialidadList(); track item.id_especialidad) {
+                <mat-option [value]="item.id_especialidad">{{ item.nombre }}</mat-option>
+              }
+            </mat-select>
+            @if(categoriaForm.controls['especialidades'].invalid && categoriaForm.controls['especialidades'].touched) {
+              <mat-error>
+                {{ 'CATEGORY_FORM.ERROR_SPECIALTIES_REQUIRED' | translate }}
+              </mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+
+    </mat-card-content>
+
+    <!-- 🔘 Botones -->
+    <mat-card-actions class="button-row">
+      <button matButton class="btn-tertiary" type="button" (click)="onReset()">{{ 'CATEGORY_FORM.RESET' | translate }}</button>
+      <button matButton class="btn-secondary" type="button" (click)="onBack()">{{ 'CATEGORY_FORM.BACK' | translate }}</button>
+      <button matButton class="btn-primary" type="submit">{{ 'CATEGORY_FORM.SAVE' | translate }}</button>
+    </mat-card-actions>
+  </mat-card>
+</form>

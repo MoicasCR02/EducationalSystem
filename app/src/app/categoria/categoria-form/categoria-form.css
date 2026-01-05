@@ -1,0 +1,169 @@
+.full-width {
+  width: 100%;
+}
+
+/* Card principal */
+.form-card {
+  width: 80%;
+  margin: 0 auto;
+  background: #121212; /* negro profundo */
+  color: #e0e0e0;      /* texto claro */
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+}
+
+/* Título */
+.title {
+  margin-top: 1em;
+  padding: 0.5em;
+  margin-bottom: 1em;
+  background: linear-gradient(90deg, #0d47a1, #1976d2); /* azul moderno */
+  color: #fff;
+  border-radius: 8px 8px 0 0;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* Layout */
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+.col {
+  flex: 1;
+  margin-right: 20px;
+}
+
+.col:last-child {
+  margin-right: 0;
+}
+
+/* Inputs */
+mat-form-field.full-width {
+  width: 100%;
+}
+
+mat-label {
+  font-weight: bold;
+  color: #64b5f6 !important; /* azul claro */
+}
+
+input[matInput], textarea[matInput], mat-select {
+  color: #e0e0e0;
+}
+
+.mat-mdc-input-element, .mat-mdc-select-value {
+  background-color: #1e1e1e;
+  border-radius: 6px;
+  padding: 8px;
+}
+
+/* Errores */
+mat-error {
+  color: #ff5252;
+  font-size: 0.85rem;
+}
+
+/* Tablas */
+.table {
+  margin: 1em;
+  width: 100%;
+  text-align: center;
+  border-collapse: collapse;
+}
+
+.table th {
+  color: #ffffff;
+  background: #1e1e1e;
+}
+
+.table td, th {
+  border: 1px solid #444;
+  padding: 0.5em;
+  color: #e0e0e0;
+}
+
+/* Botones */
+.button-row {
+  margin-top: 1em;
+  width: 100%;
+  margin-bottom: 1em;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.button-row button {
+  border-radius: 6px;
+  font-weight: 600;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.btn-primary {
+  background: #1976d2;
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: #0d47a1;
+}
+
+.btn-secondary {
+  background: #1e1e1e;
+  color: #64b5f6;
+  border: 1px solid #64b5f6;
+}
+
+.btn-secondary:hover {
+  background: #0d47a1;
+  color: #fff;
+}
+
+.btn-tertiary {
+  background: transparent;
+  color: #b0bec5;
+  border: 1px dashed #64b5f6;
+}
+
+.btn-tertiary:hover {
+  background: #263238;
+  color: #fff;
+}
+
+/* Upload */
+.file-upload {
+  padding: 1em;
+  background: #1e1e1e;
+  border-radius: 8px;
+}
+
+.drop_box {
+  margin: 10px 0;
+  padding: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border: 3px dashed #444;
+  border-radius: 5px;
+  background: #121212;
+  color: #a3a3a3;
+}
+
+.drop_box:hover {
+  border: 3px dashed #1976d2;
+}
+
+.drop_box h4 {
+  font-size: 16px;
+  font-weight: 400;
+  color: #64b5f6;
+}
+
+.drop_box p {
+  margin-top: 10px;
+  margin-bottom: 20px;
+  font-size: 12px;
+  color: #a3a3a3;
+}

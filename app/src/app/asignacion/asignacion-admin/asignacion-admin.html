@@ -1,0 +1,134 @@
+<mat-card class="tickets-card">
+  <!-- Encabezado del Card -->
+  <mat-card-header class="card-header">
+    <mat-card-title class="title">
+      {{ 'TICKETS.TITLE' | translate }}
+    </mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content>
+    <div class="tabla-container">
+      <mat-table
+        [dataSource]="dataSource"
+        class="tabla"
+        matSort
+        aria-label="{{ 'TICKETS.TITLE' | translate }}"
+      >
+        <!-- Columna Titulo -->
+        <ng-container matColumnDef="titulo">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            {{ 'TICKETS.NAME' | translate }}
+          </th>
+          <td mat-cell *matCellDef="let row">{{ row.titulo }}</td>
+        </ng-container>
+
+        <!-- Columna Descripcion -->
+        <ng-container matColumnDef="descripcion">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            {{ 'TICKETS.DESCRIPTION' | translate }}
+          </th>
+          <td mat-cell *matCellDef="let row">{{ row.descripcion }}</td>
+        </ng-container>
+
+        <!-- Columna Categoria -->
+        <ng-container matColumnDef="categoria">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            {{ 'TICKETS.CATEGORY' | translate }}
+          </th>
+          <td mat-cell *matCellDef="let row">{{ row.categoria.nombre }}</td>
+        </ng-container>
+
+        <!-- Columna prioridad -->
+        <ng-container matColumnDef="prioridad">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            {{ 'TICKETS.PRIORITY' | translate }}
+          </th>
+          <td mat-cell *matCellDef="let row">{{ row.prioridad }}</td>
+        </ng-container>
+
+        <!-- Columna Tiempo Restante SLA -->
+        <ng-container matColumnDef="TiempoRestante">
+          <th mat-header-cell *matHeaderCellDef>
+            {{ 'TICKETS.TIME_REMAINING' | translate }}
+          </th>
+          <td mat-cell *matCellDef="let ticket">{{ ticket.tiempoRestante }} h</td>
+        </ng-container>
+
+        <!-- Columna fecha_creacion -->
+        <ng-container matColumnDef="fecha_creacion">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            {{ 'TICKETS.CREATED_AT2' | translate }}
+          </th>
+          <td mat-cell *matCellDef="let row">
+            {{ row.fecha_creacion | date : 'dd/MM/yyyy HH:mm' }}
+          </td>
+        </ng-container>
+
+        <!-- Columna fecha máxima -->
+        <ng-container matColumnDef="Fecha_maxima">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            {{ 'TICKETS.FECHAMAXIMA' | translate }}
+          </th>
+          <td mat-cell *matCellDef="let row">
+            {{ row.fecha_maxima_resolucion | date : 'dd/MM/yyyy HH:mm' }}
+          </td>
+        </ng-container>
+
+        <!-- Columna campo calculado -->
+        <ng-container matColumnDef="campoCalculado">
+          <th mat-header-cell *matHeaderCellDef>
+            {{ 'TICKETS.SCORE' | translate }}
+          </th>
+          <td mat-cell *matCellDef="let ticket">
+            {{ ticket.campoCalculado }}
+          </td>
+        </ng-container>
+
+        <tr
+          mat-header-row
+          *matHeaderRowDef="displayedColumns; sticky: true"
+          class="header-cell"
+        ></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </mat-table>
+
+      <mat-paginator
+        #paginator
+        [length]="dataSource.data.length"
+        [pageIndex]="0"
+        [pageSize]="5"
+        [pageSizeOptions]="[3, 5, 10]"
+        showFirstLastButtons
+      >
+      </mat-paginator>
+    </div>
+  </mat-card-content>
+
+  <!-- Botones de acciones -->
+  <button mat-raised-button color="primary" (click)="mostrarAsignaciones()">
+    {{ 'ACTIONS.SHOW_ASSIGNMENTS' | translate }}
+  </button>
+  <button mat-raised-button color="primary" (click)="asignarAutomaticamente()">
+    {{ 'ACTIONS.AUTO_ASSIGN' | translate }}
+  </button>
+</mat-card>
+
+<!-- Resumen de asignaciones -->
+<div *ngIf="asignaciones.length > 0" class="resumen-asignaciones">
+  <h3>{{ 'SUMMARY.TITLE' | translate }}</h3>
+  <mat-list>
+    <mat-list-item *ngFor="let asignacion of asignaciones">
+      <ng-container *ngIf="asignacion.tecnico && asignacion.tecnico.id_usuario !== 0; else noAsignado">
+        {{ 'SUMMARY.ASSIGNED' | translate }} Ticket "{{ asignacion.ticket.titulo }}" {{ 'SUMMARY.ASSIGNEDP' | translate }} "{{ asignacion.tecnico.nombre }}"
+        <span *ngIf="asignacion.regla">
+          {{ 'SUMMARY.RULE' | translate }} "{{ asignacion.regla.nombre }}"
+        </span>
+      </ng-container>
+
+      <ng-template #noAsignado>
+        {{ 'SUMMARY.UNASSIGNED' | translate }} Ticket "{{ asignacion.ticket.titulo }}" {{ 'SUMMARY.UNASSIGNEDP' | translate }}
+      </ng-template>
+    </mat-list-item>
+  </mat-list>
+</div>
+

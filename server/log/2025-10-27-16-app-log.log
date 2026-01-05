@@ -1,0 +1,160 @@
+2025-10-27 16:42:36.519 error: 	moise--Se produjo un error interno del servidor 
+Invalid `this.prisma.ticket.findMany()` invocation in
+C:\Users\moise\Desktop\Universidad\Software Libre\Proyecto Completo\EducationalSystem\server\source\controllers\TicketController.ts:30:44
+
+  27 // ADMIN no necesita filtro
+  28 
+  29 // 📦 Consulta a la base de datos con Prisma
+→ 30 const tickets = await this.prisma.ticket.findMany({
+       where: {
+         asignaciones: {
+           some: {
+             id_usuario_tecnico: 5,
+             ~~~~~~~~~~~~~~~~~~
+     ?       AND?: AsignacionWhereInput | AsignacionWhereInput[],
+     ?       OR?: AsignacionWhereInput[],
+     ?       NOT?: AsignacionWhereInput | AsignacionWhereInput[],
+     ?       id_asignacion?: IntFilter | Int,
+     ?       fecha_asignacion?: DateTimeFilter | DateTime,
+     ?       metodo?: StringFilter | String,
+     ?       id_ticket?: IntFilter | Int,
+     ?       id_tecnico?: IntFilter | Int,
+     ?       id_reglaAutotriage?: IntNullableFilter | Int | Null,
+     ?       ticket?: TicketScalarRelationFilter | TicketWhereInput,
+     ?       tecnico?: UsuarioScalarRelationFilter | UsuarioWhereInput,
+     ?       regla?: Reglas_AutotriageNullableScalarRelationFilter | Reglas_AutotriageWhereInput | Null
+           }
+         }
+       },
+       orderBy: {
+         id_ticket: "asc"
+       },
+       include: {
+         categoria: true,
+         Historial_Estados: true,
+         valoracion: true,
+         asignaciones: true
+       }
+     })
+
+Unknown argument `id_usuario_tecnico`. Available options are marked with ?.
+2025-10-27 16:42:53.409 error: 	moise--Se produjo un error interno del servidor 
+Invalid `this.prisma.ticket.findMany()` invocation in
+C:\Users\moise\Desktop\Universidad\Software Libre\Proyecto Completo\EducationalSystem\server\source\controllers\TicketController.ts:30:44
+
+  27 // ADMIN no necesita filtro
+  28 
+  29 // 📦 Consulta a la base de datos con Prisma
+→ 30 const tickets = await this.prisma.ticket.findMany({
+       where: {
+         asignaciones: {
+           some: {
+             id_usuario_tecnico: 6,
+             ~~~~~~~~~~~~~~~~~~
+     ?       AND?: AsignacionWhereInput | AsignacionWhereInput[],
+     ?       OR?: AsignacionWhereInput[],
+     ?       NOT?: AsignacionWhereInput | AsignacionWhereInput[],
+     ?       id_asignacion?: IntFilter | Int,
+     ?       fecha_asignacion?: DateTimeFilter | DateTime,
+     ?       metodo?: StringFilter | String,
+     ?       id_ticket?: IntFilter | Int,
+     ?       id_tecnico?: IntFilter | Int,
+     ?       id_reglaAutotriage?: IntNullableFilter | Int | Null,
+     ?       ticket?: TicketScalarRelationFilter | TicketWhereInput,
+     ?       tecnico?: UsuarioScalarRelationFilter | UsuarioWhereInput,
+     ?       regla?: Reglas_AutotriageNullableScalarRelationFilter | Reglas_AutotriageWhereInput | Null
+           }
+         }
+       },
+       orderBy: {
+         id_ticket: "asc"
+       },
+       include: {
+         categoria: true,
+         Historial_Estados: true,
+         valoracion: true,
+         asignaciones: true
+       }
+     })
+
+Unknown argument `id_usuario_tecnico`. Available options are marked with ?.
+2025-10-27 16:43:00.302 error: 	moise--Se produjo un error interno del servidor 
+Invalid `this.prisma.ticket.findMany()` invocation in
+C:\Users\moise\Desktop\Universidad\Software Libre\Proyecto Completo\EducationalSystem\server\source\controllers\TicketController.ts:30:44
+
+  27 // ADMIN no necesita filtro
+  28 
+  29 // 📦 Consulta a la base de datos con Prisma
+→ 30 const tickets = await this.prisma.ticket.findMany({
+       where: {
+         asignaciones: {
+           some: {
+             id_usuario_tecnico: 7,
+             ~~~~~~~~~~~~~~~~~~
+     ?       AND?: AsignacionWhereInput | AsignacionWhereInput[],
+     ?       OR?: AsignacionWhereInput[],
+     ?       NOT?: AsignacionWhereInput | AsignacionWhereInput[],
+     ?       id_asignacion?: IntFilter | Int,
+     ?       fecha_asignacion?: DateTimeFilter | DateTime,
+     ?       metodo?: StringFilter | String,
+     ?       id_ticket?: IntFilter | Int,
+     ?       id_tecnico?: IntFilter | Int,
+     ?       id_reglaAutotriage?: IntNullableFilter | Int | Null,
+     ?       ticket?: TicketScalarRelationFilter | TicketWhereInput,
+     ?       tecnico?: UsuarioScalarRelationFilter | UsuarioWhereInput,
+     ?       regla?: Reglas_AutotriageNullableScalarRelationFilter | Reglas_AutotriageWhereInput | Null
+           }
+         }
+       },
+       orderBy: {
+         id_ticket: "asc"
+       },
+       include: {
+         categoria: true,
+         Historial_Estados: true,
+         valoracion: true,
+         asignaciones: true
+       }
+     })
+
+Unknown argument `id_usuario_tecnico`. Available options are marked with ?.
+2025-10-27 16:43:07.890 error: 	moise--Se produjo un error interno del servidor 
+Invalid `this.prisma.ticket.findMany()` invocation in
+C:\Users\moise\Desktop\Universidad\Software Libre\Proyecto Completo\EducationalSystem\server\source\controllers\TicketController.ts:30:44
+
+  27 // ADMIN no necesita filtro
+  28 
+  29 // 📦 Consulta a la base de datos con Prisma
+→ 30 const tickets = await this.prisma.ticket.findMany({
+       where: {
+         asignaciones: {
+           some: {
+             id_usuario_tecnico: 8,
+             ~~~~~~~~~~~~~~~~~~
+     ?       AND?: AsignacionWhereInput | AsignacionWhereInput[],
+     ?       OR?: AsignacionWhereInput[],
+     ?       NOT?: AsignacionWhereInput | AsignacionWhereInput[],
+     ?       id_asignacion?: IntFilter | Int,
+     ?       fecha_asignacion?: DateTimeFilter | DateTime,
+     ?       metodo?: StringFilter | String,
+     ?       id_ticket?: IntFilter | Int,
+     ?       id_tecnico?: IntFilter | Int,
+     ?       id_reglaAutotriage?: IntNullableFilter | Int | Null,
+     ?       ticket?: TicketScalarRelationFilter | TicketWhereInput,
+     ?       tecnico?: UsuarioScalarRelationFilter | UsuarioWhereInput,
+     ?       regla?: Reglas_AutotriageNullableScalarRelationFilter | Reglas_AutotriageWhereInput | Null
+           }
+         }
+       },
+       orderBy: {
+         id_ticket: "asc"
+       },
+       include: {
+         categoria: true,
+         Historial_Estados: true,
+         valoracion: true,
+         asignaciones: true
+       }
+     })
+
+Unknown argument `id_usuario_tecnico`. Available options are marked with ?.

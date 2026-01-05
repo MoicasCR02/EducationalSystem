@@ -1,0 +1,110 @@
+2025-11-17 08:26:40.452 error: 	moise--Se produjo un error interno del servidor 
+Invalid `this.prisma.categoria.findMany()` invocation in
+E:\Universidad 2025\Software Libre\Proyecto Completo p\EducationalSystem\server\source\controllers\categoriaController.ts:11:52
+
+   8 
+   9 // Listado de Categorias
+  10 get = async (request: Request, response: Response, next: NextFunction) => {
+→ 11   const categorias = await this.prisma.categoria.findMany(
+Can't reach database server at `localhost:3306`
+
+Please make sure your database server is running at `localhost:3306`.
+2025-11-17 08:26:59.530 error: 	moise--Se produjo un error interno del servidor 
+Invalid `this.prisma.categoria.findMany()` invocation in
+E:\Universidad 2025\Software Libre\Proyecto Completo p\EducationalSystem\server\source\controllers\categoriaController.ts:11:52
+
+   8 
+   9 // Listado de Categorias
+  10 get = async (request: Request, response: Response, next: NextFunction) => {
+→ 11   const categorias = await this.prisma.categoria.findMany(
+Can't reach database server at `localhost:3306`
+
+Please make sure your database server is running at `localhost:3306`.
+2025-11-17 08:27:03.573 error: 	moise--Se produjo un error interno del servidor 
+Invalid `this.prisma.categoria.findMany()` invocation in
+E:\Universidad 2025\Software Libre\Proyecto Completo p\EducationalSystem\server\source\controllers\categoriaController.ts:11:52
+
+   8 
+   9 // Listado de Categorias
+  10 get = async (request: Request, response: Response, next: NextFunction) => {
+→ 11   const categorias = await this.prisma.categoria.findMany(
+Can't reach database server at `localhost:3306`
+
+Please make sure your database server is running at `localhost:3306`.
+2025-11-17 08:27:07.660 error: 	moise--Se produjo un error interno del servidor 
+Invalid `this.prisma.categoria.findMany()` invocation in
+E:\Universidad 2025\Software Libre\Proyecto Completo p\EducationalSystem\server\source\controllers\categoriaController.ts:11:52
+
+   8 
+   9 // Listado de Categorias
+  10 get = async (request: Request, response: Response, next: NextFunction) => {
+→ 11   const categorias = await this.prisma.categoria.findMany(
+Can't reach database server at `localhost:3306`
+
+Please make sure your database server is running at `localhost:3306`.
+2025-11-17 08:27:11.722 error: 	moise--Se produjo un error interno del servidor 
+Invalid `this.prisma.categoria.findMany()` invocation in
+E:\Universidad 2025\Software Libre\Proyecto Completo p\EducationalSystem\server\source\controllers\categoriaController.ts:11:52
+
+   8 
+   9 // Listado de Categorias
+  10 get = async (request: Request, response: Response, next: NextFunction) => {
+→ 11   const categorias = await this.prisma.categoria.findMany(
+Can't reach database server at `localhost:3306`
+
+Please make sure your database server is running at `localhost:3306`.
+2025-11-17 08:27:16.364 error: 	moise--Se produjo un error interno del servidor 
+Invalid `this.prisma.categoria.findMany()` invocation in
+E:\Universidad 2025\Software Libre\Proyecto Completo p\EducationalSystem\server\source\controllers\categoriaController.ts:11:52
+
+   8 
+   9 // Listado de Categorias
+  10 get = async (request: Request, response: Response, next: NextFunction) => {
+→ 11   const categorias = await this.prisma.categoria.findMany(
+Can't reach database server at `localhost:3306`
+
+Please make sure your database server is running at `localhost:3306`.
+2025-11-17 08:29:01.890 error: 	moise--Se produjo un error interno del servidor 
+Invalid `this.prisma.categoria.findMany()` invocation in
+E:\Universidad 2025\Software Libre\Proyecto Completo p\EducationalSystem\server\source\controllers\categoriaController.ts:11:52
+
+   8 
+   9 // Listado de Categorias
+  10 get = async (request: Request, response: Response, next: NextFunction) => {
+→ 11   const categorias = await this.prisma.categoria.findMany(
+Can't reach database server at `localhost:3306`
+
+Please make sure your database server is running at `localhost:3306`.
+2025-11-17 08:29:05.962 error: 	moise--Se produjo un error interno del servidor 
+Invalid `this.prisma.categoria.findMany()` invocation in
+E:\Universidad 2025\Software Libre\Proyecto Completo p\EducationalSystem\server\source\controllers\categoriaController.ts:11:52
+
+   8 
+   9 // Listado de Categorias
+  10 get = async (request: Request, response: Response, next: NextFunction) => {
+→ 11   const categorias = await this.prisma.categoria.findMany(
+Can't reach database server at `localhost:3306`
+
+Please make sure your database server is running at `localhost:3306`.
+2025-11-17 08:29:45.420 error: 	moise--Se produjo un error interno del servidor 
+Invalid `this.prisma.categoria.findMany()` invocation in
+E:\Universidad 2025\Software Libre\Proyecto Completo p\EducationalSystem\server\source\controllers\categoriaController.ts:11:52
+
+   8 
+   9 // Listado de Categorias
+  10 get = async (request: Request, response: Response, next: NextFunction) => {
+→ 11   const categorias = await this.prisma.categoria.findMany(
+Can't reach database server at `localhost:3306`
+
+Please make sure your database server is running at `localhost:3306`.
+2025-11-17 08:29:46.374 error: 	moise--Se produjo un error interno del servidor 
+Invalid `this.prisma.usuario.findUnique()` invocation in
+E:\Universidad 2025\Software Libre\Proyecto Completo p\EducationalSystem\server\source\controllers\TicketController.ts:12:47
+
+   9 
+  10 const idUsuarioActual = 2; // cambiar por valor de usario que inicia la sesion
+  11 
+→ 12 const usuario = await this.prisma.usuario.findUnique(
+Can't reach database server at `localhost:3306`
+
+Please make sure your database server is running at `localhost:3306`.

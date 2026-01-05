@@ -1,0 +1,52 @@
+2025-12-03 11:29:58.974 error: 	moise--Se produjo un error interno del servidor 
+Invalid `this.prisma.ticket.create()` invocation in
+E:\Universidad 2025\Software Libre\Proyecto Completo p\EducationalSystem\server\source\controllers\ticketController.ts:144:48
+
+  141 try {
+  142   const body = request.body;
+  143 
+→ 144   const newTicket = await this.prisma.ticket.create({
+          data: {
+            titulo: "Nuevo incidenete",
+            descripcion: "la mesa no sirve",
+            fecha_creacion: "2025-12-03T17:29:58.923Z",
+            fecha_cierre: null,
+            estado: "Pendiente",
+            prioridad: {
+              id_prioridad: "Alta"
+            },
+            ~~~~~~~~~~~~~~~~~~~~~~
+            id_categoria: 3,
+            id_usuario_cliente: 2,
+            Historial_Estados: {
+              create: [
+                {
+                  estado_anterior: "",
+                  nuevo_estado: "Pendiente",
+                  observaciones: "quiero que lo solucionen lo más rápido posible",
+                  fecha_cambio: "2025-12-03T17:29:58.923Z",
+                  id_usuario: 2,
+                  Imagenes_Ticket: {
+                    create: [
+                      {
+                        ruta_imagen: "tikcet-bg.png"
+                      },
+                      {
+                        ruta_imagen: "ticket.png"
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          },
+          include: {
+            Historial_Estados: {
+              include: {
+                Imagenes_Ticket: true
+              }
+            }
+          }
+        })
+
+Argument `prioridad`: Invalid value provided. Expected String, provided Object.

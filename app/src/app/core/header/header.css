@@ -1,0 +1,122 @@
+.header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 64px;
+  padding: 0 1rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0);
+  z-index: 10;
+}
+
+/* Menú central perfectamente centrado */
+.center-menu {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 3rem;
+  align-items: center;
+  z-index: 1;
+}
+
+.center-menu a[mat-button] {
+  position: relative;
+  color: #fff;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  transition: color 0.3s ease;
+}
+
+.center-menu a[mat-button].active-link {
+  background-color: #b9c4eb;
+  color: #313ca1;
+}
+
+.center-menu a[mat-button] mat-icon {
+  font-size: 20px;
+}
+
+/* Línea animada debajo del texto */
+.center-menu a[mat-button]::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background-color: #bcdfe7;
+  transition: width 0.3s ease, left 0.3s ease;
+}
+
+.center-menu a[mat-button]:hover {
+  color: #4668c5;
+}
+
+.center-menu a[mat-button]:hover::after {
+  width: 100%;
+  left: 0;
+}
+
+/* Sección de usuario a la derecha */
+.user-section {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-left: auto;
+  z-index: 2;
+}
+
+.user-section .user-email {
+  color: #fff;
+  font-size: 0.9rem;
+}
+
+/* Botón con animación */
+.menu-hover {
+  position: relative;
+  color: #fff;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  transition: color 0.3s ease;
+}
+
+.menu-hover::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background-color: #bcdfe7;
+  transition: width 0.3s ease, left 0.3s ease;
+}
+
+.menu-hover:hover {
+  color: #64b5f6;
+}
+
+.menu-hover:hover::after {
+  width: 100%;
+  left: 0;
+}
+
+/* Menú hamburguesa (solo en móvil) */
+.mobile-menu-button {
+  display: none;
+  color: #fff;
+}
+
+/* Responsive: oculta menú central en móvil */
+@media (max-width: 768px) {
+  .center-menu {
+    display: none;
+  }
+  .mobile-menu-button {
+    display: inline-flex;
+  }
+}

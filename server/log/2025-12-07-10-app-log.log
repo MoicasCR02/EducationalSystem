@@ -1,0 +1,34 @@
+2025-12-07 10:08:39.969 error: 	moise--Se produjo un error interno del servidor 
+Invalid `this.prisma.usuario.findMany()` invocation in
+E:\Universidad 2025\Software Libre\Proyecto Completo p\EducationalSystem\server\source\controllers\usuarioController.ts:10:49
+
+   7 // Listado de Técnicos
+   8 get = async (request: Request, response: Response, next: NextFunction) => {
+   9   try {
+→ 10     const listado = await this.prisma.usuario.findMany(
+Authentication failed against database server, the provided database credentials for `root` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+2025-12-07 10:31:58.127 error: 	moise--Se produjo un error interno del servidor 
+Invalid `this.prisma.usuario.create()` invocation in
+E:\Universidad 2025\Software Libre\Proyecto Completo p\EducationalSystem\server\source\controllers\usuarioController.ts:140:52
+
+  137 try {
+  138   const body = request.body;
+  139 
+→ 140   const newTecnico = await this.prisma.usuario.create({
+          data: {
+            correo: undefined,
+            activo: false,
+            carga_actual: 0,
+            especialidades: {
+              connect: undefined
+            },
+            id_rol: "TECNICO",
+            disponible: true,
+        +   nombre: String
+          }
+        })
+
+Argument `nombre` is missing.
+2025-12-07 10:52:44.857 error: 	moise--Se produjo un error interno del servidor Cannot set headers after they are sent to the client

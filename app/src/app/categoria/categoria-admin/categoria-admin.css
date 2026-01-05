@@ -1,0 +1,75 @@
+.videojuego-card {
+   width: fit-content;
+  margin: 2em auto;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  border-radius: 16px;
+  background: linear-gradient(145deg, #1e1e2f, #2c2c3f);
+  color: #fff;
+}
+
+.card-header {
+  justify-content: space-between;
+  align-items: center;
+}
+.title{
+  margin-bottom: 0.5em;
+}
+mat-card-title {
+  font-size: 1.6em;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+}
+
+mat-card-subtitle {
+  display: flex;
+  align-items: center;
+  padding: 0.5em;
+}
+
+tabla-container {
+  width: 100%;
+  display: block;
+  overflow-x: auto;
+}
+
+.tabla {
+  margin: 0 auto;
+  justify-content: center;
+}
+
+.header-cell, th.mat-header-cell {
+  font-weight: 900;
+  text-transform: uppercase;
+  background-color: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  vertical-align:middle;
+}
+
+.header-cell, th.mat-header-cell, td.mat-cell {
+  width:100%;
+  text-overflow: ellipsis;
+}
+
+tr.mat-row:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  transition: background-color 0.3s ease;
+}
+tr.mat-row, tr.mat-header-row {
+  display: table-row;
+  width: 100%;
+  table-layout: fixed;
+}
+
+.acciones-cell {
+  display: flex;
+  justify-content: center;
+  gap: 0.5em;
+  height: inherit;
+}
+
+mat-paginator {
+  margin-top: 1em;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+

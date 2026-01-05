@@ -1,0 +1,130 @@
+2025-11-17 15:20:15.389 error: 	moise--Se produjo un error interno del servidor 
+Invalid `this.prisma.usuario.update()` invocation in
+E:\Universidad 2025\Software Libre\Proyecto Completo p\EducationalSystem\server\source\controllers\usuarioController.ts:146:55
+
+  143   : [];
+  144 
+  145 //Actualizar
+→ 146 const updateTecnico = await this.prisma.usuario.update({
+        where: {
+          id_usuario: 9
+        },
+        data: {
+          nombre: "Moisés Castro",
+          correo: "moises.castro@empresa.com",
+          activo: 0,
+                  ~
+          especialidades: {
+            disconnect: [
+              {
+                id_especialidad: 1
+              },
+              {
+                id_especialidad: 3
+              },
+              {
+                id_especialidad: 6
+              }
+            ],
+            connect: [
+              {
+                id_especialidad: 1
+              },
+              {
+                id_especialidad: 2
+              },
+              {
+                id_especialidad: 5
+              }
+            ]
+          }
+        }
+      })
+
+Argument `activo`: Invalid value provided. Expected Boolean or BoolFieldUpdateOperationsInput, provided Int.
+2025-11-17 15:21:07.728 error: 	moise--Se produjo un error interno del servidor 
+Invalid `this.prisma.usuario.update()` invocation in
+E:\Universidad 2025\Software Libre\Proyecto Completo p\EducationalSystem\server\source\controllers\usuarioController.ts:146:55
+
+  143   : [];
+  144 
+  145 //Actualizar
+→ 146 const updateTecnico = await this.prisma.usuario.update({
+        where: {
+          id_usuario: 9
+        },
+        data: {
+          nombre: "Moisés Castro",
+          correo: "moises.castro@empresa.com",
+          activo: 0,
+                  ~
+          especialidades: {
+            disconnect: [
+              {
+                id_especialidad: 1
+              },
+              {
+                id_especialidad: 3
+              },
+              {
+                id_especialidad: 6
+              }
+            ],
+            connect: [
+              {
+                id_especialidad: 1
+              },
+              {
+                id_especialidad: 2
+              },
+              {
+                id_especialidad: 5
+              }
+            ]
+          }
+        }
+      })
+
+Argument `activo`: Invalid value provided. Expected Boolean or BoolFieldUpdateOperationsInput, provided Int.
+2025-11-17 15:35:38.613 error: 	moise--Se produjo un error interno del servidor 
+Invalid `this.prisma.usuario.findUnique()` invocation in
+E:\Universidad 2025\Software Libre\Proyecto Completo p\EducationalSystem\server\source\controllers\usuarioController.ts:113:58
+
+  110 const idTecnico = parseInt(request.params.id);
+  111 
+  112 //Obtener categoria anterior
+→ 113 const TecnicoExistente = await this.prisma.usuario.findUnique({
+        where: {
+      +   id_usuario: Int
+        },
+        include: {
+          especialidades: {
+            select: {
+              id_especialidad: true
+            }
+          }
+        }
+      })
+
+Argument `id_usuario` is missing.
+2025-11-17 15:35:51.331 error: 	moise--Se produjo un error interno del servidor 
+Invalid `this.prisma.usuario.findUnique()` invocation in
+E:\Universidad 2025\Software Libre\Proyecto Completo p\EducationalSystem\server\source\controllers\usuarioController.ts:113:58
+
+  110 const idTecnico = parseInt(request.params.id);
+  111 
+  112 //Obtener categoria anterior
+→ 113 const TecnicoExistente = await this.prisma.usuario.findUnique({
+        where: {
+      +   id_usuario: Int
+        },
+        include: {
+          especialidades: {
+            select: {
+              id_especialidad: true
+            }
+          }
+        }
+      })
+
+Argument `id_usuario` is missing.

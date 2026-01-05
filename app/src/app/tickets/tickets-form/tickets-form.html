@@ -1,0 +1,234 @@
+<form [formGroup]="TicketForm" (ngSubmit)="submitTicket()" novalidate>
+  <input type="hidden" formControlName="id_categoria" />
+
+  <mat-card class="form-card">
+    <mat-card-header class="primary-title">
+      <mat-card-title>{{ 'TICKET_FORM.TICKET' | translate }}</mat-card-title>
+    </mat-card-header>
+
+    <!-- Usuario solicitante -->
+    <div class="usuario-solicitante">
+      <span class="user-label">{{ 'TICKET_FORM.REQUEST_USER' | translate }}</span>
+      <mat-icon class="user-icon">person</mat-icon>
+
+      @if (usuario() !== null) {
+      <span class="user-name">{{ usuario()?.nombre }}</span>
+      } @else {
+      <span class="user-loading">{{ 'TICKET_FORM.LOADING_USER' | translate }}</span>
+      }
+
+      <span class="user-label">{{ 'TICKET_FORM.DATE' | translate }}:</span>
+      <span class="user-date">{{ today | date : 'dd/MM/yyyy' }}</span>
+    </div>
+
+    <mat-card-content>
+      <!-- Título -->
+      <h3 class="section-subtitle">{{ 'TICKET_FORM.TITLE_SECTION' | translate }}</h3>
+      <mat-form-field class="full-width" floatLabel="auto">
+        <mat-label>{{ 'TICKET_FORM.TITLE' | translate }}</mat-label>
+        <input
+          matInput
+          formControlName="titulo"
+          placeholder="{{ 'TICKET_FORM.NAME' | translate }}"
+        />
+        @if(TicketForm.controls['titulo'].invalid && TicketForm.controls['titulo'].touched) {
+        <mat-error>
+          <ng-container *ngIf="TicketForm.controls['titulo'].errors?.['required']">
+            {{ 'TICKET_FORM.ERROR_TITLE_REQUIRED' | translate }}
+          </ng-container>
+          <ng-container *ngIf="TicketForm.controls['titulo'].errors?.['minlength']">
+            {{ 'TICKET_FORM.ERROR_TITLE_MINLENGTH' | translate }}
+          </ng-container>
+        </mat-error>
+        }
+      </mat-form-field>
+
+      <!-- Descripción -->
+      <h3 class="section-subtitle">{{ 'TICKET_FORM.DESCRIPTION_SECTION' | translate }}</h3>
+      <mat-form-field class="full-width" floatLabel="auto">
+        <mat-label>{{ 'TICKET_FORM.DESCRIPTION' | translate }}</mat-label>
+        <textarea
+          matInput
+          formControlName="descripcion"
+          placeholder="{{ 'TICKET_FORM.DESCRIPTION_PLACEHOLDER' | translate }}"
+        ></textarea>
+        @if(TicketForm.controls['descripcion'].invalid &&
+        TicketForm.controls['descripcion'].touched) {
+        <mat-error>
+          <ng-container *ngIf="TicketForm.controls['descripcion'].errors?.['required']">
+            {{ 'TICKET_FORM.ERROR_DESCRIPTION_REQUIRED' | translate }}
+          </ng-container>
+          <ng-container *ngIf="TicketForm.controls['descripcion'].errors?.['minWords']">
+            {{ 'TICKET_FORM.ERROR_DESCRIPTION_MINWORDS' | translate }}
+          </ng-container>
+        </mat-error>
+        }
+      </mat-form-field>
+
+      <!-- Etiquetas -->
+      @if (isCreate) {
+      <h3 class="section-subtitle">{{ 'TICKET_FORM.TAGS_SECTION' | translate }}</h3>
+      <mat-form-field class="full-width" formGroupName="etiquetas">
+        <mat-label>{{ 'TICKET_FORM.TAG' | translate }}</mat-label>
+        <input
+          type="text"
+          matInput
+          [matAutocomplete]="auto"
+          formControlName="nombre"
+          placeholder="{{ 'TICKET_FORM.TAG_PLACEHOLDER' | translate }}"
+        />
+        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onEtiquetaSelected($event)">
+          @for (item of filteredEtiquetas; track item.id_etiqueta) {
+          <mat-option [value]="item.nombre">
+            {{ item.nombre }}
+          </mat-option>
+          } @if (filteredEtiquetas.length === 0) {
+          <mat-option disabled>{{ 'TICKET_FORM.NO_TAGS_FOUND' | translate }}</mat-option>
+          }
+        </mat-autocomplete>
+        @if (TicketForm.get('etiquetas.nombre')?.invalid &&
+        TicketForm.get('etiquetas.nombre')?.touched) {
+        <mat-error>{{ 'TICKET_FORM.ERROR_TAG_REQUIRED' | translate }}</mat-error>
+        }
+      </mat-form-field>
+      }
+
+      <!-- Categorías asociadas con SLA -->
+      @if (categoriasEtiqueta.length > 0) {
+      <h3 class="section-subtitle">{{ 'TICKET_FORM.CATEGORIES_SECTION' | translate }}</h3>
+      <div class="categoria-grid">
+        @for (cat of categoriasEtiqueta; track cat.id_categoria) {
+        <mat-card class="categoria-card">
+          <mat-card-header>
+            <mat-card-title>{{ cat.nombre }}</mat-card-title>
+            <mat-card-subtitle>SLA: {{ cat.sla.nombre }}</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <div class="sla-info">
+              <span class="sla-chip">
+                <mat-icon>schedule</mat-icon>
+                {{ 'TICKET_FORM.RESPONSE' | translate }}: {{ cat.sla.tiempo_max_respuesta }} hrs
+              </span>
+              <span class="sla-chip">
+                <mat-icon>hourglass_bottom</mat-icon>
+                {{ 'TICKET_FORM.RESOLUTION' | translate }}: {{ cat.sla.tiempo_max_resolucion }} hrs
+              </span>
+            </div>
+          </mat-card-content>
+        </mat-card>
+        }
+      </div>
+      }
+
+      <!-- Prioridad -->
+      <h3 class="section-subtitle">{{ 'TICKET_FORM.PRIORITY_SECTION' | translate }}</h3>
+      <mat-form-field class="full-width" formGroupName="prioridad">
+        <mat-label>{{ 'TICKET_FORM.PRIORITY' | translate }}</mat-label>
+        <mat-select
+          formControlName="id_prioridad"
+          placeholder="{{ 'TICKET_FORM.SELECT_PRIORITY' | translate }}"
+        >
+          @for (item of prioridadList(); track item.id_prioridad) {
+          <mat-option [value]="item.nombre">
+            {{ item.nombre }}
+          </mat-option>
+          }
+        </mat-select>
+        @if(TicketForm.get('prioridad.id_prioridad')?.invalid &&
+        TicketForm.get('prioridad.id_prioridad')?.touched) {
+        <mat-error>{{ 'TICKET_FORM.ERROR_PRIORITY_REQUIRED' | translate }}</mat-error>
+        }
+      </mat-form-field>
+
+      <!-- Mensaje de aceptación automática -->
+      <div
+        *ngIf="TicketForm.get('prioridad.id_prioridad')?.value === 'Alta'"
+        class="aceptacion-box"
+      >
+        <p>¿Quieres que el ticket sea asignado automáticamente?</p>
+        <button mat-button color="primary" type="button" (click)="setAceptacion('Si')">Sí</button>
+        <button mat-button color="warn" type="button" (click)="setAceptacion('No')">No</button>
+      </div>
+
+      <!-- Mostrar el estado actual de aceptacion -->
+      <p *ngIf="TicketForm.get('aceptacion')?.value">
+        Estado de aceptación: {{ TicketForm.get('aceptacion')?.value }}
+      </p>
+
+      <!-- Observaciones -->
+      <h3 class="section-subtitle">{{ 'TICKET_FORM.OBSERVATIONS_SECTION' | translate }}</h3>
+      <mat-form-field class="full-width" floatLabel="auto">
+        <mat-label>{{ 'TICKET_FORM.OBSERVATIONS' | translate }}</mat-label>
+        <textarea
+          matInput
+          formControlName="observaciones"
+          placeholder="{{ 'TICKET_FORM.OBSERVATIONS_PLACEHOLDER' | translate }}"
+        ></textarea>
+        @if(TicketForm.controls['observaciones'].invalid &&
+        TicketForm.controls['observaciones'].touched) {
+        <mat-error>
+          <ng-container *ngIf="TicketForm.controls['observaciones'].errors?.['required']">
+            {{ 'TICKET_FORM.ERROR_OBSERVATIONS_REQUIRED' | translate }}
+          </ng-container>
+          <ng-container *ngIf="TicketForm.controls['observaciones'].errors?.['minWords']">
+            {{ 'TICKET_FORM.ERROR_OBSERVATIONS_MINWORDS' | translate }}
+          </ng-container>
+        </mat-error>
+        }
+      </mat-form-field>
+    </mat-card-content>
+
+    <!-- Subir imágenes -->
+    <div class="upload-section">
+      <h3 class="section-subtitle">{{ 'TICKET_FORM.UPLOAD_IMAGES' | translate }}</h3>
+      <div class="file-upload">
+        @if(selectedImages.length > 0) {
+        <div class="image-preview-grid">
+          @for (img of selectedImages; track img.preview) {
+          <div class="image-preview">
+            <img [src]="img.preview" alt="{{ 'TICKET_FORM.IMAGE_SELECTED' | translate }}" />
+            <button mat-icon-button color="warn" type="button" (click)="removeImage(img)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+          }
+        </div>
+        } @else {
+        <p>{{ 'TICKET_FORM.NO_IMAGES' | translate }}</p>
+        }
+        <button type="button" mat-raised-button color="accent" (click)="fileUpload.click()">
+          <mat-icon>attach_file</mat-icon> {{ 'TICKET_FORM.SELECT_FILES' | translate }}
+        </button>
+        <input
+          type="file"
+          accept="image/*"
+          multiple
+          (change)="selectFiles($event)"
+          #fileUpload
+          hidden
+        />
+        @if(TicketForm.controls['imagenes'].invalid &&
+        TicketForm.controls['imagenes'].touched) {
+        <mat-error>
+          <ng-container *ngIf="TicketForm.controls['imagenes'].errors?.['required']">
+            {{ 'TICKET_FORM.NO_IMAGES' | translate }}
+          </ng-container>
+        </mat-error>
+        }
+      </div>
+    </div>
+
+    <!-- Botones -->
+    <mat-card-actions class="button-row">
+      <button mat-stroked-button color="warn" type="button" (click)="onReset()">
+        {{ 'TICKET_FORM.RESET' | translate }}
+      </button>
+      <button mat-stroked-button color="primary" type="button" (click)="onBack()">
+        {{ 'TICKET_FORM.BACK' | translate }}
+      </button>
+      <button mat-flat-button color="accent" type="submit">
+        {{ 'TICKET_FORM.SAVE' | translate }}
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</form>

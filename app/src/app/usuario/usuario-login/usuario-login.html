@@ -1,0 +1,82 @@
+<form [formGroup]="formulario" novalidate>
+  <mat-card class="card-content">
+    <mat-card-header>
+      <mat-card-title class="title">{{ 'LOGIN.TITLE' | translate }}</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <mat-label>{{ 'LOGIN.EMAIL_LABEL' | translate }}</mat-label>
+
+            <input
+              matInput
+              type="email"
+              placeholder="{{ 'LOGIN.EMAIL_PLACEHOLDER' | translate }}"
+              formControlName="correo"
+            />
+
+            @if (formulario.get('correo')?.invalid &&
+            (formulario.get('correo')?.dirty || formulario.get('correo')?.touched)) {
+
+              @if (formulario.get('correo')?.errors?.['required']) {
+                <mat-error>{{ 'LOGIN.EMAIL_REQUIRED' | translate }}</mat-error>
+              }
+              @if (formulario.get('correo')?.errors?.['correo']) {
+                <mat-error>{{ 'LOGIN.EMAIL_INVALID' | translate }}</mat-error>
+              }
+            }
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <mat-label>{{ 'LOGIN.PASSWORD_LABEL' | translate }}</mat-label>
+
+            <input
+              matInput
+              [type]="hide ? 'password' : 'text'"
+              placeholder="{{ 'LOGIN.PASSWORD_PLACEHOLDER' | translate }}"
+              formControlName="contrasena"
+            />
+
+            <button
+              type="button"
+              mat-icon-button
+              matSuffix
+              (click)="hide = !hide"
+              [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="hide"
+            >
+              <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
+            </button>
+
+            @if (formulario.get('contrasena')?.invalid &&
+            (formulario.get('contrasena')?.dirty || formulario.get('contrasena')?.touched)) {
+
+              @if (formulario.get('contrasena')?.errors?.['required']) {
+                <mat-error>{{ 'LOGIN.PASSWORD_REQUIRED' | translate }}</mat-error>
+              }
+              @if (formulario.get('contrasena')?.errors?.['minlength']) {
+                <mat-error>{{ 'LOGIN.PASSWORD_MINLENGTH' | translate }}</mat-error>
+              }
+            }
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-card-content>
+
+    <mat-card-actions>
+      <button mat-flat-button type="button" color="primary" (click)="submitForm()">
+        {{ 'LOGIN.BUTTON_SUBMIT' | translate }}
+      </button>
+
+      <button mat-stroked-button color="warn" (click)="onReset()" type="reset">
+        {{ 'LOGIN.BUTTON_CANCEL' | translate }}
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</form>

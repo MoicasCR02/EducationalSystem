@@ -1,0 +1,78 @@
+@if (datos()) {
+<mat-card class="home-card" appearance="outlined">
+  <!-- 🧑 Encabezado -->
+  <mat-card-header class="card-header-secondary">
+    <mat-card-title-group>
+      <mat-card-title class="tecnico-nombre">
+        {{ datos()?.nombre }}
+      </mat-card-title>
+      <mat-card-subtitle class="tecnico-correo">
+        {{ datos()?.correo }}
+      </mat-card-subtitle>
+    </mat-card-title-group>
+  </mat-card-header>
+
+  <!-- 📄 Contenido -->
+  <mat-card-content class="home-card-content">
+    <div class="usuario-details-info">
+      <!-- Estado -->
+      <div class="info-row">
+        <mat-icon color="primary">verified_user</mat-icon>
+        <span>
+          {{ 'TECHNICIAN_DETAIL.STATUS' | translate }}:
+          <mat-chip [color]="datos()?.activo ? 'primary' : 'warn'" selected>
+            {{ datos()?.activo ? ('TECHNICIAN_DETAIL.ACTIVE' | translate) : ('TECHNICIAN_DETAIL.INACTIVE' | translate) }}
+          </mat-chip>
+        </span>
+      </div>
+
+      <!-- Carga de trabajo -->
+      <div class="info-row">
+        <mat-icon color="accent">work</mat-icon>
+        <span>
+          {{ 'TECHNICIAN_DETAIL.WORKLOAD' | translate }}:
+          <mat-chip color="accent" selected>
+            {{ datos()?.carga_actual || 0 }} {{ 'TECHNICIAN_DETAIL.TICKETS' | translate }}
+          </mat-chip>
+        </span>
+      </div>
+
+      <mat-divider></mat-divider>
+
+      <!-- Especialidades -->
+      <div class="especialidades">
+        <h3 class="section-title">
+          <mat-icon color="primary">psychology</mat-icon>
+          {{ 'TECHNICIAN_DETAIL.SPECIALTIES' | translate }}
+        </h3>
+
+        <mat-chip-listbox aria-label="{{ 'TECHNICIAN_DETAIL.SPECIALTIES' | translate }}" class="chip-container">
+          @for (item of datos()?.especialidades; track item.id ?? $index) {
+          <mat-chip-option class="chip-tertiary" selected>
+            <div class="chip-content">
+              <strong class="chip-nombre">{{ item.nombre }}</strong>
+              <span class="chip-descripcion">{{ item.descripcion }}</span>
+            </div>
+          </mat-chip-option>
+          }
+        </mat-chip-listbox>
+      </div>
+    </div>
+  </mat-card-content>
+
+  <!-- 🔙 Botón de acción -->
+  <mat-card-actions class="detail-actions">
+    <button mat-button color="primary" class="bg-primary" (click)="goBack()">
+      <mat-icon>arrow_back</mat-icon>
+      {{ 'TECHNICIAN_DETAIL.BACK' | translate }}
+    </button>
+  </mat-card-actions>
+</mat-card>
+} @else {
+<mat-card class="home-card" appearance="outlined">
+  <mat-card-content class="home-card-content text-center">
+    <p class="mat-body">{{ 'TECHNICIAN_DETAIL.NOT_FOUND' | translate }}</p>
+  </mat-card-content>
+</mat-card>
+}
+

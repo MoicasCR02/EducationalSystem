@@ -1,0 +1,244 @@
+@if (datos()) {
+<mat-card class="ticket-card" appearance="outlined">
+  <div class="ticket-info-container">
+    <!-- 🆕 Sección paralela (solo si está En Proceso) -->
+    @if (datos()?.estado === 'En Proceso' && isTecnico()) {
+    <div class="ticket-process">
+      <h2 class="section-title">
+        <mat-icon color="primary">work</mat-icon>
+        Proceso de resolución
+      </h2>
+      <p class="process-message">
+        Estas en proceso de resolución de este ticket, cuando finalices no olvides marcarlo como
+        resuelto.
+      </p>
+      <button mat-raised-button color="accent" (click)="ResolverTicket(datos()?.id_ticket)">
+        <mat-icon>done_all</mat-icon>
+        Marcar como Resuelto
+      </button>
+    </div>
+    }
+   @if (isAdmin() || isUser()) {
+  <!-- 🆕 Sección paralela (solo si está Resuelto) -->
+  @if (datos()?.estado === 'Resuelto') {
+    <div class="ticket-process">
+      <h2 class="section-title">
+        <mat-icon color="primary">work</mat-icon>
+        Agregar valoración
+      </h2>
+      <p class="process-message">
+        Ya el ticket se encuentra resuelto, analiza el detalle del ticket y deja una valoración para
+        dar por cerrado el ticket.
+      </p>
+      <button mat-raised-button color="accent" (click)="CerrarTicket(datos()?.id_ticket)">
+        <mat-icon>done_all</mat-icon>
+        Agregar Valoración
+      </button>
+    </div>
+  }
+}
+
+    
+
+    <!-- 🧑 Sección 1: Información del ticket -->
+    <div class="ticket-info">
+      <h2 class="section-title">
+        <mat-icon color="primary">assignment</mat-icon>
+        {{ 'TICKET.INFO_TITLE' | translate }}
+      </h2>
+      <p>
+        <strong>{{ 'TICKET.TITLE' | translate }}:</strong> {{ datos()?.titulo }}
+      </p>
+      <p>
+        <strong>{{ 'TICKET.DESCRIPTION' | translate }}:</strong> {{ datos()?.descripcion }}
+      </p>
+      <p>
+        <strong>{{ 'TICKET.CREATED' | translate }}:</strong>
+        {{ datos()?.fecha_creacion | date : 'dd/MM/yyyy HH:mm' }}
+      </p>
+      <p>
+        <strong>{{ 'TICKET.CLOSED' | translate }}:</strong>
+        {{ datos()?.fecha_cierre | date : 'dd/MM/yyyy HH:mm' }}
+      </p>
+
+      <div class="ticket-status">
+        <mat-icon color="accent">verified_user</mat-icon>
+        <span>
+          {{ 'TICKET.STATUS' | translate }}:
+          <mat-chip [color]="datos()?.estado ? 'primary' : 'warn'" selected>
+            {{ datos()?.estado }}
+          </mat-chip>
+        </span>
+      </div>
+
+      <p>
+        <strong>{{ 'TICKET.PRIORITY' | translate }}:</strong> {{ datos()?.prioridad }}
+      </p>
+      <p>
+        <strong>{{ 'TICKET.CATEGORY' | translate }}:</strong> {{ datos()?.categoria?.nombre }}
+      </p>
+      <p>
+        <strong>{{ 'TICKET.CLIENT' | translate }}:</strong> {{ datos()?.cliente?.nombre }}
+      </p>
+    </div>
+  </div>
+
+  <!-- 🧾 Sección de asignaciones -->
+  <div class="ticket-info">
+    <h2 class="section-title">
+      <mat-icon color="primary">assignment</mat-icon>
+      {{ 'TICKET.ASSIGNMENT' | translate }}
+    </h2>
+
+    @if (datos()?.asignaciones) { @for (asignacion of datos()?.asignaciones; track
+    asignacion.id_asignacion) {
+    <p>
+      <strong>{{ 'TICKET.METHOD' | translate }}:</strong> {{ asignacion.metodo }}
+    </p>
+    <p>
+      <strong>{{ 'TICKET.DATE' | translate }}:</strong>
+      {{ asignacion.fecha_asignacion | date : 'dd/MM/yyyy HH:mm' }}
+    </p>
+    <p>
+      <strong>{{ 'TICKET.ASSIGNED_TO' | translate }}:</strong> {{ asignacion.tecnico?.nombre }}
+    </p>
+
+    <!-- ⚡ Solo mostrar el botón si el estado es Asignado -->
+    @if (datos()?.estado === 'Asignado' && isTecnico()) {
+    <button mat-raised-button color="accent" (click)="procesarTicket(datos()?.id_ticket)">
+      <mat-icon>add_task</mat-icon>
+      {{ 'TICKET.MANAGE_BUTTON' | translate }}
+    </button>
+    }
+
+    <hr />
+    } } @else { @if (isAdmin()) {
+    <p>
+      <em>{{ 'TICKET.NO_ASSIGNMENT' | translate }}</em>
+    </p>
+    <button mat-raised-button color="accent" (click)="asignarTicket(datos()?.id_ticket)">
+      <mat-icon>add_task</mat-icon>
+      {{ 'TICKET.ASSIGN_BUTTON' | translate }}
+    </button>
+    } }
+  </div>
+
+  <!-- 🕒 Sección 2: SLA -->
+  <div class="sla-section">
+    <div class="sla-card">
+      <h3 class="section-title">
+        <mat-icon color="primary">schedule</mat-icon>
+        {{ 'TICKET.SLA_RESPONSE' | translate }}
+      </h3>
+      <p>
+        <strong>{{ 'TICKET.DEADLINE' | translate }}:</strong>
+        {{ fechaLimiteRespuesta() | date : 'dd/MM/yyyy HH:mm' }}
+      </p>
+      <p>
+        <strong>{{ 'TICKET.TIME_LEFT' | translate }}:</strong> {{ tiempoRestanteRespuesta() }}
+      </p>
+      <p>
+        <strong>{{ 'TICKET.COMPLIANCE' | translate }}:</strong>
+        {{
+          datos()?.cumplimiento_respuesta
+            ? ('TICKET.YES' | translate)
+            : ('TICKET.NOT_YET' | translate)
+        }}
+      </p>
+    </div>
+
+    <div class="sla-card">
+      <h3 class="section-title">
+        <mat-icon color="primary">hourglass_bottom</mat-icon>
+        {{ 'TICKET.SLA_RESOLUTION' | translate }}
+      </h3>
+      <p>
+        <strong>{{ 'TICKET.DEADLINE' | translate }}:</strong>
+        {{ fechaLimiteResolucion() | date : 'dd/MM/yyyy HH:mm' }}
+      </p>
+      <p>
+        <strong>{{ 'TICKET.TIME_LEFT' | translate }}:</strong> {{ tiempoRestanteResolucion() }}
+      </p>
+      <p>
+        <strong>{{ 'TICKET.RESOLUTION_DAYS' | translate }}:</strong> {{ diasResolucion() }}
+      </p>
+      <p>
+        <strong>{{ 'TICKET.COMPLIANCE' | translate }}:</strong>
+        {{
+          datos()?.cumplimiento_resolucion
+            ? ('TICKET.YES' | translate)
+            : ('TICKET.NOT_YET' | translate)
+        }}
+      </p>
+    </div>
+  </div>
+
+  <!-- 📄 Sección 3: Historial -->
+  <div class="historial-section">
+    <h3 class="section-title">
+      <mat-icon color="primary">history</mat-icon>
+      {{ 'TICKET.HISTORY' | translate }}
+    </h3>
+
+    @for (item of datos()?.Historial_Estados; track item.id ?? $index) {
+    <mat-card class="estado-card">
+      <mat-card-content>
+        <strong class="estado-nombre">
+          {{ 'TICKET.FROM' | translate }}: {{ item.estado_anterior }} →
+          {{ 'TICKET.TO' | translate }}: {{ item.nuevo_estado }}
+        </strong>
+        <p class="estado-observaciones">{{ item.observaciones }}</p>
+        <p class="estado-observaciones">Fecha: {{ item.fecha_cambio | date : 'dd/MM/yyyy HH:mm'}}</p>
+        <p class="estado-observaciones">Usuario que hizo el cambio: {{ item.usuario?.nombre }}</p>
+        <div class="imagenes-ticket">
+          @for (imagen of item.Imagenes_Ticket; track imagen.id_imagen) {
+          <img
+            class="imagen-ticket"
+            [src]="'http://localhost:3000/images/' + imagen.ruta_imagen"
+            [alt]="imagen.ruta_imagen"
+            *ngIf="imagen.ruta_imagen"
+          />
+          }
+        </div>
+      </mat-card-content>
+    </mat-card>
+    }
+  </div>
+
+  <!-- ⭐ Sección 4: Valoración -->
+  <div class="valoracion-section">
+    <h3 class="section-title">
+      <mat-icon color="primary">star_rate</mat-icon>
+      {{ 'TICKET.RATING' | translate }}
+    </h3>
+
+    <p class="estado-observaciones">{{ datos()?.valoracion?.fecha | date : 'dd/MM/yyyy HH:mm' }}</p>
+
+    <div class="stars">
+      <ng-container *ngFor="let star of [1, 2, 3, 4, 5]">
+        <mat-icon
+          [ngClass]="star <= (datos()?.valoracion?.puntuacion ?? 0) ? 'star-filled' : 'star-empty'"
+        >
+          {{ star <= (datos()?.valoracion?.puntuacion ?? 0) ? 'star' : 'star_border' }}
+        </mat-icon>
+      </ng-container>
+    </div>
+
+    <p class="estado-observaciones">{{ datos()?.valoracion?.comentario }}</p>
+
+    <!-- 🔙 Botón de acción -->
+    <mat-card-actions class="ticket-actions">
+      <button mat-raised-button color="primary" (click)="goBack()">
+        <mat-icon>arrow_back</mat-icon>
+        {{ 'TICKET.BACK' | translate }}
+      </button>
+    </mat-card-actions>
+  </div>
+</mat-card>
+} @else {
+<mat-card class="ticket-card" appearance="outlined">
+  <mat-card-content class="ticket-content text-center">
+    <p class="mat-body">{{ 'TICKET.NO_TECHNICIAN' | translate }}</p>
+  </mat-card-content>
+</mat-card>
+}

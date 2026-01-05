@@ -1,0 +1,69 @@
+@if (datos()) {
+<mat-card class="categoria-card" appearance="outlined">
+  <!-- 🏷️ Encabezado principal -->
+  <div class="categoria-header">
+    <div class="categoria-icon">
+      <mat-icon>category</mat-icon>
+    </div>
+    <div class="categoria-info">
+      <h2 class="categoria-nombre">{{ datos()?.nombre }}</h2>
+      <p class="categoria-descripcion">{{ datos()?.descripcion }}</p>
+    </div>
+  </div>
+
+  <!-- 📊 SLA dividido en dos tarjetas -->
+  <div class="sla-grid">
+    <div class="sla-item">
+      <h3><mat-icon color="primary">schedule</mat-icon> {{ 'DETAIL.SLA_RESPONSE' | translate }}</h3>
+      <p><strong>{{ 'DETAIL.NAME' | translate }}:</strong> {{ datos()?.sla?.nombre }}</p>
+      <p><strong>{{ 'DETAIL.MAX_TIME' | translate }}:</strong> {{ datos()?.sla?.tiempo_max_respuesta }}h</p>
+    </div>
+
+    <div class="sla-item">
+      <h3><mat-icon color="primary">hourglass_bottom</mat-icon> {{ 'DETAIL.SLA_RESOLUTION' | translate }}</h3>
+      <p><strong>{{ 'DETAIL.NAME' | translate }}:</strong> {{ datos()?.sla?.nombre }}</p>
+      <p><strong>{{ 'DETAIL.MAX_TIME' | translate }}:</strong> {{ datos()?.sla?.tiempo_max_resolucion }}h</p>
+    </div>
+  </div>
+
+  <!-- 🏷️ Etiquetas -->
+  <div class="categoria-section">
+    <h3><mat-icon color="primary">label</mat-icon> {{ 'DETAIL.TAGS' | translate }}</h3>
+    <div class="chip-container">
+      @for (item of datos()?.etiquetas; track item.id ?? $index) {
+      <mat-chip class="chip-modern">{{ item.nombre }}</mat-chip>
+      }
+    </div>
+  </div>
+
+  <!-- 🧠 Especialidades -->
+  <div class="categoria-section">
+    <h3><mat-icon color="primary">psychology</mat-icon> {{ 'DETAIL.SPECIALTIES' | translate }}</h3>
+    <div class="chip-container">
+      @for (item of datos()?.especialidades; track item.id ?? $index) {
+      <mat-chip class="chip-modern">
+        <div class="chip-content">
+          <span class="chip-title">{{ item.nombre }}</span>
+          <span class="chip-sub">{{ item.descripcion }}</span>
+        </div>
+      </mat-chip>
+      }
+    </div>
+  </div>
+
+  <!-- 🔙 Botón -->
+  <mat-card-actions class="categoria-actions">
+    <button mat-raised-button color="primary" (click)="goBack()">
+      <mat-icon>arrow_back</mat-icon>
+      {{ 'DETAIL.BACK' | translate }}
+    </button>
+  </mat-card-actions>
+</mat-card>
+} @else {
+<mat-card class="categoria-card" appearance="outlined">
+  <mat-card-content class="empty-state">
+    <mat-icon>error_outline</mat-icon>
+    <p>{{ 'DETAIL.NOT_FOUND' | translate }}</p>
+  </mat-card-content>
+</mat-card>
+}

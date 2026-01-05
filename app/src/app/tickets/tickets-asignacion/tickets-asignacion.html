@@ -1,0 +1,211 @@
+<mat-dialog-content class="dialog-scroll">
+  @if (datosUsuario()) {
+  <mat-card class="tecnico-card" appearance="outlined">
+    <!-- Botón cerrar -->
+    <button
+      mat-icon-button
+      class="close-button"
+      [mat-dialog-close]="true"
+      aria-label="{{ 'TICKET_DIALOG.CLOSE' | translate }}"
+    >
+      <mat-icon class="close-icon" color="warn">close</mat-icon>
+    </button>
+
+    <!-- 🧾 Sección Ticket -->
+    <div class="ticket-section-full">
+      <h2 class="section-title">
+        <mat-icon color="primary">engineering</mat-icon>
+        {{ 'TICKET_DIALOG.INFO' | translate }}
+      </h2>
+      <p>
+        <strong>{{ 'TICKET_DIALOG.TITLE' | translate }}:</strong> {{ datosTicket()?.titulo }}
+      </p>
+      <p>
+        <strong>{{ 'TICKET_DIALOG.DESCRIPTION' | translate }}:</strong>
+        {{ datosTicket()?.descripcion }}
+      </p>
+      <p>
+        <strong>{{ 'TICKET_DIALOG.CREATED' | translate }}:</strong>
+        {{ datosTicket()?.fecha_creacion | date : 'dd/MM/yyyy HH:mm' }}
+      </p>
+
+      <div class="tecnico-status">
+        <mat-icon color="accent">verified_user</mat-icon>
+        <span>
+          {{ 'TICKET_DIALOG.STATUS' | translate }}:
+          <mat-chip [color]="datosTicket()?.estado ? 'primary' : 'warn'" selected>
+            {{ datosTicket()?.estado }}
+          </mat-chip>
+        </span>
+      </div>
+
+      <p>
+        <strong>{{ 'TICKET_DIALOG.PRIORITY' | translate }}:</strong> {{ datosTicket()?.prioridad }}
+      </p>
+      <p>
+        <strong>{{ 'TICKET_DIALOG.CATEGORY' | translate }}:</strong>
+        {{ datosTicket()?.categoria?.nombre }}
+      </p>
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <h2 class="dialog-subtitle">{{ 'TECHNICIAN_DIALOG.SELECTION' | translate }}</h2>
+    <h3 class="dialog-subtitle">Estas cambiando de estado de Pendiente a Asignado</h3>
+
+    <!-- 👨‍🔧 Sección Técnicos en grid -->
+    <div class="tecnicos-grid">
+      @if(datosUsuario()?.length) { @for (item of datosUsuario(); track $index) {
+      <mat-card class="tecnico-card-item" appearance="outlined">
+        <mat-card-header>
+          <mat-card-title>{{ item.nombre }}</mat-card-title>
+          <mat-card-subtitle>{{ 'TECHNICIAN_DIALOG.SUBTITLE' | translate }}</mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content>
+          <div class="details">
+            <p class="detail-line">
+              <strong>{{ 'TECHNICIAN_DIALOG.EMAIL' | translate }}:</strong> {{ item.correo }}
+            </p>
+            <p class="detail-line">
+              <strong>{{ 'TECHNICIAN_DIALOG.STATUS' | translate }}:</strong>
+              <mat-chip [color]="item.activo ? 'primary' : 'warn'" selected>
+                {{
+                  item.activo
+                    ? ('TECHNICIAN_DIALOG.ACTIVE' | translate)
+                    : ('TECHNICIAN_DIALOG.INACTIVE' | translate)
+                }}
+              </mat-chip>
+            </p>
+            <p class="detail-line">
+              <strong>{{ 'TECHNICIAN_DIALOG.CURRENT_LOAD' | translate }}:</strong>
+              {{ item.carga_actual || 0 }} / 5
+            </p>
+            <mat-progress-bar
+              mode="determinate"
+              [value]="(item.carga_actual || 0) * 20"
+            ></mat-progress-bar>
+          </div>
+
+          <h3 class="section-title">
+            <mat-icon color="primary">psychology</mat-icon>
+            {{ 'TECHNICIAN_DETAIL.SPECIALTIES' | translate }}
+          </h3>
+          <mat-chip-listbox
+            aria-label="{{ 'TECHNICIAN_DETAIL.SPECIALTIES' | translate }}"
+            class="chip-container"
+          >
+            @for (esp of item?.especialidades; track esp.id ?? $index) {
+            <mat-chip-option class="chip-tertiary" selected>
+              <div class="chip-content">
+                <strong class="chip-nombre">{{ esp.nombre }}</strong>
+              </div>
+            </mat-chip-option>
+            }
+          </mat-chip-listbox>
+          @if(formsPorTecnico[item.id_usuario]) {
+          <form
+            [formGroup]="formsPorTecnico[item.id_usuario]"
+            (ngSubmit)="asignarTicket(datosTicket()?.id_ticket, item.id_usuario)"
+            novalidate
+          >
+            <h3 class="section-subtitle">{{ 'TICKET_FORM.OBSERVATIONS_SECTION' | translate }}</h3>
+            <h3 class="section-subtitle">
+              Justifica por qué seleccionas a este técnico y agrega una imagen
+            </h3>
+            <mat-form-field class="full-width" floatLabel="auto">
+              <mat-label>{{ 'TICKET_FORM.OBSERVATIONS' | translate }}</mat-label>
+              <textarea
+                matInput
+                formControlName="observaciones"
+                placeholder="{{ 'TICKET_FORM.OBSERVATIONS_PLACEHOLDER' | translate }}"
+              ></textarea>
+              @if(getControl(item.id_usuario, 'observaciones')?.invalid &&
+              getControl(item.id_usuario, 'observaciones')?.touched) {
+              <mat-error>
+                <ng-container
+                  *ngIf="getControl(item.id_usuario, 'observaciones')?.errors?.['required']"
+                >
+                  {{ 'TICKET_FORM.ERROR_OBSERVATIONS_REQUIRED' | translate }}
+                </ng-container>
+                <ng-container
+                  *ngIf="getControl(item.id_usuario, 'observaciones')?.errors?.['minlength']"
+                >
+                  {{ 'TICKET_FORM.ERROR_OBSERVATIONS_MINWORDS' | translate }}
+                </ng-container>
+              </mat-error>
+              }
+            </mat-form-field>
+
+            <!-- Subir imágenes -->
+            <div class="upload-section">
+              <h3 class="section-subtitle">{{ 'TICKET_FORM.UPLOAD_IMAGES' | translate }}</h3>
+              <div class="file-upload">
+                @if(selectedImagesPorTecnico[item.id_usuario]) {
+                <div class="image-preview-grid">
+                  @for (img of selectedImagesPorTecnico[item.id_usuario]; track img.preview) {
+                  <div class="image-preview">
+                    <img [src]="img.preview" alt="{{ 'TICKET_FORM.IMAGE_SELECTED' | translate }}" />
+                    <button
+                      mat-icon-button
+                      color="warn"
+                      type="button"
+                      (click)="removeImage(img, item.id_usuario)"
+                      matTooltip="Eliminar imagen"
+                    >
+                      <mat-icon>delete</mat-icon>
+                    </button>
+                  </div>
+                  }
+                </div>
+                } @else {
+                <p>{{ 'TICKET_FORM.NO_IMAGES' | translate }}</p>
+                }
+                <button type="button" mat-raised-button color="accent" (click)="fileUpload.click()">
+                  <mat-icon>attach_file</mat-icon> {{ 'TICKET_FORM.SELECT_FILES' | translate }}
+                </button>
+                <input
+                  type="file"
+                  accept="image/*"
+                  multiple
+                  (change)="selectFiles($event, item.id_usuario)"
+                  #fileUpload
+                  hidden
+                />
+              </div>
+               @if(getControl(item.id_usuario, 'imagenes')?.invalid && getControl(item.id_usuario,
+                'imagenes')?.touched) {
+                <mat-error>
+                  {{ 'TICKET_FORM.ERROR_IMAGES_REQUIRED' | translate }}
+                </mat-error>
+                }
+            </div>
+
+            <mat-card-actions class="button-row">
+              <button mat-flat-button color="accent" type="submit">
+                {{ 'TICKET_FORM.SAVE' | translate }}
+              </button>
+            </mat-card-actions>
+          </form>
+          }
+        </mat-card-content>
+      </mat-card>
+      } }
+    </div>
+
+    <!-- 🔙 Acción -->
+    <mat-card-actions class="tecnico-actions">
+      <button mat-stroked-button color="primary" (click)="close()">
+        <mat-icon>arrow_back</mat-icon>
+        {{ 'TICKET_DIALOG.BACK' | translate }}
+      </button>
+    </mat-card-actions>
+  </mat-card>
+  } @else {
+  <mat-card class="tecnico-card" appearance="outlined">
+    <mat-card-content class="tecnico-content text-center">
+      <p class="mat-body">Por el momento no hay ningun tecnico disponible para poder asignar este ticket</p>
+    </mat-card-content>
+  </mat-card>
+  }
+</mat-dialog-content>

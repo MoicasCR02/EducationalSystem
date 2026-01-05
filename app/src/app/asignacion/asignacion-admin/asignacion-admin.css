@@ -1,0 +1,126 @@
+.tickets-card {
+   width: fit-content;
+  margin: 2em auto;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  border-radius: 16px;
+  background: linear-gradient(145deg, #1e1e2f, #2c2c3f);
+  color: #fff;
+}
+
+.card-header {
+  justify-content: space-between;
+  align-items: center;
+}
+.title{
+  margin-bottom: 0.5em;
+}
+mat-card-title {
+  font-size: 1.6em;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+}
+
+mat-card-subtitle {
+  display: flex;
+  align-items: center;
+  padding: 0.5em;
+}
+
+tabla-container {
+  width: 100%;
+  display: block;
+  overflow-x: auto;
+}
+
+.tabla {
+  margin: 0 auto;
+  justify-content: center;
+}
+
+.header-cell, th.mat-header-cell {
+  font-weight: 900;
+  text-transform: uppercase;
+  background-color: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  vertical-align:middle;
+}
+
+.header-cell, th.mat-header-cell, td.mat-cell {
+  width:100%;
+  text-overflow: ellipsis;
+}
+
+tr.mat-row:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  transition: background-color 0.3s ease;
+}
+tr.mat-row, tr.mat-header-row {
+  display: table-row;
+  width: 100%;
+  table-layout: fixed;
+}
+
+.acciones-cell {
+  display: flex;
+  justify-content: center;
+  gap: 0.5em;
+  height: inherit;
+}
+
+mat-paginator {
+  margin-top: 1em;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.resumen-asignaciones {
+  display: flex;
+  flex-direction: column;
+  align-items: center;       
+  justify-content: flex-start;
+  text-align: center;
+  margin: 2rem auto;
+  padding: 2rem;
+  width: 70%;                /* Más compacto que 90% */
+  min-height: 50vh;          /* Ocupa la mitad de la pantalla */
+  background: #1e1e2f;       /* Fondo oscuro */
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+  animation: fadeIn 0.5s ease-in-out;
+  color: #e0e0e0;
+}
+
+.resumen-asignaciones h3 {
+  margin-bottom: 1.5rem;
+  font-size: 1.6rem;
+  color: #90caf9; /* Azul claro Material */
+  font-weight: 600;
+}
+
+.resumen-asignaciones mat-list {
+  width: 100%;
+  max-height: 40vh;          /* Limita la altura de la lista */
+  overflow-y: auto;          /* Scroll si hay muchos tickets */
+}
+
+.resumen-asignaciones mat-list-item {
+  background: #2c2c3e;
+  margin: 0.5rem 0;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  transition: transform 0.2s ease, background 0.3s ease;
+  color: #f5f5f5;
+}
+
+.resumen-asignaciones mat-list-item:hover {
+  transform: scale(1.02);
+  background: #3949ab;
+  color: #ffffff;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+

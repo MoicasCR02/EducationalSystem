@@ -1,0 +1,140 @@
+2025-12-04 14:12:21.951 error: 	moise--Se produjo un error interno del servidor Cannot set headers after they are sent to the client
+2025-12-04 14:14:25.484 error: 	moise--Se produjo un error interno del servidor 
+Invalid `this.prisma.usuario.update()` invocation in
+E:\Universidad 2025\Software Libre\Proyecto Completo p\EducationalSystem\server\source\controllers\asigancionController.ts:103:61
+
+  100   data: { estado: "Asignado" },
+  101 });
+  102 
+→ 103 const updateTecnico = await this.prisma.usuario.update({
+        where: {
+          id_usuario: undefined,
+      ?   correo?: String,
+      ?   AND?: UsuarioWhereInput | UsuarioWhereInput[],
+      ?   OR?: UsuarioWhereInput[],
+      ?   NOT?: UsuarioWhereInput | UsuarioWhereInput[],
+      ?   nombre?: StringFilter | String,
+      ?   contrasena?: StringNullableFilter | String | Null,
+      ?   id_rol?: EnumRoleFilter | Role,
+      ?   ultimo_inicio_sesion?: DateTimeNullableFilter | DateTime | Null,
+      ?   activo?: BoolFilter | Boolean,
+      ?   carga_actual?: IntNullableFilter | Int | Null,
+      ?   disponible?: BoolNullableFilter | Boolean | Null,
+      ?   especialidades?: EspecialidadListRelationFilter,
+      ?   tickets?: TicketListRelationFilter,
+      ?   asignaciones?: AsignacionListRelationFilter,
+      ?   Historial_Estados?: Historial_EstadoListRelationFilter,
+      ?   NotificacionesRemitente?: NotificacionListRelationFilter,
+      ?   NotificacionesDestinatario?: NotificacionListRelationFilter
+        },
+        data: {
+          carga_actual: {
+            increment: 1
+          }
+        }
+      })
+
+Argument `where` of type UsuarioWhereUniqueInput needs at least one of `id_usuario` or `correo` arguments. Available options are marked with ?.
+2025-12-04 14:20:03.394 error: 	moise--Se produjo un error interno del servidor 
+Invalid `this.prisma.usuario.update()` invocation in
+E:\Universidad 2025\Software Libre\Proyecto Completo p\EducationalSystem\server\source\controllers\asigancionController.ts:105:61
+
+  102   data: { estado: "Asignado" },
+  103 });
+  104 
+→ 105 const updateTecnico = await this.prisma.usuario.update({
+        where: {
+          id_usuario: undefined,
+      ?   correo?: String,
+      ?   AND?: UsuarioWhereInput | UsuarioWhereInput[],
+      ?   OR?: UsuarioWhereInput[],
+      ?   NOT?: UsuarioWhereInput | UsuarioWhereInput[],
+      ?   nombre?: StringFilter | String,
+      ?   contrasena?: StringNullableFilter | String | Null,
+      ?   id_rol?: EnumRoleFilter | Role,
+      ?   ultimo_inicio_sesion?: DateTimeNullableFilter | DateTime | Null,
+      ?   activo?: BoolFilter | Boolean,
+      ?   carga_actual?: IntNullableFilter | Int | Null,
+      ?   disponible?: BoolNullableFilter | Boolean | Null,
+      ?   especialidades?: EspecialidadListRelationFilter,
+      ?   tickets?: TicketListRelationFilter,
+      ?   asignaciones?: AsignacionListRelationFilter,
+      ?   Historial_Estados?: Historial_EstadoListRelationFilter,
+      ?   NotificacionesRemitente?: NotificacionListRelationFilter,
+      ?   NotificacionesDestinatario?: NotificacionListRelationFilter
+        },
+        data: {
+          carga_actual: {
+            increment: 1
+          }
+        }
+      })
+
+Argument `where` of type UsuarioWhereUniqueInput needs at least one of `id_usuario` or `correo` arguments. Available options are marked with ?.
+2025-12-04 14:21:06.692 error: 	moise--Se produjo un error interno del servidor Cannot set headers after they are sent to the client
+2025-12-04 14:22:12.816 error: 	moise--Se produjo un error interno del servidor Cannot set headers after they are sent to the client
+2025-12-04 14:26:42.961 error: 	moise--Se produjo un error interno del servidor 
+Invalid `this.prisma.usuario.update()` invocation in
+E:\Universidad 2025\Software Libre\Proyecto Completo p\EducationalSystem\server\source\controllers\asigancionController.ts:104:55
+
+  101   data: { estado: "Asignado" },
+  102 });
+  103 
+→ 104 const updateTecnico = await this.prisma.usuario.update({
+        where: {
+          id_usuario: undefined,
+      ?   correo?: String,
+      ?   AND?: UsuarioWhereInput | UsuarioWhereInput[],
+      ?   OR?: UsuarioWhereInput[],
+      ?   NOT?: UsuarioWhereInput | UsuarioWhereInput[],
+      ?   nombre?: StringFilter | String,
+      ?   contrasena?: StringNullableFilter | String | Null,
+      ?   id_rol?: EnumRoleFilter | Role,
+      ?   ultimo_inicio_sesion?: DateTimeNullableFilter | DateTime | Null,
+      ?   activo?: BoolFilter | Boolean,
+      ?   carga_actual?: IntNullableFilter | Int | Null,
+      ?   disponible?: BoolNullableFilter | Boolean | Null,
+      ?   especialidades?: EspecialidadListRelationFilter,
+      ?   tickets?: TicketListRelationFilter,
+      ?   asignaciones?: AsignacionListRelationFilter,
+      ?   Historial_Estados?: Historial_EstadoListRelationFilter,
+      ?   NotificacionesRemitente?: NotificacionListRelationFilter,
+      ?   NotificacionesDestinatario?: NotificacionListRelationFilter
+        },
+        data: {
+          carga_actual: {
+            increment: 1
+          }
+        }
+      })
+
+Argument `where` of type UsuarioWhereUniqueInput needs at least one of `id_usuario` or `correo` arguments. Available options are marked with ?.
+2025-12-04 14:30:54.334 error: 	moise--Se produjo un error interno del servidor 
+Invalid `this.prisma.historial_Estado.create()` invocation in
+E:\Universidad 2025\Software Libre\Proyecto Completo p\EducationalSystem\server\source\controllers\asigancionController.ts:120:42
+
+  117 });
+  118 
+  119 // Registrar en historial estados y asiganar una imagen por default
+→ 120 await this.prisma.historial_Estado.create({
+        data: {
+          id_ticket: 16,
+          estado_anterior: "Pendiente",
+          nuevo_estado: "Asignado",
+          observaciones: "Asignación automática por prioridad alta",
+          fecha_cambio: new Date("2025-12-04T20:30:54.319Z"),
+          id_usuario: undefined,
+          Imagenes_Ticket: {
+            create: {
+              ruta_imagen: "asignado.jpg"
+            }
+          },
+      +   ticket: {
+      +     create: TicketCreateWithoutHistorial_EstadosInput | TicketUncheckedCreateWithoutHistorial_EstadosInput,
+      +     connectOrCreate: TicketCreateOrConnectWithoutHistorial_EstadosInput,
+      +     connect: TicketWhereUniqueInput
+      +   }
+        }
+      })
+
+Argument `ticket` is missing.

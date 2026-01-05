@@ -1,0 +1,340 @@
+2025-11-16 21:25:51.532 error: 	moise--Se produjo un error interno del servidor 
+Invalid `this.prisma.categoria.findUnique()` invocation in
+E:\Universidad 2025\Software Libre\Proyecto Completo p\EducationalSystem\server\source\controllers\categoriaController.ts:114:62
+
+  111 const idCategoria = parseInt(request.params.id);
+  112 
+  113 //Obtener videojuego anterior
+→ 114 const CategoriaExistente = await this.prisma.categoria.findUnique({
+        where: {
+      +   id_categoria: Int
+        },
+        include: {
+          etiquetas: {
+            select: {
+              id_etiqueta: true
+            }
+          },
+          sla: {
+            select: {
+              id_sla: true
+            }
+          },
+          especialidades: {
+            select: {
+              id_especialidad: true
+            }
+          }
+        }
+      })
+
+Argument `id_categoria` is missing.
+2025-11-16 21:28:46.125 error: 	moise--Se produjo un error interno del servidor 
+Invalid `this.prisma.categoria.findUnique()` invocation in
+E:\Universidad 2025\Software Libre\Proyecto Completo p\EducationalSystem\server\source\controllers\categoriaController.ts:114:62
+
+  111 const idCategoria = parseInt(request.params.id);
+  112 
+  113 //Obtener videojuego anterior
+→ 114 const CategoriaExistente = await this.prisma.categoria.findUnique({
+        where: {
+      +   id_categoria: Int
+        },
+        include: {
+          etiquetas: {
+            select: {
+              id_etiqueta: true
+            }
+          },
+          sla: {
+            select: {
+              id_sla: true
+            }
+          },
+          especialidades: {
+            select: {
+              id_especialidad: true
+            }
+          }
+        }
+      })
+
+Argument `id_categoria` is missing.
+2025-11-16 21:29:32.512 error: 	moise--Se produjo un error interno del servidor 
+Invalid `this.prisma.categoria.findUnique()` invocation in
+E:\Universidad 2025\Software Libre\Proyecto Completo p\EducationalSystem\server\source\controllers\categoriaController.ts:114:62
+
+  111 const idCategoria = parseInt(request.params.id);
+  112 
+  113 //Obtener categoria anterior
+→ 114 const CategoriaExistente = await this.prisma.categoria.findUnique({
+        where: {
+      +   id_categoria: Int
+        },
+        include: {
+          etiquetas: {
+            select: {
+              id_etiqueta: true
+            }
+          },
+          sla: {
+            select: {
+              id_sla: true
+            }
+          },
+          especialidades: {
+            select: {
+              id_especialidad: true
+            }
+          }
+        }
+      })
+
+Argument `id_categoria` is missing.
+2025-11-16 21:31:29.273 error: 	moise--Se produjo un error interno del servidor 
+Invalid `this.prisma.categoria.findUnique()` invocation in
+E:\Universidad 2025\Software Libre\Proyecto Completo p\EducationalSystem\server\source\controllers\categoriaController.ts:114:62
+
+  111 const idCategoria = parseInt(request.params.id);
+  112 
+  113 //Obtener categoria anterior
+→ 114 const CategoriaExistente = await this.prisma.categoria.findUnique({
+        where: {
+      +   id_categoria: Int
+        },
+        include: {
+          etiquetas: {
+            select: {
+              id_etiqueta: true
+            }
+          },
+          sla: {
+            select: {
+              id_sla: true
+            }
+          },
+          especialidades: {
+            select: {
+              id_especialidad: true
+            }
+          }
+        }
+      })
+
+Argument `id_categoria` is missing.
+2025-11-16 21:33:23.690 error: 	moise--Se produjo un error interno del servidor 
+Invalid `this.prisma.categoria.update()` invocation in
+E:\Universidad 2025\Software Libre\Proyecto Completo p\EducationalSystem\server\source\controllers\categoriaController.ts:159:59
+
+  156   : [];
+  157 
+  158 //Actualizar
+→ 159 const updateCategoria = await this.prisma.categoria.update({
+        where: {
+          id_categoria: 5
+        },
+        data: {
+          nombre: "Nueva Categoría de pruebab actualizada",
+          descripcion: "Categoría enfocada en la gestión y resolución de incidencias",
+          etiquetas: {
+            disconnect: [
+              {
+                id_etiqueta: 2
+              },
+              {
+                id_etiqueta: 5
+              }
+            ],
+            connect: [
+              {
+                id_etiqueta: 5
+              },
+              {
+                id_etiqueta: 6
+              },
+              {
+                id_etiqueta: 7
+              },
+              {
+                id_etiqueta: 8
+              }
+            ]
+          },
+          sla: {
+            id_sla: 1,
+            ~~~~~~
+      ?     create?: SlaCreateWithoutCategoriasInput | SlaUncheckedCreateWithoutCategoriasInput,
+      ?     connectOrCreate?: SlaCreateOrConnectWithoutCategoriasInput,
+      ?     upsert?: SlaUpsertWithoutCategoriasInput,
+      ?     connect?: SlaWhereUniqueInput,
+      ?     update?: SlaUpdateToOneWithWhereWithoutCategoriasInput | SlaUpdateWithoutCategoriasInput | SlaUncheckedUpdateWithoutCategoriasInput
+          },
+          especialidades: {
+            disconnect: [
+              {
+                id_especialidad: 3
+              },
+              {
+                id_especialidad: 4
+              }
+            ],
+            connect: [
+              {
+                id_especialidad: 3
+              },
+              {
+                id_especialidad: 4
+              },
+              {
+                id_especialidad: 1
+              }
+            ]
+          }
+        }
+      })
+
+Unknown argument `id_sla`. Available options are marked with ?.
+2025-11-16 21:38:02.920 error: 	moise--Se produjo un error interno del servidor 
+Invalid `this.prisma.categoria.update()` invocation in
+E:\Universidad 2025\Software Libre\Proyecto Completo p\EducationalSystem\server\source\controllers\categoriaController.ts:155:59
+
+  152   : [];
+  153 
+  154 //Actualizar
+→ 155 const updateCategoria = await this.prisma.categoria.update({
+        where: {
+          id_categoria: 5
+        },
+        data: {
+          nombre: "Nueva Categoría de pruebab actualizada",
+          descripcion: "Categoría enfocada en la gestión y resolución de incidencias",
+          etiquetas: {
+            disconnect: [
+              {
+                id_etiqueta: 2
+              },
+              {
+                id_etiqueta: 5
+              }
+            ],
+            connect: [
+              {
+                id_etiqueta: 5
+              },
+              {
+                id_etiqueta: 6
+              },
+              {
+                id_etiqueta: 7
+              },
+              {
+                id_etiqueta: 8
+              }
+            ]
+          },
+          sla: {
+            id_sla: 1,
+            ~~~~~~
+      ?     create?: SlaCreateWithoutCategoriasInput | SlaUncheckedCreateWithoutCategoriasInput,
+      ?     connectOrCreate?: SlaCreateOrConnectWithoutCategoriasInput,
+      ?     upsert?: SlaUpsertWithoutCategoriasInput,
+      ?     connect?: SlaWhereUniqueInput,
+      ?     update?: SlaUpdateToOneWithWhereWithoutCategoriasInput | SlaUpdateWithoutCategoriasInput | SlaUncheckedUpdateWithoutCategoriasInput
+          },
+          especialidades: {
+            disconnect: [
+              {
+                id_especialidad: 3
+              },
+              {
+                id_especialidad: 4
+              }
+            ],
+            connect: [
+              {
+                id_especialidad: 3
+              },
+              {
+                id_especialidad: 4
+              },
+              {
+                id_especialidad: 1
+              }
+            ]
+          }
+        }
+      })
+
+Unknown argument `id_sla`. Available options are marked with ?.
+2025-11-16 21:40:49.051 error: 	moise--Se produjo un error interno del servidor 
+Invalid `this.prisma.categoria.update()` invocation in
+E:\Universidad 2025\Software Libre\Proyecto Completo p\EducationalSystem\server\source\controllers\categoriaController.ts:155:59
+
+  152   : [];
+  153 
+  154 //Actualizar
+→ 155 const updateCategoria = await this.prisma.categoria.update({
+        where: {
+          id_categoria: 5
+        },
+        data: {
+          nombre: "Nueva Categoría de pruebab actualizada",
+          descripcion: "Categoría enfocada en la gestión y resolución de incidencias",
+          etiquetas: {
+            disconnect: [
+              {
+                id_etiqueta: 2
+              },
+              {
+                id_etiqueta: 5
+              }
+            ],
+            connect: [
+              {
+                id_etiqueta: 5
+              },
+              {
+                id_etiqueta: 6
+              },
+              {
+                id_etiqueta: 7
+              },
+              {
+                id_etiqueta: 8
+              }
+            ]
+          },
+          id_sla: {
+            id_sla: 1,
+            ~~~~~~
+      ?     set?: Int,
+      ?     increment?: Int,
+      ?     decrement?: Int,
+      ?     multiply?: Int,
+      ?     divide?: Int
+          },
+          especialidades: {
+            disconnect: [
+              {
+                id_especialidad: 3
+              },
+              {
+                id_especialidad: 4
+              }
+            ],
+            connect: [
+              {
+                id_especialidad: 3
+              },
+              {
+                id_especialidad: 4
+              },
+              {
+                id_especialidad: 1
+              }
+            ]
+          }
+        }
+      })
+
+Unknown argument `id_sla`. Available options are marked with ?.

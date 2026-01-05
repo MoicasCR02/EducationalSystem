@@ -1,0 +1,159 @@
+/* === Tarjeta principal === */
+.categoria-card {
+  width: 95%;
+  max-width: 1100px;
+  margin: 2rem auto;
+  background: #0d1b2a;
+  border-radius: 20px;
+  color: #e0e0e0;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+  overflow: hidden;
+}
+
+/* === Encabezado === */
+.categoria-header {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  background: linear-gradient(135deg, #425b70, #88b2db);
+  padding: 2rem;
+  color: #fff;
+}
+
+.categoria-icon mat-icon {
+  font-size: 48px;
+}
+
+.categoria-nombre {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.categoria-descripcion {
+  font-size: 1.1rem;
+  color: #e3f2fd;
+}
+
+/* === SLA dividido === */
+.sla-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  padding: 2rem;
+}
+
+.sla-item {
+  background: linear-gradient(145deg, #263238, #37474f);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+}
+
+.sla-item h3 {
+  color: #90caf9;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sla-timer {
+  font-family: 'Courier New', monospace;
+  font-size: 1.1rem;
+  background: #2c3c4e;
+  color: #fff;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  margin-top: 0.8rem;
+  text-align: center;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 0.8; }
+  50% { opacity: 1; }
+  100% { opacity: 0.8; }
+}
+
+/* === Secciones de etiquetas y especialidades === */
+.categoria-section {
+  padding: 2rem;
+  border-top: 1px solid rgba(71, 57, 57, 0.1);
+}
+
+.categoria-section h3 {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: #64b5f6;
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+}
+
+.chip-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.chip-modern {
+  display: flex;
+  flex-direction: column; /* ahora sí en columna */
+  align-items: flex-start;
+  background: linear-gradient(145deg, #263238, #37474f);
+  color: #e0e0e0;
+  padding: 0.8rem 1rem;
+  border-radius: 12px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.4);
+  transition: transform 0.25s ease;
+  min-width: 220px;
+}
+
+/* fuerza cada línea a comportarse como bloque */
+.chip-title,
+.chip-sub {
+  display: block;
+  width: 100%;
+}
+
+.chip-modern:hover {
+  transform: translateY(-3px);
+  background: linear-gradient(145deg, #2e3c43, #455a64);
+}
+
+.chip-title {
+  font-weight: 600;
+  font-size: 1rem;
+  color: #bbdefb;
+  margin-bottom: 0.3rem;
+}
+
+.chip-sub {
+  font-size: 0.85rem;
+  color: #b0bec5;
+  line-height: 1.4;
+}
+
+/* === Botón de regresar === */
+.categoria-actions {
+  display: flex;
+  justify-content: flex-end;
+  padding: 1.5rem 2rem;
+}
+
+.btn-back {
+  background: linear-gradient(135deg, #42a5f5, #1e88e5);
+  color: #fff;
+  font-weight: 600;
+  border-radius: 10px;
+  padding: 0.7rem 1.5rem;
+  box-shadow: 0 4px 12px rgba(33,150,243,0.4);
+  transition: all 0.3s ease;
+}
+
+.btn-back:hover {
+  background: linear-gradient(135deg, #64b5f6, #2196f3);
+  transform: translateY(-3px);
+}

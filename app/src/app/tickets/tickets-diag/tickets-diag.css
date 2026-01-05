@@ -1,0 +1,82 @@
+
+
+/* Ícono dentro del botón */
+.close-icon {
+  font-size: 20px;
+  color: #fff;
+}
+.tecnico-card {
+  padding: 1.5rem;
+  margin: 1rem auto;
+  border-radius: 12px;
+  background: #000000;
+}
+
+.section-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #1976d2;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.tecnico-info p,
+.cumplimiento-card p {
+  margin: 0.25rem 0;
+  font-size: 0.95rem;
+}
+
+.tecnico-status {
+  margin: 0.5rem 0;
+}
+
+.cumplimiento-section {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.cumplimiento-card {
+  flex: 1;
+  padding: 1rem;
+  background: #131010;
+  border-radius: 8px;
+}
+
+.historial-section {
+  margin-top: 1.5rem;
+}
+
+.estado-card {
+  margin-bottom: 0.75rem;
+}
+
+.tecnico-actions {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Botón de cierre */
+.close-button {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background-color: #f44336; /* rojo */
+  color: #fff;
+  border-radius: 50%;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  z-index: 10; /* 👈 asegura que quede encima */
+}
+
+.close-button:hover {
+  background-color: #d32f2f;
+  transform: scale(1.1);
+}
+
+.close-icon {
+  font-size: 20px;
+  color: #fff;
+}

@@ -1,0 +1,128 @@
+/* Contenedor general */
+.ticket-list {
+  display: grid;
+  gap: 1.5rem;
+  padding: 2rem;
+  box-sizing: border-box;
+  grid-template-columns: repeat(4, 1fr); /* por defecto 4 columnas */
+}
+
+/* Tablets: 2 columnas */
+@media (max-width: 1199px) {
+  .ticket-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Móviles: 1 columna */
+@media (max-width: 767px) {
+  .ticket-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Ticket individual */
+.ticket-wrapper {
+  width: 100%;
+  aspect-ratio: 5 / 2; /* mantiene proporción */
+  background-image: url('/images/ticket.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  display: grid; /* usamos grid para dividir en 2 columnas */
+  grid-template-columns: 70% 30%; /* izquierda 70%, derecha 30% */
+  grid-template-rows: 70% 30%;    /* header arriba (70%), actions abajo (30%) */
+  padding: 1rem;
+  box-sizing: border-box;
+  color: #161515;
+}
+
+.ticket-wrapper mat-card-subtitle {
+  color: #000 !important;
+}
+
+/* Header ocupa 70% ancho y 70% alto */
+.ticket-header {
+  display: flex;
+  align-items: stretch; /* hace que los hijos ocupen la misma altura */
+  gap: 1rem;
+  padding-left: 40px;
+}
+
+.ticket-header > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Icono ocupa toda la altura del bloque de texto */
+.ticket-icon {
+  font-size: 3rem;       /* tamaño base del icono */
+  height: auto;          /* se adapta */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #3949ab;
+  width: 19%;
+}
+
+/* Actions ocupa 70% ancho y 30% alto */
+.ticket-actions {
+  grid-column: 2 / 3; /* columna derecha */
+  grid-row: 1 / 3;    /* ocupa ambas filas (100% alto) */
+  display: flex;
+  align-items: center;       /* centra verticalmente */
+  justify-content: center;   /* centra horizontalmente */
+  padding-left: 30px;
+}
+
+.btn-detalle {
+  display: flex;
+  flex-direction: column;    /* ícono arriba, texto abajo */
+  align-items: center;
+  justify-content: center;
+  height: 80%;               /* ocupa el 80% del alto del contenedor */
+  width: 20%;                /* ancho relativo */
+  border-radius: 20px;       /* borde redondeado */
+  background-color: #1b2229; /* color base */
+  color: #fff;
+  font-size: 0.9rem;
+  gap: 0.5rem;   
+}
+
+/* Status ocupa 30% ancho y 100% alto */
+.ticket-status {
+  grid-column: 1 / 2; /* columna izquierda */
+  grid-row: 2 / 3;    /* fila inferior */
+  display: flex;
+  flex-direction: column;
+  padding-left: 40px;
+  gap: 0.5rem;
+}
+
+/* Colores de chips según estado */
+.chip-pendiente {
+  background-color: #f44336 !important; /* rojo */
+  color: #fff !important;
+}
+
+.chip-asignado {
+  background-color: #ff9800 !important; /* naranja */
+  color: #fff !important;
+}
+
+.chip-proceso {
+  background-color: #2196f3 !important; /* azul */
+  color: #fff !important;
+}
+
+.chip-resuelto {
+  background-color: #4caf50 !important; /* verde */
+  color: #fff !important;
+}
+
+.chip-cerrado {
+  background-color: #9e9e9e !important; /* gris */
+  color: #fff !important;
+}

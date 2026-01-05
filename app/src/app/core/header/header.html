@@ -1,0 +1,123 @@
+<mat-toolbar class="header primary-gradient">
+  <!-- Logo -->
+  <button
+    mat-icon-button
+    [routerLink]="['/inicio']"
+    routerLinkActive="active-link"
+    class="example-header-image"
+    matTooltip="App Tickets"
+  ></button>
+  @if(isAuthenticated()) {
+  <!-- Menú hamburguesa (móvil) -->
+  <button mat-icon-button [matMenuTriggerFor]="mobileMenu" class="mobile-menu-button">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <mat-menu #mobileMenu="matMenu">
+    <button mat-menu-item [routerLink]="['/tickets']">
+      <mat-icon>confirmation_number</mat-icon>
+      <span>{{ 'MENU.TICKETS' | translate }}</span>
+    </button>
+    <button mat-menu-item [routerLink]="['/usuarios']">
+      <mat-icon>engineering</mat-icon>
+      <span>{{ 'MENU.TECHNICIANS' | translate }}</span>
+    </button>
+    <button mat-menu-item [routerLink]="['/asignaciones']">
+      <mat-icon>assignment</mat-icon>
+      <span>{{ 'MENU.ASSIGNMENTS' | translate }}</span>
+    </button>
+    <button mat-menu-item [routerLink]="['/categorias']">
+      <mat-icon>category</mat-icon>
+      <span>{{ 'MENU.CATEGORIES' | translate }}</span>
+    </button>
+    <button mat-menu-item [matMenuTriggerFor]="menuMantenimientos">
+      <mat-icon>build</mat-icon>
+      <span>{{ 'MENU.MAINTENANCE' | translate }}</span>
+    </button>
+  </mat-menu>
+
+  <!-- Opciones centradas (desktop) -->
+  <div class="center-menu">
+    <a mat-button [routerLink]="['/tickets']" routerLinkActive="active-link">
+      <mat-icon>confirmation_number</mat-icon>
+      <span>{{ 'MENU.TICKETS' | translate }}</span>
+    </a>
+    @if(isAdmin()){
+    <a mat-button [routerLink]="['/usuarios']" routerLinkActive="active-link">
+      <mat-icon>engineering</mat-icon>
+      <span>{{ 'MENU.TECHNICIANS' | translate }}</span>
+    </a>
+    } @if(isAdmin() || isTecnico()){
+    <a mat-button [routerLink]="['/asignaciones']" routerLinkActive="active-link">
+      <mat-icon>assignment</mat-icon>
+      <span>{{ 'MENU.ASSIGNMENTS' | translate }}</span>
+    </a>
+    } @if(isAdmin()){
+    <a mat-button [routerLink]="['/categorias']" routerLinkActive="active-link">
+      <mat-icon>category</mat-icon>
+      <span>{{ 'MENU.CATEGORIES' | translate }}</span>
+    </a>
+    } @if(isAdmin()) {
+    <a mat-button [matMenuTriggerFor]="menuMantenimientos">
+      <mat-icon>build</mat-icon>
+      <span>{{ 'MENU.MAINTENANCE' | translate }}</span>
+    </a>
+    } @if(isAdmin()){
+    <a mat-button [routerLink]="['/dashboard']" routerLinkActive="active-link">
+      <mat-icon>category</mat-icon>
+      <span>Dashboard</span>
+    </a>
+    }
+  </div>
+
+  <!-- Menú desplegable de Mantenimientos -->
+  <mat-menu #menuMantenimientos="matMenu">
+    <button mat-menu-item [routerLink]="'/categoria-admin'" [routerLinkActive]="'active-link'">
+      <mat-icon>build</mat-icon>
+      <span>{{ 'MENU.MAINTENANCE_CATEGORIES' | translate }}</span>
+    </button>
+    <button mat-menu-item [routerLink]="'/usuario-admin'" [routerLinkActive]="'active-link'">
+      <mat-icon>build</mat-icon>
+      <span>{{ 'MENU.MAINTENANCE_TECHNICIANS' | translate }}</span>
+    </button>
+    <button mat-menu-item [routerLink]="'/tickets-admin'" [routerLinkActive]="'active-link'">
+      <mat-icon>build</mat-icon>
+      <span>{{ 'MENU.MAINTENANCE_TICKETS' | translate }}</span>
+    </button>
+    <button mat-menu-item [routerLink]="'/asignaciones-admin'" [routerLinkActive]="'active-link'">
+      <mat-icon>build</mat-icon>
+      <span>{{ 'MENU.MAINTENANCE_ASSIGNMENTS' | translate }}</span>
+    </button>
+
+    <button mat-menu-item [routerLink]="'/usuario-crear'" [routerLinkActive]="'active-link'">
+      <mat-icon>build</mat-icon>
+      <span>{{ 'MENU.USER_MAINTENANCE' | translate }}</span>
+    </button>
+  </mat-menu>
+
+  }
+  <!-- Spacer -->
+  <span class="example-spacer"></span>
+
+  <div class="user-section">
+    <button mat-icon-button matBadge="3" matBadgeColor="accent">
+      <mat-icon>shopping_cart</mat-icon>
+    </button>
+    <span class="small-text user-email">{{ 'USER.EMAIL' | translate }}:{{ correo() }} </span>
+    <button mat-icon-button [matMenuTriggerFor]="menu3">
+      <mat-icon>person</mat-icon>
+    </button>
+    <mat-menu #menu3="matMenu">
+      @if(!isAuthenticated()) {
+      <button mat-menu-item [routerLink]="'/login'" [routerLinkActive]="'active-link'">
+        <mat-icon>person_add</mat-icon>
+        <span>{{ 'USER.LOGIN' | translate }}</span>
+      </button>
+      } @else {
+      <button mat-menu-item (click)="logout()">
+        <mat-icon>person_remove</mat-icon>
+        <span>{{ 'USER.LOGOUT' | translate }}</span>
+      </button>
+      }
+    </mat-menu>
+  </div>
+</mat-toolbar>

@@ -1,0 +1,149 @@
+2025-11-17 09:38:20.025 error: 	moise--Se produjo un error interno del servidor 
+Invalid `this.prisma.categoria.create()` invocation in
+E:\Universidad 2025\Software Libre\Proyecto Completo p\EducationalSystem\server\source\controllers\categoriaController.ts:86:56
+
+  83 try {
+  84   const body = request.body;
+  85 
+→ 86   const newCategoria = await this.prisma.categoria.create({
+         data: {
+           nombre: "Nueva Categoria de Prueba create",
+           descripcion: "para la prueba",
+           etiquetas: {
+             connect: [
+               {},
+               {},
+               {},
+               {},
+               {},
+               {},
+               {}
+             ]
+             ~~~~
+           },
+           sla: {
+             connect: {
+               id_sla: 5,
+               nombre: null,
+               tiempo_max_respuesta: null,
+               tiempo_max_resolucion: null
+             }
+           },
+           especialidades: {
+             connect: [
+               {},
+               {},
+               {},
+               {}
+             ]
+           }
+         }
+       })
+
+Argument `connect`: Invalid value provided. Expected EtiquetaWhereUniqueInput, provided (Object, Object, Object, Object, Object, Object, Object).
+2025-11-17 09:56:39.902 error: 	moise--Se produjo un error interno del servidor 
+Invalid `this.prisma.categoria.create()` invocation in
+E:\Universidad 2025\Software Libre\Proyecto Completo p\EducationalSystem\server\source\controllers\categoriaController.ts:86:56
+
+  83 try {
+  84   const body = request.body;
+  85 
+→ 86   const newCategoria = await this.prisma.categoria.create({
+         data: {
+           nombre: "Categoria de prueba ak7",
+           descripcion: "para la prueba",
+           etiquetas: {
+             connect: [
+               {},
+               {},
+               {},
+               {},
+               {},
+               {},
+               {}
+             ]
+             ~~~~
+           },
+           sla: {
+             connect: {
+               id_sla: 5
+             }
+           },
+           especialidades: {
+             connect: [
+               {},
+               {},
+               {},
+               {},
+               {}
+             ]
+           }
+         }
+       })
+
+Argument `connect`: Invalid value provided. Expected EtiquetaWhereUniqueInput, provided (Object, Object, Object, Object, Object, Object, Object).
+2025-11-17 09:59:25.757 error: 	moise--Se produjo un error interno del servidor 
+Invalid `this.prisma.categoria.create()` invocation in
+E:\Universidad 2025\Software Libre\Proyecto Completo p\EducationalSystem\server\source\controllers\categoriaController.ts:86:54
+
+  83 try {
+  84   const body = request.body;
+  85 
+→ 86   const newCategoria = await this.prisma.categoria.create({
+         data: {
+           nombre: "Categoria de prueba ak7",
+           descripcion: "para la prueba",
+           etiquetas: {
+             connect: [
+               {
+                 id_etiqueta: undefined
+               },
+               {
+                 id_etiqueta: undefined
+               },
+               {
+                 id_etiqueta: undefined
+               },
+               {
+                 id_etiqueta: undefined
+               },
+               {
+                 id_etiqueta: undefined
+               },
+               {
+                 id_etiqueta: undefined
+               },
+               {
+                 id_etiqueta: undefined
+               }
+             ]
+             ~~~~~~~~~~~~~~~~~~~~~~~~~~
+           },
+           sla: {
+             connect: {
+               id_sla: 5
+             }
+           },
+           especialidades: {
+             connect: [
+               {
+                 id_especialidad: undefined
+               },
+               {
+                 id_especialidad: undefined
+               },
+               {
+                 id_especialidad: undefined
+               },
+               {
+                 id_especialidad: undefined
+               },
+               {
+                 id_especialidad: undefined
+               }
+             ]
+           }
+         }
+       })
+
+Argument `connect`: Invalid value provided. Expected EtiquetaWhereUniqueInput, provided (Object, Object, Object, Object, Object, Object, Object).

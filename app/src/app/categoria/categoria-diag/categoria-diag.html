@@ -1,0 +1,44 @@
+<button mat-icon-button class="close-button" [mat-dialog-close]="true" aria-label="{{ 'CATEGORY_DIALOG.CLOSE' | translate }}">
+  <mat-icon class="close-icon" color="warn">close</mat-icon>
+</button>
+
+@if(datos()){
+<div class="categoria-dialog">
+  <h2 mat-dialog-title class="dialog-title">{{ datos()?.nombre }}</h2>
+  <h6 mat-dialog-title class="dialog-subtitle">{{ datos()?.descripcion }}</h6>
+
+  <mat-dialog-content class="content">
+    <div class="details">
+      <!-- Descripción -->
+      <section class="section">
+        <p class="descripcion">{{ datos()?.descripcion }}</p>
+      </section>
+
+      <!-- Etiquetas -->
+      <section class="section">
+        <h6 class="section-title">{{ 'CATEGORY_DIALOG.TAGS' | translate }}</h6>
+        <mat-chip-listbox aria-label="{{ 'CATEGORY_DIALOG.TAGS' | translate }}">
+          @for (item of datos()?.etiquetas; track $index) {
+          <mat-chip-option class="chip-tertiary">{{ item.nombre }}</mat-chip-option>
+          }
+        </mat-chip-listbox>
+      </section>
+
+      <!-- Especialidades -->
+      <section class="section">
+        <h6 class="section-title">{{ 'CATEGORY_DIALOG.SPECIALTIES' | translate }}</h6>
+
+        <!-- Tarjetas verticales: título arriba, descripción abajo -->
+        <div class="especialidades-grid">
+          @for (item of datos()?.especialidades; track $index) {
+          <div class="especialidad-card">
+            <div class="especialidad-title">{{ item.nombre }}</div>
+            <div class="especialidad-desc">{{ item.descripcion }}</div>
+          </div>
+          }
+        </div>
+      </section>
+    </div>
+  </mat-dialog-content>
+</div>
+}

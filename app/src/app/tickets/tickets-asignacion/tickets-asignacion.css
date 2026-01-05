@@ -1,0 +1,96 @@
+/* Ticket en una sola sección */
+.ticket-section-full {
+  background-color: #2a2a3d;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 25px;
+}
+
+/* Grid de técnicos */
+.tecnicos-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 columnas */
+  gap: 20px;
+}
+
+/* Tarjeta de técnico */
+.tecnico-card-item {
+  background-color: #2a2a3d;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Hover intuitivo */
+.tecnico-card-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.7);
+  background-color: #33334d; /* un poco más claro al hover */
+}
+
+/* Línea de detalle */
+.detail-line {
+  font-size: 14px;
+  color: #e0e0e0;
+  margin: 6px 0;
+}
+.detail-line strong {
+  color: #90caf9; /* azul claro para etiquetas */
+}
+
+/* Barra de carga */
+mat-progress-bar {
+  margin-top: 5px;
+  height: 8px;
+  border-radius: 4px;
+}
+
+/* Botón asignar */
+.asignar-button {
+  margin-top: 15px;
+  width: 100%;
+  background-color: #43a047; /* verde */
+  color: #fff;
+  font-weight: bold;
+}
+.asignar-button:hover {
+  background-color: #2e7d32;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .tecnicos-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.tecnicos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1rem;
+}
+
+.chip-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.chip-nombre {
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.chip-descripcion {
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.image-preview img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 4px;
+}

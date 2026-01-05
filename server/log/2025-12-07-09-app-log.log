@@ -1,0 +1,53 @@
+2025-12-07 09:38:51.052 error: 	moise--Se produjo un error interno del servidor 
+Invalid `this.prisma.valoracion.create()` invocation in
+E:\Universidad 2025\Software Libre\Proyecto Completo p\EducationalSystem\server\source\controllers\ValoracionController.ts:22:58
+
+  19 try {
+  20   const body = request.body;
+  21 
+→ 22   const newValoracion = await this.prisma.valoracion.create(
+Unique constraint failed on the constraint: `Valoracion_id_ticket_key`
+2025-12-07 09:44:04.609 error: 	moise--Se produjo un error interno del servidor 
+Invalid `this.prisma.usuario.create()` invocation in
+E:\Universidad 2025\Software Libre\Proyecto Completo p\EducationalSystem\server\source\controllers\usuarioController.ts:140:52
+
+  137 try {
+  138   const body = request.body;
+  139 
+→ 140   const newTecnico = await this.prisma.usuario.create({
+          data: {
+            correo: undefined,
+            activo: false,
+            carga_actual: 0,
+            especialidades: {
+              connect: undefined
+            },
+            id_rol: "TECNICO",
+            disponible: true,
+        +   nombre: String
+          }
+        })
+
+Argument `nombre` is missing.
+2025-12-07 09:52:43.021 error: 	moise--Se produjo un error interno del servidor 
+Invalid `this.prisma.usuario.create()` invocation in
+E:\Universidad 2025\Software Libre\Proyecto Completo p\EducationalSystem\server\source\controllers\usuarioController.ts:140:52
+
+  137 try {
+  138   const body = request.body;
+  139 
+→ 140   const newTecnico = await this.prisma.usuario.create({
+          data: {
+            correo: undefined,
+            activo: false,
+            carga_actual: 0,
+            especialidades: {
+              connect: undefined
+            },
+            id_rol: "TECNICO",
+            disponible: true,
+        +   nombre: String
+          }
+        })
+
+Argument `nombre` is missing.

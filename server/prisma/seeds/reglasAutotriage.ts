@@ -1,0 +1,42 @@
+export const reglasAutotriage = [
+  {
+    nombre: "Priorizar SLA Crítico",
+    descripcion: "Asigna prioridad a los tickets con SLA de tipo Crítico o Urgente.",
+    prioridad_base: 3,
+    peso_carga: 1,
+    peso_sla: 5,
+    activo: true,
+  },
+  {
+    nombre: "Balancear Carga",
+    descripcion: "Distribuye tickets entre técnicos con menos carga actual.",
+    prioridad_base: 2,
+    peso_carga: 4,
+    peso_sla: 2,
+    activo: true,
+  },
+  {
+    nombre: "Asignar por Especialidad",
+    descripcion: "Asigna automáticamente según la coincidencia con la especialidad técnica.",
+    prioridad_base: 3,
+    peso_carga: 2,
+    peso_sla: 3,
+    activo: true,
+  },
+  {
+    nombre: "Tiempo de Respuesta Óptimo",
+    descripcion: "Evalúa el SLA y asigna al técnico más rápido disponible.",
+    prioridad_base: 2,
+    peso_carga: 3,
+    peso_sla: 3,
+    activo: true,
+  },
+  {
+    nombre: "Prioridad de Emergencia",
+    descripcion: "Deriva automáticamente tickets con prioridad Alta o Crítica a técnicos especializados.",
+    prioridad_base: 5,
+    peso_carga: 2,
+    peso_sla: 4,
+    activo: true,
+  },
+];

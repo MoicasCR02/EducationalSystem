@@ -1,0 +1,1065 @@
+2025-11-17 10:05:08.313 error: 	moise--Se produjo un error interno del servidor 
+Invalid `this.prisma.categoria.create()` invocation in
+E:\Universidad 2025\Software Libre\Proyecto Completo p\EducationalSystem\server\source\controllers\categoriaController.ts:86:56
+
+  83 try {
+  84   const body = request.body;
+  85 
+→ 86   const newCategoria = await this.prisma.categoria.create({
+         data: {
+           nombre: "Categoria de prueba ak7",
+           descripcion: "para la prueba",
+           etiquetas: {
+             connect: [
+               {},
+               {},
+               {},
+               {},
+               {},
+               {},
+               {}
+             ]
+             ~~~~
+           },
+           sla: {
+             connect: {
+               id_sla: 5
+             }
+           },
+           especialidades: {
+             connect: [
+               {},
+               {},
+               {},
+               {},
+               {}
+             ]
+           }
+         }
+       })
+
+Argument `connect`: Invalid value provided. Expected EtiquetaWhereUniqueInput, provided (Object, Object, Object, Object, Object, Object, Object).
+2025-11-17 10:07:00.845 error: 	moise--Se produjo un error interno del servidor 
+Invalid `this.prisma.categoria.create()` invocation in
+E:\Universidad 2025\Software Libre\Proyecto Completo p\EducationalSystem\server\source\controllers\categoriaController.ts:86:56
+
+  83 try {
+  84   const body = request.body;
+  85 
+→ 86   const newCategoria = await this.prisma.categoria.create({
+         data: {
+           nombre: "rgdh",
+           descripcion: "fghgfjhgfhjhg thb gthfgh",
+           etiquetas: {
+             connect: [
+               {},
+               {},
+               {}
+             ]
+             ~~~~
+           },
+           sla: {
+             connect: {
+               id_sla: 5
+             }
+           },
+           especialidades: {
+             connect: [
+               {},
+               {},
+               {},
+               {}
+             ]
+           }
+         }
+       })
+
+Argument `connect`: Invalid value provided. Expected EtiquetaWhereUniqueInput, provided (Object, Object, Object).
+2025-11-17 10:07:07.921 error: 	moise--Se produjo un error interno del servidor 
+Invalid `this.prisma.categoria.create()` invocation in
+E:\Universidad 2025\Software Libre\Proyecto Completo p\EducationalSystem\server\source\controllers\categoriaController.ts:86:56
+
+  83 try {
+  84   const body = request.body;
+  85 
+→ 86   const newCategoria = await this.prisma.categoria.create({
+         data: {
+           nombre: "rgdh",
+           descripcion: "fghgfjhgfhjhg thb gthfgh",
+           etiquetas: {
+             connect: [
+               {},
+               {},
+               {}
+             ]
+             ~~~~
+           },
+           sla: {
+             connect: {
+               id_sla: 5
+             }
+           },
+           especialidades: {
+             connect: [
+               {},
+               {},
+               {},
+               {}
+             ]
+           }
+         }
+       })
+
+Argument `connect`: Invalid value provided. Expected EtiquetaWhereUniqueInput, provided (Object, Object, Object).
+2025-11-17 10:08:28.961 error: 	moise--Se produjo un error interno del servidor 
+Invalid `this.prisma.categoria.create()` invocation in
+E:\Universidad 2025\Software Libre\Proyecto Completo p\EducationalSystem\server\source\controllers\categoriaController.ts:86:56
+
+  83 try {
+  84   const body = request.body;
+  85 
+→ 86   const newCategoria = await this.prisma.categoria.create({
+         data: {
+           nombre: "efsdfsfdg",
+           descripcion: "fdgfdgfd rtgbrhg rgfgfd",
+           etiquetas: {
+             connect: [
+               {},
+               {}
+             ]
+             ~~~~
+           },
+           sla: {
+             connect: {
+               id_sla: 3
+             }
+           },
+           especialidades: {
+             connect: [
+               {},
+               {},
+               {}
+             ]
+           }
+         }
+       })
+
+Argument `connect`: Invalid value provided. Expected EtiquetaWhereUniqueInput, provided (Object, Object).
+2025-11-17 10:15:29.630 error: 	moise--Se produjo un error interno del servidor 
+Invalid `this.prisma.categoria.findUnique()` invocation in
+E:\Universidad 2025\Software Libre\Proyecto Completo p\EducationalSystem\server\source\controllers\categoriaController.ts:114:62
+
+  111 const idCategoria = parseInt(request.params.id);
+  112 
+  113 //Obtener categoria anterior
+→ 114 const CategoriaExistente = await this.prisma.categoria.findUnique({
+        where: {
+      +   id_categoria: Int
+        },
+        include: {
+          etiquetas: {
+            select: {
+              id_etiqueta: true
+            }
+          },
+          sla: true,
+          especialidades: {
+            select: {
+              id_especialidad: true
+            }
+          }
+        }
+      })
+
+Argument `id_categoria` is missing.
+2025-11-17 10:16:48.298 error: 	moise--Se produjo un error interno del servidor 
+Invalid `this.prisma.categoria.findUnique()` invocation in
+E:\Universidad 2025\Software Libre\Proyecto Completo p\EducationalSystem\server\source\controllers\categoriaController.ts:114:62
+
+  111 const idCategoria = parseInt(request.params.id);
+  112 
+  113 //Obtener categoria anterior
+→ 114 const CategoriaExistente = await this.prisma.categoria.findUnique({
+        where: {
+      +   id_categoria: Int
+        },
+        include: {
+          etiquetas: {
+            select: {
+              id_etiqueta: true
+            }
+          },
+          sla: true,
+          especialidades: {
+            select: {
+              id_especialidad: true
+            }
+          }
+        }
+      })
+
+Argument `id_categoria` is missing.
+2025-11-17 10:18:00.871 error: 	moise--Se produjo un error interno del servidor 
+Invalid `this.prisma.categoria.findUnique()` invocation in
+E:\Universidad 2025\Software Libre\Proyecto Completo p\EducationalSystem\server\source\controllers\categoriaController.ts:114:62
+
+  111 const idCategoria = parseInt(request.params.id);
+  112 
+  113 //Obtener categoria anterior
+→ 114 const CategoriaExistente = await this.prisma.categoria.findUnique({
+        where: {
+      +   id_categoria: Int
+        },
+        include: {
+          etiquetas: {
+            select: {
+              id_etiqueta: true
+            }
+          },
+          sla: true,
+          especialidades: {
+            select: {
+              id_especialidad: true
+            }
+          }
+        }
+      })
+
+Argument `id_categoria` is missing.
+2025-11-17 10:20:09.936 error: 	moise--Se produjo un error interno del servidor 
+Invalid `this.prisma.categoria.findUnique()` invocation in
+E:\Universidad 2025\Software Libre\Proyecto Completo p\EducationalSystem\server\source\controllers\categoriaController.ts:114:62
+
+  111 const idCategoria = parseInt(request.params.id);
+  112 
+  113 //Obtener categoria anterior
+→ 114 const CategoriaExistente = await this.prisma.categoria.findUnique({
+        where: {
+      +   id_categoria: Int
+        },
+        include: {
+          etiquetas: {
+            select: {
+              id_etiqueta: true
+            }
+          },
+          sla: true,
+          especialidades: {
+            select: {
+              id_especialidad: true
+            }
+          }
+        }
+      })
+
+Argument `id_categoria` is missing.
+2025-11-17 10:24:07.264 error: 	moise--Se produjo un error interno del servidor 
+Invalid `this.prisma.categoria.findUnique()` invocation in
+E:\Universidad 2025\Software Libre\Proyecto Completo p\EducationalSystem\server\source\controllers\categoriaController.ts:114:62
+
+  111 const idCategoria = parseInt(request.params.id);
+  112 
+  113 //Obtener categoria anterior
+→ 114 const CategoriaExistente = await this.prisma.categoria.findUnique({
+        where: {
+      +   id_categoria: Int
+        },
+        include: {
+          etiquetas: {
+            select: {
+              id_etiqueta: true
+            }
+          },
+          sla: true,
+          especialidades: {
+            select: {
+              id_especialidad: true
+            }
+          }
+        }
+      })
+
+Argument `id_categoria` is missing.
+2025-11-17 10:24:49.243 error: 	moise--Se produjo un error interno del servidor 
+Invalid `this.prisma.categoria.findUnique()` invocation in
+E:\Universidad 2025\Software Libre\Proyecto Completo p\EducationalSystem\server\source\controllers\categoriaController.ts:114:62
+
+  111 const idCategoria = parseInt(request.params.id_categoria);
+  112 
+  113 //Obtener categoria anterior
+→ 114 const CategoriaExistente = await this.prisma.categoria.findUnique({
+        where: {
+      +   id_categoria: Int
+        },
+        include: {
+          etiquetas: {
+            select: {
+              id_etiqueta: true
+            }
+          },
+          sla: true,
+          especialidades: {
+            select: {
+              id_especialidad: true
+            }
+          }
+        }
+      })
+
+Argument `id_categoria` is missing.
+2025-11-17 10:27:40.832 error: 	moise--Se produjo un error interno del servidor 
+Invalid `this.prisma.categoria.findUnique()` invocation in
+E:\Universidad 2025\Software Libre\Proyecto Completo p\EducationalSystem\server\source\controllers\categoriaController.ts:114:62
+
+  111 const idCategoria = parseInt(request.params.id_categoria);
+  112 
+  113 //Obtener categoria anterior
+→ 114 const CategoriaExistente = await this.prisma.categoria.findUnique({
+        where: {
+      +   id_categoria: Int
+        },
+        include: {
+          etiquetas: {
+            select: {
+              id_etiqueta: true
+            }
+          },
+          sla: true,
+          especialidades: {
+            select: {
+              id_especialidad: true
+            }
+          }
+        }
+      })
+
+Argument `id_categoria` is missing.
+2025-11-17 10:27:53.497 error: 	moise--Se produjo un error interno del servidor 
+Invalid `this.prisma.categoria.findUnique()` invocation in
+E:\Universidad 2025\Software Libre\Proyecto Completo p\EducationalSystem\server\source\controllers\categoriaController.ts:114:62
+
+  111 const idCategoria = parseInt(request.params.id_categoria);
+  112 
+  113 //Obtener categoria anterior
+→ 114 const CategoriaExistente = await this.prisma.categoria.findUnique({
+        where: {
+      +   id_categoria: Int
+        },
+        include: {
+          etiquetas: {
+            select: {
+              id_etiqueta: true
+            }
+          },
+          sla: true,
+          especialidades: {
+            select: {
+              id_especialidad: true
+            }
+          }
+        }
+      })
+
+Argument `id_categoria` is missing.
+2025-11-17 10:28:42.504 error: 	moise--Se produjo un error interno del servidor 
+Invalid `this.prisma.categoria.findUnique()` invocation in
+E:\Universidad 2025\Software Libre\Proyecto Completo p\EducationalSystem\server\source\controllers\categoriaController.ts:114:62
+
+  111 const idCategoria = parseInt(request.params.id_categoria);
+  112 
+  113 //Obtener categoria anterior
+→ 114 const CategoriaExistente = await this.prisma.categoria.findUnique({
+        where: {
+      +   id_categoria: Int
+        },
+        include: {
+          etiquetas: {
+            select: {
+              id_etiqueta: true
+            }
+          },
+          sla: true,
+          especialidades: {
+            select: {
+              id_especialidad: true
+            }
+          }
+        }
+      })
+
+Argument `id_categoria` is missing.
+2025-11-17 10:29:10.321 error: 	moise--Se produjo un error interno del servidor 
+Invalid `this.prisma.categoria.findUnique()` invocation in
+E:\Universidad 2025\Software Libre\Proyecto Completo p\EducationalSystem\server\source\controllers\categoriaController.ts:114:62
+
+  111 const idCategoria = parseInt(request.params.id_categoria);
+  112 
+  113 //Obtener categoria anterior
+→ 114 const CategoriaExistente = await this.prisma.categoria.findUnique({
+        where: {
+      +   id_categoria: Int
+        },
+        include: {
+          etiquetas: {
+            select: {
+              id_etiqueta: true
+            }
+          },
+          sla: true,
+          especialidades: {
+            select: {
+              id_especialidad: true
+            }
+          }
+        }
+      })
+
+Argument `id_categoria` is missing.
+2025-11-17 10:29:27.098 error: 	moise--Se produjo un error interno del servidor 
+Invalid `this.prisma.categoria.findUnique()` invocation in
+E:\Universidad 2025\Software Libre\Proyecto Completo p\EducationalSystem\server\source\controllers\categoriaController.ts:114:62
+
+  111 const idCategoria = parseInt(request.params.id_categoria);
+  112 
+  113 //Obtener categoria anterior
+→ 114 const CategoriaExistente = await this.prisma.categoria.findUnique({
+        where: {
+      +   id_categoria: Int
+        },
+        include: {
+          etiquetas: {
+            select: {
+              id_etiqueta: true
+            }
+          },
+          sla: true,
+          especialidades: {
+            select: {
+              id_especialidad: true
+            }
+          }
+        }
+      })
+
+Argument `id_categoria` is missing.
+2025-11-17 10:30:26.333 error: 	moise--Se produjo un error interno del servidor 
+Invalid `this.prisma.categoria.findUnique()` invocation in
+E:\Universidad 2025\Software Libre\Proyecto Completo p\EducationalSystem\server\source\controllers\categoriaController.ts:114:62
+
+  111 const idCategoria = parseInt(request.params.id);
+  112 
+  113 //Obtener categoria anterior
+→ 114 const CategoriaExistente = await this.prisma.categoria.findUnique({
+        where: {
+      +   id_categoria: Int
+        },
+        include: {
+          etiquetas: {
+            select: {
+              id_etiqueta: true
+            }
+          },
+          sla: true,
+          especialidades: {
+            select: {
+              id_especialidad: true
+            }
+          }
+        }
+      })
+
+Argument `id_categoria` is missing.
+2025-11-17 10:32:56.451 error: 	moise--Se produjo un error interno del servidor 
+Invalid `this.prisma.categoria.update()` invocation in
+E:\Universidad 2025\Software Libre\Proyecto Completo p\EducationalSystem\server\source\controllers\categoriaController.ts:165:59
+
+  162   : [];
+  163 
+  164 //Actualizar
+→ 165 const updateCategoria = await this.prisma.categoria.update({
+        where: {
+          id_categoria: 7
+        },
+        data: {
+          nombre: "Nueva Categoría de pruebab actualizada",
+          descripcion: "Categoría enfocada en la gestión y resolución de incidencias",
+          etiquetas: {
+            disconnect: [
+              {
+                id_etiqueta: 5
+              },
+              {
+                id_etiqueta: 6
+              },
+              {
+                id_etiqueta: 7
+              },
+              {
+                id_etiqueta: 8
+              }
+            ],
+            connect: [
+              {
+                id_etiqueta: undefined
+              },
+              {
+                id_etiqueta: undefined
+              },
+              {
+                id_etiqueta: undefined
+              },
+              {
+                id_etiqueta: undefined
+              }
+            ]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~
+          },
+          sla: {
+            connect: {
+              id_sla: 5
+            }
+          },
+          especialidades: {
+            disconnect: [
+              {
+                id_especialidad: 1
+              },
+              {
+                id_especialidad: 3
+              },
+              {
+                id_especialidad: 4
+              }
+            ],
+            connect: [
+              {
+                id_especialidad: undefined
+              },
+              {
+                id_especialidad: undefined
+              },
+              {
+                id_especialidad: undefined
+              },
+              {
+                id_especialidad: undefined
+              }
+            ]
+          }
+        }
+      })
+
+Argument `connect`: Invalid value provided. Expected EtiquetaWhereUniqueInput, provided (Object, Object, Object, Object).
+2025-11-17 10:38:37.150 error: 	moise--Se produjo un error interno del servidor 
+Invalid `this.prisma.categoria.update()` invocation in
+E:\Universidad 2025\Software Libre\Proyecto Completo p\EducationalSystem\server\source\controllers\categoriaController.ts:159:59
+
+  156   : [];
+  157 
+  158 //Actualizar
+→ 159 const updateCategoria = await this.prisma.categoria.update({
+        where: {
+          id_categoria: 7
+        },
+        data: {
+          nombre: "Nueva Categoría de pruebab actualizada",
+          descripcion: "Categoría enfocada en la gestión y resolución de incidencias",
+          etiquetas: {
+            disconnect: [
+              {
+                id_etiqueta: 5
+              },
+              {
+                id_etiqueta: 6
+              },
+              {
+                id_etiqueta: 7
+              },
+              {
+                id_etiqueta: 8
+              }
+            ],
+            connect: [
+              {
+                id_etiqueta: {
+                  id_etiqueta: 5
+                }
+              },
+              {
+                id_etiqueta: {
+                  id_etiqueta: 6
+                }
+              },
+              {
+                id_etiqueta: {
+                  id_etiqueta: 7
+                }
+              },
+              {
+                id_etiqueta: {
+                  id_etiqueta: 8
+                }
+              }
+            ]
+          },
+          sla: {
+            connect: {
+              id_sla: 5
+            }
+          },
+          especialidades: {
+            disconnect: [
+              {
+                id_especialidad: 1
+              },
+              {
+                id_especialidad: 3
+              },
+              {
+                id_especialidad: 4
+              }
+            ],
+            connect: [
+              {
+                id_especialidad: {
+                  id_especialidad: 3
+                }
+              },
+              {
+                id_especialidad: {
+                  id_especialidad: 4
+                }
+              },
+              {
+                id_especialidad: {
+                  id_especialidad: 1
+                }
+              }
+            ]
+          }
+        }
+      })
+
+Argument `id_etiqueta`: Invalid value provided. Expected Int, provided Object.
+2025-11-17 10:39:47.465 error: 	moise--Se produjo un error interno del servidor 
+Invalid `this.prisma.categoria.update()` invocation in
+E:\Universidad 2025\Software Libre\Proyecto Completo p\EducationalSystem\server\source\controllers\categoriaController.ts:159:59
+
+  156   : [];
+  157 
+  158 //Actualizar
+→ 159 const updateCategoria = await this.prisma.categoria.update({
+        where: {
+          id_categoria: 7
+        },
+        data: {
+          nombre: "Nueva Categoría de pruebab actualizada",
+          descripcion: "Categoría enfocada en la gestión y resolución de incidencias",
+          etiquetas: {
+            disconnect: [
+              {
+                id_etiqueta: 5
+              },
+              {
+                id_etiqueta: 6
+              },
+              {
+                id_etiqueta: 7
+              },
+              {
+                id_etiqueta: 8
+              }
+            ],
+            connect: [
+              {
+                id_etiqueta: {
+                  id_etiqueta: 5
+                }
+              },
+              {
+                id_etiqueta: {
+                  id_etiqueta: 6
+                }
+              },
+              {
+                id_etiqueta: {
+                  id_etiqueta: 7
+                }
+              },
+              {
+                id_etiqueta: {
+                  id_etiqueta: 8
+                }
+              }
+            ]
+          },
+          sla: {
+            connect: {
+              id_sla: 5
+            }
+          },
+          especialidades: {
+            disconnect: [
+              {
+                id_especialidad: 1
+              },
+              {
+                id_especialidad: 3
+              },
+              {
+                id_especialidad: 4
+              }
+            ],
+            connect: [
+              {
+                id_especialidad: {
+                  id_especialidad: 3
+                }
+              },
+              {
+                id_especialidad: {
+                  id_especialidad: 4
+                }
+              },
+              {
+                id_especialidad: {
+                  id_especialidad: 1
+                }
+              }
+            ]
+          }
+        }
+      })
+
+Argument `id_etiqueta`: Invalid value provided. Expected Int, provided Object.
+2025-11-17 10:40:07.801 error: 	moise--Se produjo un error interno del servidor 
+Invalid `this.prisma.categoria.update()` invocation in
+E:\Universidad 2025\Software Libre\Proyecto Completo p\EducationalSystem\server\source\controllers\categoriaController.ts:159:59
+
+  156   : [];
+  157 
+  158 //Actualizar
+→ 159 const updateCategoria = await this.prisma.categoria.update({
+        where: {
+          id_categoria: 7
+        },
+        data: {
+          nombre: "Nueva Categoría de pruebab actualizada",
+          descripcion: "Categoría enfocada en la gestión y resolución de incidencias",
+          etiquetas: {
+            disconnect: [
+              {
+                id_etiqueta: 5
+              },
+              {
+                id_etiqueta: 6
+              },
+              {
+                id_etiqueta: 7
+              },
+              {
+                id_etiqueta: 8
+              }
+            ],
+            connect: [
+              {
+                id_etiqueta: {
+                  id_etiqueta: 5
+                }
+              },
+              {
+                id_etiqueta: {
+                  id_etiqueta: 6
+                }
+              },
+              {
+                id_etiqueta: {
+                  id_etiqueta: 7
+                }
+              },
+              {
+                id_etiqueta: {
+                  id_etiqueta: 8
+                }
+              }
+            ]
+          },
+          sla: {
+            connect: {
+              id_sla: 5
+            }
+          },
+          especialidades: {
+            disconnect: [
+              {
+                id_especialidad: 1
+              },
+              {
+                id_especialidad: 3
+              },
+              {
+                id_especialidad: 4
+              }
+            ],
+            connect: [
+              {
+                id_especialidad: {
+                  id_especialidad: 3
+                }
+              },
+              {
+                id_especialidad: {
+                  id_especialidad: 4
+                }
+              },
+              {
+                id_especialidad: {
+                  id_especialidad: 1
+                }
+              }
+            ]
+          }
+        }
+      })
+
+Argument `id_etiqueta`: Invalid value provided. Expected Int, provided Object.
+2025-11-17 10:41:50.490 error: 	moise--Se produjo un error interno del servidor 
+Invalid `this.prisma.categoria.update()` invocation in
+E:\Universidad 2025\Software Libre\Proyecto Completo p\EducationalSystem\server\source\controllers\categoriaController.ts:165:59
+
+  162   : [];
+  163 
+  164 //Actualizar
+→ 165 const updateCategoria = await this.prisma.categoria.update({
+        where: {
+          id_categoria: 7
+        },
+        data: {
+          nombre: "Nueva Categoría de pruebab actualizada",
+          descripcion: "Categoría enfocada en la gestión y resolución de incidencias",
+          etiquetas: {
+            disconnect: [
+              {
+                id_etiqueta: 5
+              },
+              {
+                id_etiqueta: 6
+              },
+              {
+                id_etiqueta: 8
+              },
+              {
+                id_etiqueta: 10
+              }
+            ],
+            connect: [
+              {
+                id_etiqueta: undefined
+              },
+              {
+                id_etiqueta: undefined
+              },
+              {
+                id_etiqueta: undefined
+              },
+              {
+                id_etiqueta: undefined
+              }
+            ]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~
+          },
+          sla: {
+            connect: {
+              id_sla: 5
+            }
+          },
+          especialidades: {
+            disconnect: [
+              {
+                id_especialidad: 1
+              },
+              {
+                id_especialidad: 3
+              },
+              {
+                id_especialidad: 5
+              }
+            ],
+            connect: [
+              {
+                id_especialidad: undefined
+              },
+              {
+                id_especialidad: undefined
+              },
+              {
+                id_especialidad: undefined
+              },
+              {
+                id_especialidad: undefined
+              }
+            ]
+          }
+        }
+      })
+
+Argument `connect`: Invalid value provided. Expected EtiquetaWhereUniqueInput, provided (Object, Object, Object, Object).
+2025-11-17 10:42:57.027 error: 	moise--Se produjo un error interno del servidor 
+Invalid `this.prisma.categoria.update()` invocation in
+E:\Universidad 2025\Software Libre\Proyecto Completo p\EducationalSystem\server\source\controllers\categoriaController.ts:165:59
+
+  162   : [];
+  163 
+  164 //Actualizar
+→ 165 const updateCategoria = await this.prisma.categoria.update({
+        where: {
+          id_categoria: 7
+        },
+        data: {
+          nombre: "Nueva Categoría de pruebab actualizada",
+          descripcion: "Categoría enfocada en la gestión y resolución de incidencias",
+          etiquetas: {
+            disconnect: [
+              {
+                id_etiqueta: 5
+              },
+              {
+                id_etiqueta: 6
+              },
+              {
+                id_etiqueta: 8
+              },
+              {
+                id_etiqueta: 10
+              }
+            ],
+            connect: [
+              {
+                id_etiqueta: undefined
+              },
+              {
+                id_etiqueta: undefined
+              },
+              {
+                id_etiqueta: undefined
+              },
+              {
+                id_etiqueta: undefined
+              }
+            ]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~
+          },
+          sla: {
+            connect: {
+              id_sla: 5
+            }
+          },
+          especialidades: {
+            disconnect: [
+              {
+                id_especialidad: 1
+              },
+              {
+                id_especialidad: 3
+              },
+              {
+                id_especialidad: 5
+              }
+            ],
+            connect: [
+              {
+                id_especialidad: undefined
+              },
+              {
+                id_especialidad: undefined
+              },
+              {
+                id_especialidad: undefined
+              },
+              {
+                id_especialidad: undefined
+              }
+            ]
+          }
+        }
+      })
+
+Argument `connect`: Invalid value provided. Expected EtiquetaWhereUniqueInput, provided (Object, Object, Object, Object).
+2025-11-17 10:43:19.406 error: 	moise--Se produjo un error interno del servidor 
+Invalid `this.prisma.categoria.update()` invocation in
+E:\Universidad 2025\Software Libre\Proyecto Completo p\EducationalSystem\server\source\controllers\categoriaController.ts:165:59
+
+  162   : [];
+  163 
+  164 //Actualizar
+→ 165 const updateCategoria = await this.prisma.categoria.update({
+        where: {
+          id_categoria: 7
+        },
+        data: {
+          nombre: "Nueva Categoría de pruebab actualizada",
+          descripcion: "Categoría enfocada en la gestión y resolución de incidencias",
+          etiquetas: {
+            disconnect: [
+              {
+                id_etiqueta: 5
+              },
+              {
+                id_etiqueta: 6
+              },
+              {
+                id_etiqueta: 8
+              },
+              {
+                id_etiqueta: 10
+              }
+            ],
+            connect: [
+              {
+                id_etiqueta: undefined
+              },
+              {
+                id_etiqueta: undefined
+              },
+              {
+                id_etiqueta: undefined
+              }
+            ]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~
+          },
+          sla: {
+            connect: {
+              id_sla: 5
+            }
+          },
+          especialidades: {
+            disconnect: [
+              {
+                id_especialidad: 1
+              },
+              {
+                id_especialidad: 3
+              },
+              {
+                id_especialidad: 5
+              }
+            ],
+            connect: [
+              {
+                id_especialidad: undefined
+              },
+              {
+                id_especialidad: undefined
+              },
+              {
+                id_especialidad: undefined
+              },
+              {
+                id_especialidad: undefined
+              }
+            ]
+          }
+        }
+      })
+
+Argument `connect`: Invalid value provided. Expected EtiquetaWhereUniqueInput, provided (Object, Object, Object).

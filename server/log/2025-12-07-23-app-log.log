@@ -1,0 +1,227 @@
+2025-12-07 23:03:02.183 error: 	moise--Se produjo un error interno del servidor 
+Invalid `this.prisma.asignacion.findMany()` invocation in
+E:\Universidad 2025\Software Libre\Proyecto Completo p\EducationalSystem\server\source\controllers\asigancionController.ts:56:55
+
+  53 // ADMIN no necesita filtro
+  54 
+  55 // 📦 Consulta a la base de datos con Prisma
+→ 56 const asignaciones = await this.prisma.asignacion.findMany({
+       where: {
+         id_usuario_cliente: 2,
+         ~~~~~~~~~~~~~~~~~~
+     ?   AND?: AsignacionWhereInput | AsignacionWhereInput[],
+     ?   OR?: AsignacionWhereInput[],
+     ?   NOT?: AsignacionWhereInput | AsignacionWhereInput[],
+     ?   id_asignacion?: IntFilter | Int,
+     ?   fecha_asignacion?: DateTimeFilter | DateTime,
+     ?   metodo?: StringFilter | String,
+     ?   justificacion?: StringNullableFilter | String | Null,
+     ?   id_ticket?: IntFilter | Int,
+     ?   id_tecnico?: IntFilter | Int,
+     ?   id_reglaAutotriage?: IntNullableFilter | Int | Null,
+     ?   ticket?: TicketNullableScalarRelationFilter | TicketWhereInput | Null,
+     ?   tecnico?: UsuarioNullableScalarRelationFilter | UsuarioWhereInput | Null,
+     ?   regla?: Reglas_AutotriageNullableScalarRelationFilter | Reglas_AutotriageWhereInput | Null
+       },
+       orderBy: {
+         id_asignacion: "asc"
+       },
+       include: {
+         tecnico: true,
+         ticket: {
+           include: {
+             categoria: {
+               include: {
+                 sla: true
+               }
+             }
+           }
+         }
+       }
+     })
+
+Unknown argument `id_usuario_cliente`. Available options are marked with ?.
+2025-12-07 23:05:35.097 error: 	moise--Se produjo un error interno del servidor 
+Invalid `this.prisma.asignacion.findMany()` invocation in
+E:\Universidad 2025\Software Libre\Proyecto Completo p\EducationalSystem\server\source\controllers\asigancionController.ts:56:55
+
+  53 // ADMIN no necesita filtro
+  54 
+  55 // 📦 Consulta a la base de datos con Prisma
+→ 56 const asignaciones = await this.prisma.asignacion.findMany({
+       where: {
+         id_usuario_cliente: 2,
+         ~~~~~~~~~~~~~~~~~~
+     ?   AND?: AsignacionWhereInput | AsignacionWhereInput[],
+     ?   OR?: AsignacionWhereInput[],
+     ?   NOT?: AsignacionWhereInput | AsignacionWhereInput[],
+     ?   id_asignacion?: IntFilter | Int,
+     ?   fecha_asignacion?: DateTimeFilter | DateTime,
+     ?   metodo?: StringFilter | String,
+     ?   justificacion?: StringNullableFilter | String | Null,
+     ?   id_ticket?: IntFilter | Int,
+     ?   id_tecnico?: IntFilter | Int,
+     ?   id_reglaAutotriage?: IntNullableFilter | Int | Null,
+     ?   ticket?: TicketNullableScalarRelationFilter | TicketWhereInput | Null,
+     ?   tecnico?: UsuarioNullableScalarRelationFilter | UsuarioWhereInput | Null,
+     ?   regla?: Reglas_AutotriageNullableScalarRelationFilter | Reglas_AutotriageWhereInput | Null
+       },
+       orderBy: {
+         id_asignacion: "asc"
+       },
+       include: {
+         tecnico: true,
+         ticket: {
+           include: {
+             categoria: {
+               include: {
+                 sla: true
+               }
+             }
+           }
+         }
+       }
+     })
+
+Unknown argument `id_usuario_cliente`. Available options are marked with ?.
+2025-12-07 23:08:33.813 error: 	moise--Se produjo un error interno del servidor 
+Invalid `this.prisma.asignacion.findMany()` invocation in
+E:\Universidad 2025\Software Libre\Proyecto Completo p\EducationalSystem\server\source\controllers\asigancionController.ts:56:55
+
+  53 // ADMIN no necesita filtro
+  54 
+  55 // 📦 Consulta a la base de datos con Prisma
+→ 56 const asignaciones = await this.prisma.asignacion.findMany({
+       where: {
+         asignaciones: {
+         ~~~~~~~~~~~~
+           some: {
+             id_tecnico: 6
+           }
+         },
+     ?   AND?: AsignacionWhereInput | AsignacionWhereInput[],
+     ?   OR?: AsignacionWhereInput[],
+     ?   NOT?: AsignacionWhereInput | AsignacionWhereInput[],
+     ?   id_asignacion?: IntFilter | Int,
+     ?   fecha_asignacion?: DateTimeFilter | DateTime,
+     ?   metodo?: StringFilter | String,
+     ?   justificacion?: StringNullableFilter | String | Null,
+     ?   id_ticket?: IntFilter | Int,
+     ?   id_tecnico?: IntFilter | Int,
+     ?   id_reglaAutotriage?: IntNullableFilter | Int | Null,
+     ?   ticket?: TicketNullableScalarRelationFilter | TicketWhereInput | Null,
+     ?   tecnico?: UsuarioNullableScalarRelationFilter | UsuarioWhereInput | Null,
+     ?   regla?: Reglas_AutotriageNullableScalarRelationFilter | Reglas_AutotriageWhereInput | Null
+       },
+       orderBy: {
+         id_asignacion: "asc"
+       },
+       include: {
+         tecnico: true,
+         ticket: {
+           include: {
+             categoria: {
+               include: {
+                 sla: true
+               }
+             }
+           }
+         }
+       }
+     })
+
+Unknown argument `asignaciones`. Available options are marked with ?.
+2025-12-07 23:08:44.726 error: 	moise--Se produjo un error interno del servidor 
+Invalid `this.prisma.asignacion.findMany()` invocation in
+E:\Universidad 2025\Software Libre\Proyecto Completo p\EducationalSystem\server\source\controllers\asigancionController.ts:56:55
+
+  53 // ADMIN no necesita filtro
+  54 
+  55 // 📦 Consulta a la base de datos con Prisma
+→ 56 const asignaciones = await this.prisma.asignacion.findMany({
+       where: {
+         asignaciones: {
+         ~~~~~~~~~~~~
+           some: {
+             id_tecnico: 6
+           }
+         },
+     ?   AND?: AsignacionWhereInput | AsignacionWhereInput[],
+     ?   OR?: AsignacionWhereInput[],
+     ?   NOT?: AsignacionWhereInput | AsignacionWhereInput[],
+     ?   id_asignacion?: IntFilter | Int,
+     ?   fecha_asignacion?: DateTimeFilter | DateTime,
+     ?   metodo?: StringFilter | String,
+     ?   justificacion?: StringNullableFilter | String | Null,
+     ?   id_ticket?: IntFilter | Int,
+     ?   id_tecnico?: IntFilter | Int,
+     ?   id_reglaAutotriage?: IntNullableFilter | Int | Null,
+     ?   ticket?: TicketNullableScalarRelationFilter | TicketWhereInput | Null,
+     ?   tecnico?: UsuarioNullableScalarRelationFilter | UsuarioWhereInput | Null,
+     ?   regla?: Reglas_AutotriageNullableScalarRelationFilter | Reglas_AutotriageWhereInput | Null
+       },
+       orderBy: {
+         id_asignacion: "asc"
+       },
+       include: {
+         tecnico: true,
+         ticket: {
+           include: {
+             categoria: {
+               include: {
+                 sla: true
+               }
+             }
+           }
+         }
+       }
+     })
+
+Unknown argument `asignaciones`. Available options are marked with ?.
+2025-12-07 23:10:22.072 error: 	moise--Se produjo un error interno del servidor 
+Invalid `this.prisma.asignacion.findMany()` invocation in
+E:\Universidad 2025\Software Libre\Proyecto Completo p\EducationalSystem\server\source\controllers\asigancionController.ts:56:55
+
+  53 // ADMIN no necesita filtro
+  54 
+  55 // 📦 Consulta a la base de datos con Prisma
+→ 56 const asignaciones = await this.prisma.asignacion.findMany({
+       where: {
+         asignaciones: {
+         ~~~~~~~~~~~~
+           some: {
+             id_tecnico: 8
+           }
+         },
+     ?   AND?: AsignacionWhereInput | AsignacionWhereInput[],
+     ?   OR?: AsignacionWhereInput[],
+     ?   NOT?: AsignacionWhereInput | AsignacionWhereInput[],
+     ?   id_asignacion?: IntFilter | Int,
+     ?   fecha_asignacion?: DateTimeFilter | DateTime,
+     ?   metodo?: StringFilter | String,
+     ?   justificacion?: StringNullableFilter | String | Null,
+     ?   id_ticket?: IntFilter | Int,
+     ?   id_tecnico?: IntFilter | Int,
+     ?   id_reglaAutotriage?: IntNullableFilter | Int | Null,
+     ?   ticket?: TicketNullableScalarRelationFilter | TicketWhereInput | Null,
+     ?   tecnico?: UsuarioNullableScalarRelationFilter | UsuarioWhereInput | Null,
+     ?   regla?: Reglas_AutotriageNullableScalarRelationFilter | Reglas_AutotriageWhereInput | Null
+       },
+       orderBy: {
+         id_asignacion: "asc"
+       },
+       include: {
+         tecnico: true,
+         ticket: {
+           include: {
+             categoria: {
+               include: {
+                 sla: true
+               }
+             }
+           }
+         }
+       }
+     })
+
+Unknown argument `asignaciones`. Available options are marked with ?.

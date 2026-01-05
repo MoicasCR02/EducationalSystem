@@ -1,0 +1,71 @@
+<mat-card class="videojuego-card">
+  <!-- Encabezado del Card -->
+  <mat-card-header class="card-header">
+    <mat-card-title class="title">{{ 'TECHNICIANS.TITLE' | translate }}</mat-card-title>
+    <mat-card-subtitle>
+      <button
+        mat-mini-fab
+        matTooltip="{{ 'TECHNICIANS.CREATE' | translate }}"
+        class="bg-primary"
+        aria-label="{{ 'TECHNICIANS.CREATE' | translate }}"
+        (click)="crearTecnico()"
+      >
+        <mat-icon>add</mat-icon>
+      </button>
+    </mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <div class="tabla-container">
+      <mat-table [dataSource]="dataSource" class="tabla" matSort aria-label="{{ 'TECHNICIANS.TITLE' | translate }}">
+        <!-- Columna Nombre -->
+        <ng-container matColumnDef="nombre">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'TECHNICIANS.NAME' | translate }}</th>
+          <td mat-cell *matCellDef="let row">{{ row.nombre }}</td>
+        </ng-container>
+
+        <!-- Columna Correo -->
+        <ng-container matColumnDef="correo">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'TECHNICIANS.EMAIL' | translate }}</th>
+          <td mat-cell *matCellDef="let row">{{ row.correo }}</td>
+        </ng-container>
+
+        <!-- Columna Acciones -->
+        <ng-container matColumnDef="acciones">
+          <th mat-header-cell *matHeaderCellDef>{{ 'TECHNICIANS.OPTIONS' | translate }}</th>
+          <td mat-cell *matCellDef="let row" class="acciones-cell">
+            <button
+              mat-mini-fab
+              matTooltip="{{ 'TECHNICIANS.UPDATE' | translate }}"
+              class="bg-primary"
+              (click)="actualizarTecnico(row.id_usuario)"
+            >
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button
+              mat-mini-fab
+              matTooltip="{{ 'TECHNICIANS.DETAIL' | translate }}"
+              class="bg-primary"
+              (click)="detalleTecnico(row.id_usuario)"
+            >
+              <mat-icon>info</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true" class="header-cell"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </mat-table>
+
+      <mat-paginator
+        #paginator
+        [length]="dataSource.data.length"
+        [pageIndex]="0"
+        [pageSize]="5"
+        [pageSizeOptions]="[3, 5, 10]"
+        showFirstLastButtons
+      >
+      </mat-paginator>
+    </div>
+  </mat-card-content>
+</mat-card>
