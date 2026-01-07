@@ -201,7 +201,7 @@ This project was developed to:
 ---
 
 ## 👨‍💻 Author
-**Moisés Castro**  
+**Moisés Castro Madrigal**  
 Software Development Engineering Student  
 Universidad Técnica Nacional
 
