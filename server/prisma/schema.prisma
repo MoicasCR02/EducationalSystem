@@ -17,6 +17,13 @@ datasource db {
 
 //Base de datos - Modelos
 
+model login_logs {
+  id          Int      @id @default(autoincrement())
+  id_usuario Int
+  usuario Usuario @relation(fields: [id_usuario], references: [id_usuario])
+  fecha_login DateTime @db.DateTime
+}
+
 
 enum Role {
   ADMIN
@@ -53,6 +60,8 @@ model Usuario {
   NotificacionesRemitente Notificacion[] @relation("NotificacionesEnviadas")
 
   NotificacionesDestinatario Notificacion[] @relation("NotificacionesRecibidas")
+
+  login login_logs[] // relacion a los login
 }
 
 model Especialidad {

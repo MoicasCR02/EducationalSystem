@@ -4,12 +4,15 @@ import { AppError } from "../errors/custom.error";
 import { Usuario, PrismaClient, Role } from "../../generated/prisma";
 import passport from "passport";
 import { generateToken } from "../config/authUtils";
-
+import path from "path";
+import { exec } from "child_process";
+import { spawn } from "child_process";
+import fs from "fs";
 
 export class usuarioController {
   prisma = new PrismaClient();
 
-    register = async (req: Request, res: Response, next: NextFunction) => {
+  register = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const { nombre, correo, contrasena, role } = req.body;
 
@@ -35,61 +38,92 @@ export class usuarioController {
     }
   };
 
-login = async (req: Request, res: Response, next: NextFunction) => {
-  passport.authenticate(
-    "local",
-    { session: false },
-    async (
-      err: Error | null,
-      user: Express.User | false | null,
-      info: { message?: string }
-    ) => {
-      if (err) return next(err);
-      if (!user) {
-        return res
-          .status(401)
-          .json({ success: false, message: info.message });
+  login = async (req: Request, res: Response, next: NextFunction) => {
+    passport.authenticate(
+      "local",
+      { session: false },
+      async (
+        err: Error | null,
+        user: Express.User | false | null,
+        info: { message?: string }
+      ) => {
+        if (err) return next(err);
+        if (!user) {
+          return res
+            .status(401)
+            .json({ success: false, message: info.message });
+        }
+
+        try {
+          // Actualizar último inicio de sesión
+          await this.prisma.usuario.update({
+            where: {
+              id_usuario: (user as Usuario).id_usuario, // usa el id del usuario autenticado
+            },
+            data: {
+              ultimo_inicio_sesion: new Date(),
+            },
+          });
+          // ingresar inicio de sesion en login logs
+          let datetime = new Date()
+          await this.prisma.login_logs.create({
+            data: {
+              id_usuario: (user as Usuario).id_usuario,
+              fecha_login: datetime,
+            },
+          });
+
+          //Proceso externo para ver logins en excel con Python
+          const pythonPath =
+            "D:\\SSD2\\Universidad2025\\Programación_en_ambiente_webll2025\\Proyecto\\auditoria_logins_python\\venv\\Scripts\\python.exe";
+          const scriptPath =
+            "D:\\SSD2\\Universidad2025\\Programación_en_ambiente_webll2025\\Proyecto\\auditoria_logins_python\\src\\main.py";
+
+          console.log("Python path:", pythonPath);
+          console.log("Script path:", scriptPath);
+          const proceso = spawn(pythonPath, [scriptPath], {
+            windowsHide: true,
+          });
+          proceso.stdout.on("data", (data) => {
+            console.log("Auditoría salida:", data.toString());
+          });
+          proceso.stderr.on("data", (data) => {
+            console.error("Auditoría error:", data.toString());
+          });
+          proceso.on("close", (code) => {
+            console.log(`Auditoría finalizada con código ${code}`);
+          });
+
+          // Generar token
+          const token = generateToken(user as Usuario);
+
+          return res.json({
+            success: true,
+            message: "Inicio de sesión exitoso",
+            token,
+          });
+        } catch (updateError) {
+          return next(updateError);
+        }
       }
-
-      try {
-        // Actualizar último inicio de sesión
-        await this.prisma.usuario.update({
-          where: {
-            id_usuario: (user as Usuario).id_usuario, // usa el id del usuario autenticado
-          },
-          data: {
-            ultimo_inicio_sesion: new Date(),
-          },
-        });
-
-        // Generar token
-        const token = generateToken(user as Usuario);
-
-        return res.json({
-          success: true,
-          message: "Inicio de sesión exitoso",
-          token,
-        });
-      } catch (updateError) {
-        return next(updateError);
-      }
-    }
-  )(req, res, next);
-};
-
+    )(req, res, next);
+  };
 
   userAuth = (req: Request, res: Response, next: NextFunction) => {
     try {
       const usuario = req.user as Usuario;
       res.json(usuario);
-
     } catch (error) {
       next(error);
     }
   };
 
-   // Listado de usuarios
-  getUsuarios = async (request: Request, response: Response, next: NextFunction) => {
+  // Listado de usuarios
+  getUsuarios = async (
+    request: Request,
+    response: Response,
+    next: NextFunction
+  ) => {
     try {
       const listado = await this.prisma.usuario.findMany({
         orderBy: {
@@ -104,9 +138,13 @@ login = async (req: Request, res: Response, next: NextFunction) => {
       next(error);
     }
   };
-  
+
   // Listado de Técnicos
-  getByUser = async (request: Request, response: Response, next: NextFunction) => {
+  getByUser = async (
+    request: Request,
+    response: Response,
+    next: NextFunction
+  ) => {
     try {
       const listado = await this.prisma.usuario.findMany({
         where: {
@@ -125,28 +163,34 @@ login = async (req: Request, res: Response, next: NextFunction) => {
     }
   };
 
-  getByCorreo = async (request: Request, response: Response, next: NextFunction) => {
-  try {
-    const correo = request.params.correo; // 👈 o request.query.correo según tu ruta
+  getByCorreo = async (
+    request: Request,
+    response: Response,
+    next: NextFunction
+  ) => {
+    try {
+      const correo = request.params.correo; // 👈 o request.query.correo según tu ruta
 
-    if (!correo) {
-      return response.status(400).json({ error: "Debe proporcionar un correo" });
+      if (!correo) {
+        return response
+          .status(400)
+          .json({ error: "Debe proporcionar un correo" });
+      }
+
+      const usuario = await this.prisma.usuario.findUnique({
+        where: { correo: correo },
+      });
+
+      if (!usuario) {
+        return response.status(404).json({ error: "Usuario no encontrado" });
+      }
+
+      return response.json(usuario);
+    } catch (error) {
+      console.error("❌ Error en getByCorreo:", error);
+      next(error);
     }
-
-    const usuario = await this.prisma.usuario.findUnique({
-      where: { correo: correo },
-    });
-
-    if (!usuario) {
-      return response.status(404).json({ error: "Usuario no encontrado" });
-    }
-
-    return response.json(usuario);
-  } catch (error) {
-    console.error("❌ Error en getByCorreo:", error);
-    next(error);
-  }
-};
+  };
 
   //Obtener por Id
   getById = async (
@@ -188,9 +232,9 @@ login = async (req: Request, res: Response, next: NextFunction) => {
         where: {
           id_ticket: idTicket,
         },
-        include:{
-          categoria:true,
-        }
+        include: {
+          categoria: true,
+        },
       });
 
       //Buscar en categoria etiquetas relacionadas con la categoria
@@ -204,25 +248,26 @@ login = async (req: Request, res: Response, next: NextFunction) => {
         },
       });
 
-      const especialidadIds = categoria?.especialidades.map((e) => e.id_especialidad) ?? [];
+      const especialidadIds =
+        categoria?.especialidades.map((e) => e.id_especialidad) ?? [];
 
       //Elegir el tecnico con menos carga de trabajo
-        const tecnicos = await this.prisma.usuario.findMany({
-          where: {
-            id_rol: Role.TECNICO,
-            activo: true,
-            especialidades: {
-              some: {
-                id_especialidad: { in: especialidadIds },
-              },
+      const tecnicos = await this.prisma.usuario.findMany({
+        where: {
+          id_rol: Role.TECNICO,
+          activo: true,
+          especialidades: {
+            some: {
+              id_especialidad: { in: especialidadIds },
             },
           },
-          include: {
-            especialidades: true,
-          },
-        });
+        },
+        include: {
+          especialidades: true,
+        },
+      });
 
-      response.json({ticket: Ticket,tecnicos: tecnicos,});
+      response.json({ ticket: Ticket, tecnicos: tecnicos });
     } catch (error) {
       next(error);
     }
@@ -282,7 +327,11 @@ login = async (req: Request, res: Response, next: NextFunction) => {
     }
   };
 
-  createUsuario = async (request: Request, response: Response, next: NextFunction) => {
+  createUsuario = async (
+    request: Request,
+    response: Response,
+    next: NextFunction
+  ) => {
     try {
       const body = request.body;
       const hashedPassword = await bcrypt.hash(body.contrasena, 10); // 10 = salt rounds
