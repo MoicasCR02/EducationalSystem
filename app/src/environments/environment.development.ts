@@ -14,5 +14,4 @@ export const environment = {
     endPointPrioridad: 'prioridades',
     endPointreglas: 'reglasAutotriage',
     endPointValoracion:'valoraciones',
-
 };

@@ -137,7 +137,6 @@ export class TicketsForm {
           .pipe(takeUntil(this.destroy$))
           .subscribe((data) => {
             this.patchFormValues(data);
-
             // 👇 Buscar la categoría asociada con el id_categoria
             if (data.id_categoria) {
               this.vjServiceCategoria
